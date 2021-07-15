@@ -7,7 +7,7 @@
   "license": "MIT",
   "types": "./dist/tsc/index.d.ts",
   "scripts": {
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "clean": "rm -rf dist",
     "docs": "typedoc --entryPoints src/index.ts",
     "build": "npm run clean && tsc -p tsconfig.json"
