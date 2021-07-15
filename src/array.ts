@@ -79,7 +79,11 @@ export function containsAll<T>(array: T[], elements: T[]): boolean {
 }
 
 
-export function count<T>(array: T[], predicate: ArrayPredicate<T>): number {
+export function count<T>(array: T[], predicate?: ArrayPredicate<T>): number {
+  if (!predicate) {
+    return array.length
+  }
+
   return array.reduce((sum, it, index, array) => predicate(it, index, array) ? sum + 1 : sum, 0)
 }
 
