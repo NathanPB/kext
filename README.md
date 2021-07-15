@@ -13,11 +13,20 @@ const hasNonFriends = any(users, it => !it.areFriends(user))
 const agesSum = sumBy(users, it => it.age)
 ```
 
+## Showcase (Arrays Module)
+![showcase](https://user-images.githubusercontent.com/18128642/125735762-57d008b4-73c2-4d85-b6b8-87f3a37d5e08.gif)
+
+
 ## What's next
 
 - Do a proper documentation
 - Write unit tests
 - Write a typescript plugin to invoke array functions as an extension-like function
+
+## Side Notes
+
+- Project is in the very beginning
+- Performance is questionable
 
 ## Further documentation
 
