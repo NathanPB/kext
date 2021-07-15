@@ -12,5 +12,6 @@
 
 ## Specifications
 
-- Version:
+- Kext Version: <!-- "latest" is not a version! -->
+- NodeJS Version: <!-- "latest" is not a version! -->
 - Platform:
