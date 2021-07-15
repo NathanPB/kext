@@ -497,7 +497,7 @@ export function sortedByDescending<T>(array: T[], selector: (it: T)=>number): T[
 }
 
 export function sum(array: number[]): number {
-  return array.reduce((a, b) => a + b)
+  return array.reduce((a, b) => a + b, 0)
 }
 
 export function sumOf<T>(array: T[], selector: ArrayMapper<T, number>): number {
