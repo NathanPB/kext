@@ -53,9 +53,18 @@ export function averageBy<T>(array: T[], selector: ArrayMapper<T, number>): numb
 }
 
 // TODO transform
-export function chunked<T>(array: T[], size: number) : T[][] {
+export function chunkedByCount<T>(array: T[], count: number) : T[][] {
   return array.reduce((buff, it, index) => {
-    const chunkIndex = index % size
+    const chunkIndex = index % count
+    const chunk = [ ...(buff[chunkIndex] ?? []), it ]
+    return Object.assign(buff, { [chunkIndex]: chunk })
+  }, [])
+}
+
+export function chunkedBySize<T>(array: T[], size: number) : T[][] {
+  const buckedSize = Math.min(array.length / size)
+  return array.reduce((buff, it, index) => {
+    const chunkIndex = index % buckedSize
     const chunk = [ ...(buff[chunkIndex] ?? []), it ]
     return Object.assign(buff, { [chunkIndex]: chunk })
   }, [])
@@ -66,7 +75,7 @@ export function contains<T>(array: T[], element: T): boolean {
 }
 
 export function containsAll<T>(array: T[], elements: T[]): boolean {
-  return all(array, it => elements.includes(it))
+  return all(elements, it => array.includes(it))
 }
 
 
