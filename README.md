@@ -13,11 +13,6 @@ const hasNonFriends = any(users, it => !it.areFriends(user))
 const agesSum = sumBy(users, it => it.age)
 ```
 
-## Done
-
-![x] - Arrays/Lists/Collections (``any``, ``none``, ``distinct``, etc)
-![] - Extensions (``let``, ``also``, ``takeOrNull``, etc...)
-
 ## What's next
 
 - Do a proper documentation
