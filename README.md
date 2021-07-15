@@ -14,7 +14,8 @@ const agesSum = sumBy(users, it => it.age)
 ```
 
 ## Showcase (Arrays Module)
-![Peek 2021-07-15 02-01](https://user-images.githubusercontent.com/18128642/125735663-852d960b-d082-4bde-8f3c-c7ac6e89b56f.gif)
+![showcase](https://user-images.githubusercontent.com/18128642/125735762-57d008b4-73c2-4d85-b6b8-87f3a37d5e08.gif)
+
 
 ## What's next
 
