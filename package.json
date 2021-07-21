@@ -11,8 +11,8 @@
     "clean": "rm -rf dist",
     "docs": "typedoc --entryPoints src/index.ts",
     "build": "npm run clean && tsc -p tsconfig.json && cp package.json dist/package.json",
-    "prerelease": "build",
-    "release": "cd dist && publish --access public"
+    "prerelease": "npm run build",
+    "release": "cd dist && npm publish --access public"
   },
   "devDependencies": {
     "@types/jest": "^26.0.21",
