@@ -10,6 +10,7 @@
 
 
 import {ArrayMapper, ArrayPredicate} from "./index";
+import {ComparableSafe} from "../index";
 
 export function all<T>(array: T[], predicate: ArrayPredicate<T>): boolean {
   return array.every(predicate)
@@ -104,7 +105,7 @@ export function lastOrNull<T>(array: T[]): T | undefined {
  * @param find The value to search through the array
  * @param select The selector which should be applied to compare with `find`
  */
-export function firstOrNullBy<T, V> (array: T[], find: V, select: ArrayMapper<T, V>): T | undefined {
+export function firstOrNullBy<T, V extends ComparableSafe> (array: T[], find: V, select: ArrayMapper<T, V>): T | undefined {
   return elementAtOrUndefined(
     array,
     indexOfFirst(array, (it, index) => find === select(it, index, array))
@@ -122,7 +123,7 @@ export function firstOrNullBy<T, V> (array: T[], find: V, select: ArrayMapper<T,
  * @param select The selector which should be applied to compare with `find`
  * @param transform The transformation to apply to the found value
  */
-export function firstOrNullByTransforming<T, V, O> (
+export function firstOrNullByTransforming<T, O, V extends ComparableSafe> (
   array: T[],
   find: V,
   select: ArrayMapper<T, V>,
@@ -147,7 +148,7 @@ export function firstOrNullByTransforming<T, V, O> (
  * @param find The value to search through the array
  * @param select The selector which should be applied to compare with `find`
  */
-export function lastOrNullBy<T, V> (array: T[], find: V, select: ArrayMapper<T, V>): T | undefined {
+export function lastOrNullBy<T, V extends ComparableSafe> (array: T[], find: V, select: ArrayMapper<T, V>): T | undefined {
   return elementAtOrUndefined(
     array,
     indexOfLast(array, (it, index) => find === select(it, index, array))
@@ -165,7 +166,7 @@ export function lastOrNullBy<T, V> (array: T[], find: V, select: ArrayMapper<T, 
  * @param select The selector which should be applied to compare with `find`
  * @param transform The transformation to apply to the found value
  */
-export function lastOrNullByTransforming<T, V, O> (
+export function lastOrNullByTransforming<T, O, V extends ComparableSafe> (
   array: T[],
   find: V,
   select: ArrayMapper<T, V>,

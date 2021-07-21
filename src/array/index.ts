@@ -9,6 +9,8 @@
  */
 
 import {any} from "./find";
+import {ComparableSafe, Pair} from '..'
+
 export * from "./find";
 
 export type ArrayMapper<T, O> = (it: T, index: number, array: T[]) => O
@@ -23,7 +25,7 @@ export function subList<T>(array: T[], startIndex: number, endIndex: number): T[
   return array.slice(startIndex, endIndex)
 }
 
-export function associate<T, K, V>(array: T[], transform: ArrayMapper<T, [K, V]>): [K, V][] {
+export function associate<T, K, V>(array: T[], transform: ArrayMapper<T, Pair<K, V>>): Pair<K, V>[] {
   return array.map(transform)
 }
 
@@ -31,11 +33,11 @@ export function associateBy<T, K>(array: T[], keySelector: ArrayMapper<T, K>): [
   return array.map((it, index, array) => [keySelector(it, index, array), it])
 }
 
-export function associateByTransforming<T, K, V>(array: T[], keySelector: ArrayMapper<T, K>, valueTransform: ArrayMapper<T, V>): [K, V][] {
+export function associateByTransforming<T, K, V>(array: T[], keySelector: ArrayMapper<T, K>, valueTransform: ArrayMapper<T, V>): Pair<K, V>[] {
   return array.map((it, index, array) => [keySelector(it, index, array), valueTransform(it, index, array)])
 }
 
-export function associateWith<K, V>(array: K[], valueSelector: ArrayMapper<K, V>): [K, V][] {
+export function associateWith<K, V>(array: K[], valueSelector: ArrayMapper<K, V>): Pair<K, V>[] {
   return array.map((it, index, array) => [it, valueSelector(it, index, array)])
 }
 
@@ -73,7 +75,7 @@ export function count<T>(array: T[], predicate?: ArrayPredicate<T>): number {
   return array.reduce((sum, it, index, array) => predicate(it, index, array) ? sum + 1 : sum, 0)
 }
 
-export function distinct<T = number|string>(array: T[]): T[] {
+export function distinct<T extends ComparableSafe>(array: T[]): T[] {
   return [ ...new Set(array) ]
 }
 
@@ -82,7 +84,7 @@ export function distinctWith<T>(array: T[], equals: (a: T, b: T) => boolean): T[
 }
 
 
-export function distinctBy<T, K = number|string>(array: T[], transform: ArrayMapper<T, K>): T[] {
+export function distinctBy<T, K extends ComparableSafe>(array: T[], transform: ArrayMapper<T, K>): T[] {
   return array.filter((it, index, array) => {
     const a = transform(it, index, array)
     return array.findIndex((it2, index2, array2) => transform(it2, index2, array2) === a) === index
@@ -149,7 +151,7 @@ export function foldRight<T, R>(array: T[], initial: R, operation: (acc: R, it: 
   return array.reduceRight(operation, initial)
 }
 
-export function groupBy<T, V, K = number | string>(array: T[], keySelector: ArrayMapper<T, K>, valueTransform?: ArrayMapper<T, V>): [K, V[]][] {
+export function groupBy<T, V, K extends ComparableSafe>(array: T[], keySelector: ArrayMapper<T, K>, valueTransform?: ArrayMapper<T, V>): [K, V[]][] {
   return array.reduce((acc, it, index, array) => {
     const key: K = keySelector(it, index, array)
     const value: V = valueTransform ? valueTransform(it, index, array) : <V> <unknown> it
@@ -475,7 +477,7 @@ export function toSet<T>(array: T[]): Set<T> {
   return new Set(array)
 }
 
-export function union<T = number | string>(array: T[], other: T[]): T[] {
+export function union<T extends ComparableSafe>(array: T[], other: T[]): T[] {
   return distinct(array.filter(it => other.includes(it)))
 }
 
@@ -483,14 +485,14 @@ export function unionWith<T>(array: T[], other: T[], equals: (a: T, b: T)=>boole
   return distinctWith(array.filter(a => any(other, b => equals(a, b))), equals)
 }
 
-export function unionBy<T>(array: T[], other: T[], transform: ArrayMapper<T, number | string>): T[] {
+export function unionBy<T>(array: T[], other: T[], transform: ArrayMapper<T, ComparableSafe>): T[] {
   return distinctBy(array.filter((a, aIndex) => {
     const aTransform = transform(a, aIndex, array)
     return any(other, (b, bIndex) => transform(b, bIndex, other) === aTransform)
   }), transform)
 }
 
-export function zip<T, R>(array: T[], other: R[]): [T, R][] {
+export function zip<T, R>(array: T[], other: R[]): Pair<T, R>[] {
   const to = Math.min(array.length, other.length)
   let result: [T, R][] = []
   for (let i=0; i<to; i++) {

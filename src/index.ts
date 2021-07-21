@@ -10,3 +10,13 @@
 
 export * as Array from './array'
 export * as Scope from './scope'
+
+/**
+ * Represents a type which a key is associated with a value.
+ */
+export type Pair<K, V> = [K, V]
+
+/**
+ * Represents a type which it's data can safely be compared, excluding nullables.
+ */
+export type ComparableSafe = string | number | boolean | undefined | null
