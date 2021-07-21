@@ -8,6 +8,9 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+import {any} from "./find";
+export * from "./find";
+
 export type ArrayMapper<T, O> = (it: T, index: number, array: T[]) => O
 export type ArrayPredicate<T> = ArrayMapper<T, boolean>
 export type ArrayConsumer<T> = ArrayMapper<T, void>
@@ -18,14 +21,6 @@ export type ArrayConsumer<T> = ArrayMapper<T, void>
 
 export function subList<T>(array: T[], startIndex: number, endIndex: number): T[] {
   return array.slice(startIndex, endIndex)
-}
-
-export function all<T>(array: T[], predicate: ArrayPredicate<T>): boolean {
-  return array.every(predicate)
-}
-
-export function any<T>(array: T[], predicate: ArrayPredicate<T>): boolean {
-  return array.some(predicate)
 }
 
 export function associate<T, K, V>(array: T[], transform: ArrayMapper<T, [K, V]>): [K, V][] {
@@ -69,15 +64,6 @@ export function chunkedBySize<T>(array: T[], size: number) : T[][] {
     return Object.assign(buff, { [chunkIndex]: chunk })
   }, [])
 }
-
-export function contains<T>(array: T[], element: T): boolean {
-  return array.includes(element)
-}
-
-export function containsAll<T>(array: T[], elements: T[]): boolean {
-  return all(elements, it => array.includes(it))
-}
-
 
 export function count<T>(array: T[], predicate?: ArrayPredicate<T>): number {
   if (!predicate) {
@@ -137,54 +123,12 @@ export function dropLastWhile<T>(array: T[], predicate: ArrayPredicate<T>): T[] 
   return arr
 }
 
-export function elementAtOrUndefined<T>(array: T[], index: number): T | undefined {
-  return array[index]
-}
-
-export function elementAtOrElse<T>(array: T[], index: number, defaultValue: (index: number)=>T): T {
-  return index < 0 || index >= array.length ? defaultValue(index) : array[index]
-}
-
 export function filterNot<T>(array: T[], predicate: ArrayPredicate<T>): T[] {
   return array.filter((it, index, arr) => !predicate(it, index, arr))
 }
 
 export function filterNotNullable<T>(array: Array<T | undefined | null>): T[] {
   return <T[]> array.filter(it => it != null)
-}
-
-export function findLast<T>(array: T[], predicate: ArrayPredicate<T>): T | undefined {
-  for (let i = array.length-1; i>=0; i--) {
-    const element = array[i]
-    if (predicate(element, i, array)) {
-      return element
-    }
-  }
-
-  return undefined
-}
-
-export function firstOrNull<T>(array: T[], predicate: ArrayPredicate<T>): T | undefined {
-  for (let i=0; i<array.length; i++) {
-    const element = array[i]
-    if (predicate(element, i, array)) {
-      return element
-    }
-  }
-
-  return undefined
-}
-
-
-export function firstNotNullableOf<T, R>(array: T[], transform: ArrayMapper<T, R | undefined | null>): R | undefined {
-  for (let i=0; i<array.length; i++) {
-    const element = transform(array[i], i, array)
-    if (element != null) {
-      return element
-    }
-  }
-
-  return undefined
 }
 
 export function flatMap<T, R>(array: T[], transform: ArrayMapper<T, R[]>): R[] {
@@ -224,26 +168,6 @@ export function groupBy<T, V, K = number | string>(array: T[], keySelector: Arra
     .map(it => [it.key, flatten(it.values)])
 }
 
-export function indexOfFirst<T>(array: T[], predicate: ArrayPredicate<T>): number {
-  for (let i=0; i<array.length; i++) {
-    if (predicate(array[i], i, array)) {
-      return i
-    }
-  }
-
-  return -1
-}
-
-export function indexOfLast<T>(array: T[], predicate: ArrayPredicate<T>): number {
-  for (let i = array.length-1; i>=0; i--) {
-    if (predicate(array[i], i, array)) {
-      return i
-    }
-  }
-
-  return -1
-}
-
 export function intersect<T>(array: T[], other: T[]): T[] {
   return array.filter(it => other.includes(it))
 }
@@ -279,10 +203,6 @@ export function joinToString<T>(
   }
 
   return prefix + buildString() + postfix
-}
-
-export function lastOrNull<T>(array: T[]): T | undefined {
-  return array[array.length - 1]
 }
 
 export function mapNotNull<T, R>(array: T[], transform: ArrayMapper<T, R | undefined | null>): R[] {
