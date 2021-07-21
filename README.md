@@ -21,6 +21,8 @@ This library is all inspired by Kotlin, so [their documentation](https://kotlinl
 
 - [Arrays](https://kext.nathanpb.dev/modules/array.html) - Functions for array manipulation. Details on the Kotlin imp [here](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/)
 - [Scope](https://kext.nathanpb.dev/modules/scope.html) - Functions for scope manipulation. Details on the Kotlin imp [here](https://kotlinlang.org/docs/scope-functions.html)
+- [Math](https://kext.nathanpb.dev/modules/math.html) - Functions for common math equations. Still incomplete.
+- [Error](https://kext.nathanpb.dev/modules/error.html) - Functions for error/exception manipulation that I find handy. Still incomplete.
 
 ## Showcase (Brief demonstration of the Arrays Module)
 ![showcase](https://user-images.githubusercontent.com/18128642/125735762-57d008b4-73c2-4d85-b6b8-87f3a37d5e08.gif)
