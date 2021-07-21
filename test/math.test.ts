@@ -8,17 +8,11 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-export * as Array from './array'
-export * as Scope from './scope'
-export * as Errors from './error'
-export * as Math from './math'
 
-/**
- * Represents a type which a key is associated with a value.
- */
-export type Pair<K, V> = [K, V]
+import {coerce} from "../src/math";
 
-/**
- * Represents a type which it's data can safely be compared, excluding nullables.
- */
-export type ComparableSafe = string | number | boolean | undefined | null
+test('coerce', () => {
+  expect(coerce(5, 1, 10)).toEqual(5)
+  expect(coerce(-5, 1, 10)).toEqual(1)
+  expect(coerce(20, 1, 10)).toEqual(10)
+})
