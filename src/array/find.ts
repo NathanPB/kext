@@ -92,3 +92,90 @@ export function indexOfLast<T>(array: T[], predicate: ArrayPredicate<T>): number
 export function lastOrNull<T>(array: T[]): T | undefined {
   return array[array.length - 1]
 }
+
+/**
+ * Searches for the first element through an array of objects, strictly comparing `find` with the result of `select`.
+ *
+ * Returns `undefined` if no element matches.
+ *
+ * This use strict comparison (not deep equal) and sequential search.
+ *
+ * @param array The array to work on
+ * @param find The value to search through the array
+ * @param select The selector which should be applied to compare with `find`
+ */
+export function firstOrNullBy<T, V> (array: T[], find: V, select: ArrayMapper<T, V>): T | undefined {
+  return elementAtOrUndefined(
+    array,
+    indexOfFirst(array, (it, index) => find === select(it, index, array))
+  )
+}
+
+/**
+ * Searches for the first element through an array of objects, strictly comparing `find` with the result of `select`.
+ * Then, apply `transform` to it. Returns `undefined` if no element matches.
+ *
+ * This use strict comparison (not deep equal) and sequential search.
+ *
+ * @param array The array to work on
+ * @param find The value to search through the array
+ * @param select The selector which should be applied to compare with `find`
+ * @param transform The transformation to apply to the found value
+ */
+export function firstOrNullByTransforming<T, V, O> (
+  array: T[],
+  find: V,
+  select: ArrayMapper<T, V>,
+  transform: ArrayMapper<T, O>
+): O | undefined {
+  const idx = indexOfFirst(array, (it, index) => find === select(it, index, array))
+
+  if (idx !== -1) {
+    return transform(array[idx], idx, array)
+  }
+
+  return undefined
+}
+
+/**
+ * Searches for the last element through an array of objects, strictly comparing `find` with the result of `select`.
+ * Returns `undefined` if no element matches.
+ *
+ * This use strict comparison (not deep equal) and sequential search.
+ *
+ * @param array The array to work on
+ * @param find The value to search through the array
+ * @param select The selector which should be applied to compare with `find`
+ */
+export function lastOrNullBy<T, V> (array: T[], find: V, select: ArrayMapper<T, V>): T | undefined {
+  return elementAtOrUndefined(
+    array,
+    indexOfLast(array, (it, index) => find === select(it, index, array))
+  )
+}
+
+/**
+ * Searches for the last element through an array of objects, strictly comparing `find` with the result of `select`.
+ * Then, apply `transform` to it. Returns `undefined` if no element matches.
+ *
+ * This use strict comparison (not deep equal) and sequential search.
+ *
+ * @param array The array to work on
+ * @param find The value to search through the array
+ * @param select The selector which should be applied to compare with `find`
+ * @param transform The transformation to apply to the found value
+ */
+export function lastOrNullByTransforming<T, V, O> (
+  array: T[],
+  find: V,
+  select: ArrayMapper<T, V>,
+  transform: ArrayMapper<T, O>
+): O | undefined {
+  const idx = indexOfLast(array, (it, index) => find === select(it, index, array))
+
+  if (idx !== -1) {
+    return transform(array[idx], idx, array)
+  }
+
+  return undefined
+}

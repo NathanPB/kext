@@ -39,3 +39,55 @@ test('containsAll', () => {
 
   expect(A.containsAll([0, 1, 2], [])).toBeTruthy()
 })
+
+test('firstOrNullBy', () => {
+  const sample = [
+    { id: 'A', name: 'Joan' },
+    { id: 'B', name: 'Nathan' },
+    { id: 'C', name: 'Marcus' },
+    { id: 'D', name: 'Cris' },
+    { id: 'E', name: 'Nathan' }
+  ]
+
+  expect(A.firstOrNullBy(sample, 'Nathan', it => it.name)).toEqual({ id: 'B', name: 'Nathan' })
+  expect(A.firstOrNullBy(sample, 'Pedro', it => it.name)).toEqual(undefined)
+})
+
+test('firstOrNullByTransforming', () => {
+  const sample = [
+    { id: 'A', name: 'Joan' },
+    { id: 'B', name: 'Nathan' },
+    { id: 'C', name: 'Marcus' },
+    { id: 'D', name: 'Cris' },
+    { id: 'E', name: 'Nathan' }
+  ]
+
+  expect(A.firstOrNullByTransforming(sample, 'Nathan', it => it.name, it => it.id)).toStrictEqual('B')
+  expect(A.firstOrNullByTransforming(sample, 'Pedro', it => it.name, it => it.id)).toEqual(undefined)
+})
+
+test('lastOrNullBy', () => {
+  const sample = [
+    { id: 'A', name: 'Joan' },
+    { id: 'B', name: 'Nathan' },
+    { id: 'C', name: 'Marcus' },
+    { id: 'D', name: 'Cris' },
+    { id: 'E', name: 'Nathan' }
+  ]
+
+  expect(A.lastOrNullBy(sample, 'Nathan', it => it.name)).toEqual({ id: 'E', name: 'Nathan' })
+  expect(A.lastOrNullBy(sample, 'Pedro', it => it.name)).toEqual(undefined)
+})
+
+test('firstOrNullByTransforming', () => {
+  const sample = [
+    { id: 'A', name: 'Joan' },
+    { id: 'B', name: 'Nathan' },
+    { id: 'C', name: 'Marcus' },
+    { id: 'D', name: 'Cris' },
+    { id: 'E', name: 'Nathan' }
+  ]
+
+  expect(A.lastOrNullByTransforming(sample, 'Nathan', it => it.name, it => it.id)).toStrictEqual('E')
+  expect(A.lastOrNullByTransforming(sample, 'Pedro', it => it.name, it => it.id)).toEqual(undefined)
+})
