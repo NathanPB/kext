@@ -9,3 +9,4 @@
  */
 
 export * as Array from './array'
+export * as Scope from './scope'

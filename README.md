@@ -13,7 +13,16 @@ const hasNonFriends = any(users, it => !it.areFriends(user))
 const agesSum = sumBy(users, it => it.age)
 ```
 
-## Showcase (Arrays Module)
+## Documentation
+
+**For detailed information, see the [API Reference](https://kext.nathanpb.dev).**
+
+This library is all inspired by Kotlin, so [their documentation](https://kotlinlang.org/docs/home.html) may be useful.
+
+- [Arrays](https://kext.nathanpb.dev/modules/array.html) - Functions for array manipulation. Details on the Kotlin imp [here](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/)
+- [Scope](https://kext.nathanpb.dev/modules/scope.html) - Functions for scope manipulation. Details on the Kotlin imp [here](https://kotlinlang.org/docs/scope-functions.html)
+
+## Showcase (Brief demonstration of the Arrays Module)
 ![showcase](https://user-images.githubusercontent.com/18128642/125735762-57d008b4-73c2-4d85-b6b8-87f3a37d5e08.gif)
 
 
@@ -22,18 +31,13 @@ const agesSum = sumBy(users, it => it.age)
 - Do a proper documentation
 - Write unit tests
 - Write a typescript plugin to invoke array functions as an extension-like function
+- Async-compatible functions
 
 ## Side Notes
 
 - Project is in the very beginning
 - Performance is questionable
 
-## Further documentation
-
-It's not done for now, you may find something usefull at the Kotlin official documentation
-
-- [Iterable](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/)
-- [List](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/)
 
 ## License
 
