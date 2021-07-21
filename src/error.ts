@@ -8,16 +8,13 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-export * as Array from './array'
-export * as Scope from './scope'
-export * as Errors from './error'
-
 /**
- * Represents a type which a key is associated with a value.
+ * Throws the error passes on `error`.
+ *
+ * The purpose of this is that it can be used as an expression.
+ *
+ * @param error The error to throw.
  */
-export type Pair<K, V> = [K, V]
-
-/**
- * Represents a type which it's data can safely be compared, excluding nullables.
- */
-export type ComparableSafe = string | number | boolean | undefined | null
+export function throwExpr(error: Error): never {
+  throw error
+}
