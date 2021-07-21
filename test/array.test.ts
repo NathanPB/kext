@@ -12,20 +12,6 @@ test('subList', () => {
   expect(A.subList([], 90, 99)).toStrictEqual([])
 })
 
-test('all', () => {
-  expect(A.all([-2, -1, 0, 1, 2], it => it > 0)).toBeFalsy()
-  expect(A.all([0, 1, 2], it => it > 0)).toBeFalsy()
-  expect(A.all([1, 2], it => it > 0)).toBeTruthy()
-})
-
-
-test('any', () => {
-  expect(A.any([-2, -1, 0, 1, 2], it => it > 0)).toBeTruthy()
-  expect(A.any([0, 1, 2], it => it > 0)).toBeTruthy()
-  expect(A.any([1, 2], it => it > 0)).toBeTruthy()
-  expect(A.any([-2, -1], it => it > 0)).toBeFalsy()
-})
-
 test('associate', () => {
   expect(A.associate([0, 1, 2, 3], (it, index) => [it * 100, index]))
     .toStrictEqual([
@@ -95,22 +81,6 @@ test('chunkedBySize', () => {
     [0, 2, 4, 6, 8],
     [1, 3, 5, 7, 9],
   ])
-})
-
-test('contains', () => {
-  expect(A.contains([0, 1, 2], 1)).toBeTruthy()
-  expect(A.contains([0, 1, 2], 4)).toBeFalsy()
-})
-
-
-test('containsAll', () => {
-  expect(A.containsAll([0, 1, 2], [1])).toBeTruthy()
-  expect(A.containsAll([0, 1, 2], [4])).toBeFalsy()
-
-  expect(A.containsAll([0, 1, 2], [1, 2])).toBeTruthy()
-  expect(A.containsAll([0, 1, 2], [1, 4])).toBeFalsy()
-
-  expect(A.containsAll([0, 1, 2], [])).toBeTruthy()
 })
 
 test('count', () => {
