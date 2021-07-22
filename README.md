@@ -4,6 +4,8 @@ I think that the ECMAScript stdlib is not enough for me, so I'm attempting to re
 
 Yes, it's that simple
 
+**If you get any questions or suggestions just open a [discussion](https://github.com/NathanPB/kext/discussions) or an [issue](https://github.com/NathanPB/kext/issues)**
+
 ## Example
 
 ```ts
