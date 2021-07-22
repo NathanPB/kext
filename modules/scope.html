@@ -97,7 +97,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NathanPB/kext/blob/edd6e78/src/scope.ts#L66">scope.ts:66</a></li>
+									<li>Defined in <a href="https://github.com/NathanPB/kext/blob/0860774/src/scope.ts#L66">scope.ts:66</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -154,7 +154,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NathanPB/kext/blob/edd6e78/src/scope.ts#L54">scope.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/NathanPB/kext/blob/0860774/src/scope.ts#L54">scope.ts:54</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -211,7 +211,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NathanPB/kext/blob/edd6e78/src/scope.ts#L21">scope.ts:21</a></li>
+									<li>Defined in <a href="https://github.com/NathanPB/kext/blob/0860774/src/scope.ts#L21">scope.ts:21</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -271,7 +271,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NathanPB/kext/blob/edd6e78/src/scope.ts#L43">scope.ts:43</a></li>
+									<li>Defined in <a href="https://github.com/NathanPB/kext/blob/0860774/src/scope.ts#L43">scope.ts:43</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -328,7 +328,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NathanPB/kext/blob/edd6e78/src/scope.ts#L32">scope.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/NathanPB/kext/blob/0860774/src/scope.ts#L32">scope.ts:32</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -388,7 +388,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NathanPB/kext/blob/edd6e78/src/scope.ts#L98">scope.ts:98</a></li>
+									<li>Defined in <a href="https://github.com/NathanPB/kext/blob/0860774/src/scope.ts#L106">scope.ts:106</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -429,19 +429,20 @@
 					<a name="takeif" class="tsd-anchor"></a>
 					<h3>take<wbr>If</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">take<wbr>If&lt;T&gt;<span class="tsd-signature-symbol">(</span>receiver<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span>, predicate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>it<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+						<li class="tsd-signature tsd-kind-icon">take<wbr>If&lt;T&gt;<span class="tsd-signature-symbol">(</span>receiver<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span>, predicate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>it<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NathanPB/kext/blob/edd6e78/src/scope.ts#L78">scope.ts:78</a></li>
+									<li>Defined in <a href="https://github.com/NathanPB/kext/blob/0860774/src/scope.ts#L80">scope.ts:80</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Returns <code>receiver</code> value if it satisfies the given <code>predicate</code> or <code>undefined</code>, if it doesn&#39;t.</p>
+									<p>Applies <code>receiver</code> to <code>predicate</code>, returns <code>receiver</code> if the given <code>predicate</code> resolves into <code>true</code>, or <code>undefined</code> otherwise.</p>
 								</div>
+								<p>If <code>predicate</code> is a boolean, returns <code>receiver</code> cause truthy or <code>undefined</code> otherwise.</p>
 								<p><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/take-if.html">https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/take-if.html</a></p>
 							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -456,29 +457,11 @@
 									<h5>receiver: <span class="tsd-signature-type">T</span></h5>
 								</li>
 								<li>
-									<h5>predicate: <span class="tsd-signature-symbol">(</span>it<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-signature">
-											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>it<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<h4 class="tsd-parameters-title">Parameters</h4>
-													<ul class="tsd-parameters">
-														<li>
-															<h5>it: <span class="tsd-signature-type">T</span></h5>
-														</li>
-													</ul>
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-												</li>
-											</ul>
-										</li>
-									</ul>
+									<h5>predicate: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>it<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h4>
-							<p><code>receiver</code> if the evaluation of <code>predicate</code> is <code>true</code>. <code>undefined</code> otherwise.</p>
+							<p><code>receiver</code> if <code>predicate</code> (or it&#39;s evaluation) is <code>true</code>. <code>undefined</code> otherwise.</p>
 						</li>
 					</ul>
 				</section>
@@ -486,19 +469,20 @@
 					<a name="takeunless" class="tsd-anchor"></a>
 					<h3>take<wbr>Unless</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-namespace tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">take<wbr>Unless&lt;T&gt;<span class="tsd-signature-symbol">(</span>receiver<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span>, predicate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>it<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
+						<li class="tsd-signature tsd-kind-icon">take<wbr>Unless&lt;T&gt;<span class="tsd-signature-symbol">(</span>receiver<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span>, predicate<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>it<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/NathanPB/kext/blob/edd6e78/src/scope.ts#L89">scope.ts:89</a></li>
+									<li>Defined in <a href="https://github.com/NathanPB/kext/blob/0860774/src/scope.ts#L95">scope.ts:95</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Returns <code>receiver</code> value if it does not satisfy the given <code>predicate</code> or <code>undefined</code>, if it does.</p>
+									<p>Applies <code>receiver</code> to <code>predicate</code>, returns <code>receiver</code> if the given <code>predicate</code> resolves into <code>false</code>, or <code>undefined</code> otherwise.</p>
 								</div>
+								<p>If <code>predicate</code> is a boolean, returns <code>receiver</code> cause falsy or <code>undefined</code> otherwise.</p>
 								<p><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/take-unless.html">https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/take-unless.html</a></p>
 							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -513,29 +497,11 @@
 									<h5>receiver: <span class="tsd-signature-type">T</span></h5>
 								</li>
 								<li>
-									<h5>predicate: <span class="tsd-signature-symbol">(</span>it<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span></h5>
-									<ul class="tsd-parameters">
-										<li class="tsd-parameter-signature">
-											<ul class="tsd-signatures tsd-kind-type-literal">
-												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>it<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
-											</ul>
-											<ul class="tsd-descriptions">
-												<li class="tsd-description">
-													<h4 class="tsd-parameters-title">Parameters</h4>
-													<ul class="tsd-parameters">
-														<li>
-															<h5>it: <span class="tsd-signature-type">T</span></h5>
-														</li>
-													</ul>
-													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-												</li>
-											</ul>
-										</li>
-									</ul>
+									<h5>predicate: <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>it<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></h4>
-							<p><code>receiver</code> if the evaluation of <code>predicate</code> is <code>false</code>. <code>undefined</code> otherwise.</p>
+							<p><code>receiver</code> if <code>predicate</code> (or it&#39;s evaluation) is <code>false</code>. <code>undefined</code> otherwise.</p>
 						</li>
 					</ul>
 				</section>
