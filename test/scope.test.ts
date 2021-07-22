@@ -57,18 +57,24 @@ test('_also', () => {
   expect(_also({ firstName: 'Nathan' }, f)).toEqual({ firstName: 'Nathan' })
 })
 
-test('_takeIf', () => {
+test('takeIf', () => {
   expect(takeIf(1, () => true)).toStrictEqual(1)
   expect(takeIf(1, () => false)).toStrictEqual(undefined)
   expect(takeIf(1, it => it === 1)).toStrictEqual(1)
   expect(takeIf(1, it => it === 0)).toStrictEqual(undefined)
+
+  expect(takeIf(1, true)).toStrictEqual(1)
+  expect(takeIf(1, false)).toStrictEqual(undefined)
 })
 
-test('_takeUnless', () => {
+test('takeUnless', () => {
   expect(takeUnless(1, () => true)).toStrictEqual(undefined)
   expect(takeUnless(1, () => false)).toStrictEqual(1)
   expect(takeUnless(1, it => it === 1)).toStrictEqual(undefined)
   expect(takeUnless(1, it => it === 0)).toStrictEqual(1)
+
+  expect(takeUnless(1, true)).toStrictEqual(undefined)
+  expect(takeUnless(1, false)).toStrictEqual(1)
 })
 
 test('_run', () => {

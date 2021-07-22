@@ -69,25 +69,33 @@ export function _also<T>(receiver: T, block: (it: T)=>void): T {
 }
 
 /**
- * Returns `receiver` value if it satisfies the given `predicate` or `undefined`, if it doesn't.
+ * Applies `receiver` to `predicate`, returns `receiver` if the given `predicate` resolves into `true`, or `undefined` otherwise.
+ *
+ * If `predicate` is a boolean, returns `receiver` cause truthy or `undefined` otherwise.
  *
  * https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/take-if.html
  *
- * @returns `receiver` if the evaluation of `predicate` is `true`. `undefined` otherwise.
+ * @returns `receiver` if `predicate` (or it's evaluation) is `true`. `undefined` otherwise.
  */
-export function takeIf<T>(receiver: T, predicate: (it: T)=>boolean) : T | undefined {
-  return predicate(receiver) ? receiver : undefined
+export function takeIf<T>(receiver: T, predicate: ((it: T)=>boolean) | boolean) : T | undefined {
+  return typeof predicate === 'boolean'
+    ? (predicate ? receiver : undefined)
+    : (predicate(receiver) ? receiver : undefined)
 }
 
 /**
- * Returns `receiver` value if it does not satisfy the given `predicate` or `undefined`, if it does.
+ * Applies `receiver` to `predicate`, returns `receiver` if the given `predicate` resolves into `false`, or `undefined` otherwise.
+ *
+ * If `predicate` is a boolean, returns `receiver` cause falsy or `undefined` otherwise.
  *
  * https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/take-unless.html
  *
- * @returns `receiver` if the evaluation of `predicate` is `false`. `undefined` otherwise.
+ * @returns `receiver` if `predicate` (or it's evaluation) is `false`. `undefined` otherwise.
  */
-export function takeUnless<T>(receiver: T, predicate: (it: T)=>boolean) : T | undefined {
-  return predicate(receiver) ? undefined : receiver
+export function takeUnless<T>(receiver: T, predicate: ((it: T)=>boolean) | boolean) : T | undefined {
+  return typeof predicate === 'boolean'
+    ? (predicate ? undefined : receiver)
+    : (predicate(receiver) ? undefined : receiver)
 }
 
 /**
