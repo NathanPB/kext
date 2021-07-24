@@ -12,6 +12,7 @@ export * as Array from './array'
 export * as Scope from './scope'
 export * as Errors from './error'
 export * as Math from './math'
+export * as Random from './random'
 
 /**
  * Represents a type which a key is associated with a value.
