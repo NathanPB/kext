@@ -86,7 +86,7 @@
 <span style="color: #000000">  </span><span style="color: #AF00DB">throw</span><span style="color: #000000"> </span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #098658">403</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;Token not present&#039;</span><span style="color: #000000">)</span>
 <span style="color: #000000">}</span>
 
-<span style="color: #008000">// Here, the TS compiles still thinks ``token`` can be undefined</span>
+<span style="color: #008000">// Here, the TS compiler still thinks that ``token`` can be undefined</span>
 </code></pre>
 				<p><strong>Typescript + @nathanpb/kext:</strong></p>
 				<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">runCatching</span><span style="color: #000000">, </span><span style="color: #001080">throwExpr</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@nathanpb/kext/error&quot;</span><span style="color: #000000">;</span>
