@@ -29,7 +29,7 @@ try {
   throw error(403, 'Token not present')
 }
 
-// Here, the TS compiles still thinks ``token`` can be undefined
+// Here, the TS compiler still thinks that ``token`` can be undefined
 ```
 
 **Typescript + @nathanpb/kext:**
