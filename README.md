@@ -22,12 +22,14 @@ const agesSum = sumBy(users, it => it.age)
 **Typescript:**
 
 ```ts
-let token: JwtPayload = undefined // mutable variable bad, also can't have it's type inferred
+let token: JwtPayload | undefined = undefined // mutable variable bad, also can't have it's type inferred
 try {
   token = jwt.verify(req.body, secret)
 } catch (e) {
   throw error(403, 'Token not present')
 }
+
+// Here, the TS compiles still thinks ``token`` can be undefined
 ```
 
 **Typescript + @nathanpb/kext:**
