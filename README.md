@@ -6,7 +6,9 @@ Yes, it's that simple
 
 **If you get any questions or suggestions just open a [discussion](https://github.com/NathanPB/kext/discussions) or an [issue](https://github.com/NathanPB/kext/issues)**
 
-## Example
+## Example and Use Cases
+
+### Generic array usage
 
 ```ts
 import { any, sumBy } from '@nathanpb/kext/array'
@@ -14,6 +16,45 @@ import { any, sumBy } from '@nathanpb/kext/array'
 const hasNonFriends = any(users, it => !it.areFriends(user))
 const agesSum = sumBy(users, it => it.age)
 ```
+
+### Try/catch as an expression
+
+**Typescript:**
+
+```ts
+let token: JwtPayload = undefined // mutable variable bad, also can't have it's type inferred
+try {
+  token = jwt.verify(req.body, secret)
+} catch (e) {
+  throw error(403, 'Token not present')
+}
+```
+
+**Typescript + @nathanpb/kext:**
+
+```ts
+import { runCatching, throwExpr } from "@nathanpb/kext/error";
+
+const token = runCatching(() => jwt.verify(req.body, secret))
+  .onFailure(() => throwExpr(error(403, 'Token not present')))
+  .getOrUndefined()!!
+```
+
+<details>
+  <summary>If you prefer, this can also be written as</summary>
+
+  ```ts
+  const token = runCatching(() => jwt.verify(req.body, secret))
+    .recover(() => throwExpr(error(403, 'Token not present')))
+    .getOrThrow()
+  ```
+
+  ```ts
+  const token = runCatching(() => jwt.verify(req.body, secret))
+    .recover(() => { throw error(403, 'Token not present') })
+    .getOrThrow()
+  ```
+</details>
 
 ## Documentation
 
@@ -24,7 +65,7 @@ This library is all inspired by Kotlin, so [their documentation](https://kotlinl
 - [Arrays](https://kext.nathanpb.dev/modules/array.html) - Functions for array manipulation. Details on the Kotlin imp [here](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/)
 - [Scope](https://kext.nathanpb.dev/modules/scope.html) - Functions for scope manipulation. Details on the Kotlin imp [here](https://kotlinlang.org/docs/scope-functions.html)
 - [Math](https://kext.nathanpb.dev/modules/math.html) - Functions for common math equations. Still incomplete.
-- [Error](https://kext.nathanpb.dev/modules/error.html) - Functions for error/exception manipulation that I find handy. Still incomplete.
+- [Error](https://kext.nathanpb.dev/modules/error.html) - Functions for error/exception manipulation that I find handy.
 
 ## Showcase (Brief demonstration of the Arrays Module)
 ![showcase](https://user-images.githubusercontent.com/18128642/125735762-57d008b4-73c2-4d85-b6b8-87f3a37d5e08.gif)
@@ -33,7 +74,7 @@ This library is all inspired by Kotlin, so [their documentation](https://kotlinl
 ## What's next
 
 - Do a proper documentation
-- Write unit tests
+- Write unit tests for the Arrays module
 - Write a typescript plugin to invoke array functions as an extension-like function
 - Async-compatible functions
 
