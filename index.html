@@ -64,14 +64,46 @@
 				<p>I think that the ECMAScript stdlib is not enough for me, so I&#39;m attempting to rewrite all of the usefull Kotlin&#39;s stdlib into Typescript.</p>
 				<p>Yes, it&#39;s that simple</p>
 				<p><strong>If you get any questions or suggestions just open a <a href="https://github.com/NathanPB/kext/discussions">discussion</a> or an <a href="https://github.com/NathanPB/kext/issues">issue</a></strong></p>
-				<a href="#example" id="example" style="color: inherit; text-decoration: none;">
-					<h2>Example</h2>
+				<a href="#example-and-use-cases" id="example-and-use-cases" style="color: inherit; text-decoration: none;">
+					<h2>Example and Use Cases</h2>
+				</a>
+				<a href="#generic-array-usage" id="generic-array-usage" style="color: inherit; text-decoration: none;">
+					<h3>Generic array usage</h3>
 				</a>
 				<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">any</span><span style="color: #000000">, </span><span style="color: #001080">sumBy</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@nathanpb/kext/array&#039;</span>
 
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">hasNonFriends</span><span style="color: #000000"> = </span><span style="color: #795E26">any</span><span style="color: #000000">(</span><span style="color: #001080">users</span><span style="color: #000000">, </span><span style="color: #001080">it</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> !</span><span style="color: #001080">it</span><span style="color: #000000">.</span><span style="color: #795E26">areFriends</span><span style="color: #000000">(</span><span style="color: #001080">user</span><span style="color: #000000">))</span>
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">agesSum</span><span style="color: #000000"> = </span><span style="color: #795E26">sumBy</span><span style="color: #000000">(</span><span style="color: #001080">users</span><span style="color: #000000">, </span><span style="color: #001080">it</span><span style="color: #000000"> </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">it</span><span style="color: #000000">.</span><span style="color: #001080">age</span><span style="color: #000000">)</span>
 </code></pre>
+				<a href="#trycatch-as-an-expression" id="trycatch-as-an-expression" style="color: inherit; text-decoration: none;">
+					<h3>Try/catch as an expression</h3>
+				</a>
+				<p><strong>Typescript:</strong></p>
+				<pre><code class="language-ts"><span style="color: #0000FF">let</span><span style="color: #000000"> </span><span style="color: #001080">token</span><span style="color: #000000">: </span><span style="color: #267F99">JwtPayload</span><span style="color: #000000"> = </span><span style="color: #0000FF">undefined</span><span style="color: #000000"> </span><span style="color: #008000">// mutable variable bad, also can&#039;t have it&#039;s type inferred</span>
+<span style="color: #AF00DB">try</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #001080">token</span><span style="color: #000000"> = </span><span style="color: #001080">jwt</span><span style="color: #000000">.</span><span style="color: #795E26">verify</span><span style="color: #000000">(</span><span style="color: #001080">req</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000">, </span><span style="color: #001080">secret</span><span style="color: #000000">)</span>
+<span style="color: #000000">} </span><span style="color: #AF00DB">catch</span><span style="color: #000000"> (</span><span style="color: #001080">e</span><span style="color: #000000">) {</span>
+<span style="color: #000000">  </span><span style="color: #AF00DB">throw</span><span style="color: #000000"> </span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #098658">403</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;Token not present&#039;</span><span style="color: #000000">)</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p><strong>Typescript + @nathanpb/kext:</strong></p>
+				<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">runCatching</span><span style="color: #000000">, </span><span style="color: #001080">throwExpr</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@nathanpb/kext/error&quot;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">token</span><span style="color: #000000"> = </span><span style="color: #795E26">runCatching</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">jwt</span><span style="color: #000000">.</span><span style="color: #795E26">verify</span><span style="color: #000000">(</span><span style="color: #001080">req</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000">, </span><span style="color: #001080">secret</span><span style="color: #000000">))</span>
+<span style="color: #000000">  .</span><span style="color: #795E26">onFailure</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #795E26">throwExpr</span><span style="color: #000000">(</span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #098658">403</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;Token not present&#039;</span><span style="color: #000000">)))</span>
+<span style="color: #000000">  .</span><span style="color: #795E26">getOrUndefined</span><span style="color: #000000">()!!</span>
+</code></pre>
+				<details>
+					<summary>If you prefer, this can also be written as</summary>
+					<pre><code class="language-ts"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">token</span><span style="color: #000000"> = </span><span style="color: #795E26">runCatching</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">jwt</span><span style="color: #000000">.</span><span style="color: #795E26">verify</span><span style="color: #000000">(</span><span style="color: #001080">req</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000">, </span><span style="color: #001080">secret</span><span style="color: #000000">))</span>
+<span style="color: #000000">  .</span><span style="color: #795E26">recover</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #795E26">throwExpr</span><span style="color: #000000">(</span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #098658">403</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;Token not present&#039;</span><span style="color: #000000">)))</span>
+<span style="color: #000000">  .</span><span style="color: #795E26">getOrThrow</span><span style="color: #000000">()</span>
+</code></pre>
+					<pre><code class="language-ts"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">token</span><span style="color: #000000"> = </span><span style="color: #795E26">runCatching</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #001080">jwt</span><span style="color: #000000">.</span><span style="color: #795E26">verify</span><span style="color: #000000">(</span><span style="color: #001080">req</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000">, </span><span style="color: #001080">secret</span><span style="color: #000000">))</span>
+<span style="color: #000000">  .</span><span style="color: #795E26">recover</span><span style="color: #000000">(() </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> { </span><span style="color: #AF00DB">throw</span><span style="color: #000000"> </span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #098658">403</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;Token not present&#039;</span><span style="color: #000000">) })</span>
+<span style="color: #000000">  .</span><span style="color: #795E26">getOrThrow</span><span style="color: #000000">()</span>
+</code></pre>
+				</details>
 				<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
 					<h2>Documentation</h2>
 				</a>
@@ -81,7 +113,7 @@
 					<li><a href="https://kext.nathanpb.dev/modules/array.html">Arrays</a> - Functions for array manipulation. Details on the Kotlin imp <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/">here</a></li>
 					<li><a href="https://kext.nathanpb.dev/modules/scope.html">Scope</a> - Functions for scope manipulation. Details on the Kotlin imp <a href="https://kotlinlang.org/docs/scope-functions.html">here</a></li>
 					<li><a href="https://kext.nathanpb.dev/modules/math.html">Math</a> - Functions for common math equations. Still incomplete.</li>
-					<li><a href="https://kext.nathanpb.dev/modules/error.html">Error</a> - Functions for error/exception manipulation that I find handy. Still incomplete.</li>
+					<li><a href="https://kext.nathanpb.dev/modules/error.html">Error</a> - Functions for error/exception manipulation that I find handy.</li>
 				</ul>
 				<a href="#showcase-brief-demonstration-of-the-arrays-module" id="showcase-brief-demonstration-of-the-arrays-module" style="color: inherit; text-decoration: none;">
 					<h2>Showcase (Brief demonstration of the Arrays Module)</h2>
@@ -92,7 +124,7 @@
 				</a>
 				<ul>
 					<li>Do a proper documentation</li>
-					<li>Write unit tests</li>
+					<li>Write unit tests for the Arrays module</li>
 					<li>Write a typescript plugin to invoke array functions as an extension-like function</li>
 					<li>Async-compatible functions</li>
 				</ul>
