@@ -1,6 +1,6 @@
 {
   "name": "@nathanpb/kext",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Kotlin inspired extension library for NodeJS",
   "author": "Nathan P. Bombana <nathan.pbombana@gmail.com>",
   "repository": "https://github.com/NathanPB/kext",
@@ -10,7 +10,7 @@
     "test": "jest --passWithNoTests",
     "clean": "rm -rf dist",
     "docs": "typedoc --entryPoints src/index.ts",
-    "build": "npm run clean && tsc -p tsconfig.json && cp package.json dist/package.json",
+    "build": "npm run clean && tsc -p tsconfig.json && cp {package.json,LICENSE,README.md} dist",
     "prerelease": "npm run build",
     "release": "cd dist && npm publish --access public"
   },
