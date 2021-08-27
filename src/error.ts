@@ -243,7 +243,7 @@ export function throwExpr(error: Error): never {
 export function runCatching<T, E = any>(block: ()=>T): Result<T, E> {
   try {
     return Result.success<T, E>(block())
-  } catch (e) {
+  } catch (e: any) {
     return Result.failure<E, T>(e)
   }
 }
@@ -257,7 +257,7 @@ export function runCatching<T, E = any>(block: ()=>T): Result<T, E> {
 export async function runCatching$<T, E = any>(block: ()=>Promise<T>): Promise<Result<T, E>> {
   try {
     return Result.success<T, E>(await block())
-  } catch (e) {
+  } catch (e: any) {
     return Result.failure<E, T>(e)
   }
 }

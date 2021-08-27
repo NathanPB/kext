@@ -8,19 +8,19 @@
   "types": "./index.d.ts",
   "scripts": {
     "test": "jest --passWithNoTests",
-    "clean": "rm -rf dist",
+    "clean": "rm -rf dist coverage docs",
     "docs": "typedoc --entryPoints src/index.ts",
-    "build": "npm run clean && tsc -p tsconfig.json && cp {package.json,LICENSE,README.md} dist",
+    "build": "npm run clean && tsc -p tsconfig.json && cp ./{package.json,LICENSE,README.md} dist",
     "prerelease": "npm run build",
     "release": "cd dist && npm publish --access public"
   },
   "devDependencies": {
     "@types/jest": "^27.0.1",
-    "@types/node": "^15.0.1",
-    "jest": "^27.0.6",
-    "ts-jest": "^27.0.4",
-    "tslib": "^2.3.0",
-    "typedoc": "^0.21.4",
-    "typescript": "^4.2.3"
+    "@types/node": "^14.17.12",
+    "jest": "^27.1.0",
+    "ts-jest": "^27.0.5",
+    "tslib": "^2.3.1",
+    "typedoc": "^0.21.7",
+    "typescript": "^4.4.2"
   }
 }
