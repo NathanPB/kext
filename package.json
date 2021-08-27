@@ -10,7 +10,7 @@
     "test": "jest --passWithNoTests",
     "clean": "rm -rf dist coverage docs",
     "docs": "typedoc --entryPoints src/index.ts",
-    "build": "npm run clean && tsc -p tsconfig.json && cp ./{package.json,LICENSE,README.md} dist",
+    "build": "npm run clean && tsc -p tsconfig.json && cp package.json dist && cp README.md dist && cp LICENSE dist",
     "prerelease": "npm run build",
     "release": "cd dist && npm publish --access public"
   },
