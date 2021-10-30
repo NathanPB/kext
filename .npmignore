@@ -7,7 +7,9 @@
 /docs/
 
 benchmarks
+cmake-build-debug
 coverage
+node-gyp.log
 *.log
 .gitlab-ci.yml
 

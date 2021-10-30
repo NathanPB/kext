@@ -8,4 +8,6 @@
 .DS_Store
 benchmarks
 coverage
+cmake-build-debug
+node-gyp.log
 *.log
