@@ -72,13 +72,17 @@ This library is all inspired by Kotlin, so [their documentation](https://kotlinl
 ## Showcase (Brief demonstration of the Arrays Module)
 ![showcase](https://user-images.githubusercontent.com/18128642/125735762-57d008b4-73c2-4d85-b6b8-87f3a37d5e08.gif)
 
+## Performance
+
+I haven't compared the benchmarks with similar libraries, but most of the functions use the stdlib under the hood so it may be very similar.
 
 ## What's next
 
 - Do a proper documentation
-- Write unit tests for the Arrays module
+- Finish the unit tests and benchmarks for the Arrays module
 - Write a typescript plugin to invoke array functions as an extension-like function
 - Async-compatible functions
+- Rewrite performance critical functions with some compiled language
 
 ## Side Notes
 

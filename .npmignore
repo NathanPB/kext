@@ -6,6 +6,7 @@
 .idea/*
 /docs/
 
+benchmarks
 coverage
 *.log
 .gitlab-ci.yml

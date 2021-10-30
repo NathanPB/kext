@@ -1,0 +1,14 @@
+{
+  "roots": ["<rootDir>/test/benchmark"],
+  "testEnvironment": "@nathanpb/jest-bench/environment",
+  "testEnvironmentOptions": {
+    "testEnvironment": "jest-environment-jsdom",
+    "testEnvironmentOptions": {
+    }
+  },
+  "transform": {
+    "^.+\\.(ts|tsx)$": "ts-jest"
+  },
+  "reporters": ["default", "@nathanpb/jest-bench/reporter"],
+  "testRegex": "(/__benchmarks__/.*|\\.bench)\\.(ts|tsx|js)$"
+}
