@@ -8,6 +8,8 @@
   "types": "./index.d.ts",
   "gypfile": true,
   "scripts": {
+    "pretest": "npm run build:native",
+    "prebench": "npm run build:native",
     "test": "jest --passWithNoTests",
     "bench": "jest --projects jest-bench.config.json",
     "clean": "rm -rf dist coverage docs benchmarks cmake-build-debug build node-gyp.log",
