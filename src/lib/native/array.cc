@@ -30,10 +30,11 @@ void indexOfFirst(const FunctionCallbackInfo<Value>& args) {
     Local<Value> match = predicate->Call(context, Null(isolate), 3, argv).ToLocalChecked();
 
     if (match->BooleanValue(isolate)) {
-      args.GetReturnValue().Set(argIt);
-      break;
+      args.GetReturnValue().Set(argIdx);
+      return;
     }
   }
+  args.GetReturnValue().Set(Number::New(isolate, -1));
 }
 
 void Initialize(Local<Object> exports) {

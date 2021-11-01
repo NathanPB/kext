@@ -8,6 +8,9 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+// @ts-ignore
+import {multiImpBenchmark} from "../helper";
+
 import {benchmarkSuite} from '@nathanpb/jest-bench'
 import * as ArrayJS from '../../src/lib/js/array'
 import * as ArrayNative from '../../src/lib/native/array'
@@ -23,35 +26,23 @@ const halfLongList = longListSize / 2
 const longList: number[]  = [...Array(longListSize).keys()].map((_, idx) => idx)
 
 benchmarkSuite("#indexOfFirst", {
-  impCustomJSWorst: () => {
-    ArrayJS.indexOfFirst(longList, (it) => it === longListSize)
-  },
-  impCustomJSBest: () => {
-    ArrayJS.indexOfFirst(longList, (it) => it === 0)
-  },
-  impCustomJSAvg: () => {
-    ArrayJS.indexOfFirst(longList, (it) => it === halfLongList)
-  },
+  ...multiImpBenchmark({
+    js: () => void ArrayJS.indexOfFirst(longList, (it) => it === longListSize),
+    native: () => void ArrayNative.indexOfFirst(longList, (it) => it === longListSize),
+    ecma: () => void longList.findIndex(it => it === longListSize)
+  }, "worst"),
 
-  impCustomNativeWorst: () => {
-    ArrayNative.indexOfFirst(longList, (it) => it === longListSize)
-  },
-  impCustomNativeBest: () => {
-    ArrayNative.indexOfFirst(longList, (it) => it === 0)
-  },
-  impCustomNativeAvg: () => {
-    ArrayNative.indexOfFirst(longList, (it) => it === halfLongList)
-  },
+  ...multiImpBenchmark({
+    js: () => void ArrayJS.indexOfFirst(longList, (it) => it === 0),
+    native: () => void ArrayNative.indexOfFirst(longList, (it) => it === 0),
+    ecma: () => void longList.findIndex(it => it === 0)
+  }, "best"),
 
-  impEcmaStdlibWorst: () => {
-    longList.findIndex(it => it === longListSize)
-  },
-  impEcmaStdlibBest: () => {
-    longList.findIndex(it => it === 0)
-  },
-  impEcmaStdlibAvg: () => {
-    longList.findIndex(it => it === halfLongList)
-  },
+  ...multiImpBenchmark({
+    js: () => void ArrayJS.indexOfFirst(longList, (it) => it === halfLongList),
+    native: () => void ArrayNative.indexOfFirst(longList, (it) => it === halfLongList),
+    ecma: () => void longList.findIndex(it => it === halfLongList)
+  }, "avg"),
 })
 
 /*
