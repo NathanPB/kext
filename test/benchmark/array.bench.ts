@@ -45,6 +45,23 @@ benchmarkSuite("#indexOfFirst", {
   }, "avg"),
 })
 
+benchmarkSuite("#all", {
+  ...multiImpBenchmark({
+    js: () => void ArrayJS.all(longList, it => it < longListSize),
+    ecma: () => void longList.every(it => it < longListSize)
+  }, "worst"),
+
+  ...multiImpBenchmark({
+    js: () => void ArrayJS.all(longList, it => it > longListSize),
+    ecma: () => void longList.every(it => it > longListSize)
+  }, "best"),
+
+  ...multiImpBenchmark({
+    js: () => void ArrayJS.all(longList, it => it < halfLongList),
+    ecma: () => void longList.every(it => it < halfLongList)
+  }, "avg")
+})
+
 /*
 benchmarkSuite("#indexOfLast", {
   impCustomJSWorst: () => {

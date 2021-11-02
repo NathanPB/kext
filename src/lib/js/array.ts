@@ -19,7 +19,12 @@ export type ArrayConsumer<T> = ArrayMapper<T, void>
 // https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/
 
 export function all<T>(array: T[], predicate: ArrayPredicate<T>): boolean {
-  return array.every(predicate)
+  for (let i=0; i<array.length; i++) {
+    if (!predicate(array[i], i, array)) {
+      return false
+    }
+  }
+  return true
 }
 
 export function any<T>(array: T[], predicate: ArrayPredicate<T>): boolean {
