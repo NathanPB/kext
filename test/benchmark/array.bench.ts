@@ -15,114 +15,99 @@ import {benchmarkSuite} from '@nathanpb/jest-bench'
 import * as ArrayJS from '../../src/lib/js/array'
 import * as ArrayNative from '../../src/lib/native/array'
 
-const longListSize = 10_000
-//const shortListSize = 1000
-
-const halfLongList = longListSize / 2
-//const halfShortList = shortListSize / 2
-
-//const emptyList: number[] = []
-//const shortList: number[] = [...Array(shortListSize).keys()].map((_, idx) => idx)
-const longList: number[]  = [...Array(longListSize).keys()].map((_, idx) => idx)
+const listSize = 10_000
+const list: number[]  = [...Array(listSize).keys()].map((_, idx) => idx)
 
 benchmarkSuite("#indexOfFirst", {
   ...multiImpBenchmark({
-    js: () => void ArrayJS.indexOfFirst(longList, (it) => it === longListSize),
-    native: () => void ArrayNative.indexOfFirst(longList, (it) => it === longListSize),
-    ecma: () => void longList.findIndex(it => it === longListSize)
+    js: () => void ArrayJS.indexOfFirst(list, () => false),
+    native: () => void ArrayNative.indexOfFirst(list, () => false),
+    ecma: () => void list.findIndex(() => false)
   }, "worst"),
 
   ...multiImpBenchmark({
-    js: () => void ArrayJS.indexOfFirst(longList, (it) => it === 0),
-    native: () => void ArrayNative.indexOfFirst(longList, (it) => it === 0),
-    ecma: () => void longList.findIndex(it => it === 0)
+    js: () => void ArrayJS.indexOfFirst(list, () => true),
+    native: () => void ArrayNative.indexOfFirst(list, () => true),
+    ecma: () => void list.findIndex(() => true)
   }, "best"),
 
   ...multiImpBenchmark({
-    js: () => void ArrayJS.indexOfFirst(longList, (it) => it === halfLongList),
-    native: () => void ArrayNative.indexOfFirst(longList, (it) => it === halfLongList),
-    ecma: () => void longList.findIndex(it => it === halfLongList)
-  }, "avg"),
+    js: () => void ArrayJS.indexOfFirst([], () => true),
+    native: () => void ArrayNative.indexOfFirst([], () => true),
+    ecma: () => void [].findIndex(() => true)
+  }, "empty list")
 })
 
 benchmarkSuite("#all", {
   ...multiImpBenchmark({
-    js: () => void ArrayJS.all(longList, it => it < longListSize),
-    ecma: () => void longList.every(it => it < longListSize)
+    js: () => void ArrayJS.all(list, () => true),
+    ecma: () => void list.every(() => true)
   }, "worst"),
 
   ...multiImpBenchmark({
-    js: () => void ArrayJS.all(longList, it => it > longListSize),
-    ecma: () => void longList.every(it => it > longListSize)
+    js: () => void ArrayJS.all(list, () => false),
+    ecma: () => void list.every(() => false)
   }, "best"),
 
   ...multiImpBenchmark({
-    js: () => void ArrayJS.all(longList, it => it < halfLongList),
-    ecma: () => void longList.every(it => it < halfLongList)
-  }, "avg")
+    js: () => void ArrayJS.all([], () => true),
+    ecma: () => void [].every(() => true)
+  }, "empty list")
 })
 
-/*
 benchmarkSuite("#indexOfLast", {
-  impCustomJSWorst: () => {
-    ArrayJS.indexOfLast(longList, (it) => it === longListSize)
-  },
-  impCustomJSBest: () => {
-    ArrayJS.indexOfLast(longList, (it) => it === 0)
-  },
-  impCustomJSAvg: () => {
-    ArrayJS.indexOfLast(longList, (it) => it === halfLongList)
-  },
+  ...multiImpBenchmark({
+    js: () => void ArrayJS.indexOfLast(list, () => false),
+    ecma: () => void (list.length - list.reverse().findIndex(() => false))
+  }, "worst"),
 
-  impCustomNativeWorst: () => {
-    ArrayNative.indexOfLast(longList, (it) => it === longListSize)
-  },
-  impCustomNativeBest: () => {
-    ArrayNative.indexOfLast(longList, (it) => it === 0)
-  },
-  impCustomNativeAvg: () => {
-    ArrayNative.indexOfLast(longList, (it) => it === halfLongList)
-  },
+  ...multiImpBenchmark({
+    js: () => void ArrayJS.indexOfLast(list, () => true),
+    ecma: () => void list.findIndex(() => true)
+  }, "best"),
+
+  ...multiImpBenchmark({
+    js: () => void ArrayJS.indexOfLast([], () => true)
+  }, "empty list")
 })
 
 // findLast, lastOrNull, lastNotNullableOf, indexOfLast
-/*
-benchmarkSuite("#all", {
-  worstInLongList:   () => void A.all(longList, () => true),
-  bestInLongList:    () => void A.all(longList, () => false),
-  averageInLongList: () => void A.all(longList, i => i <= halfLongList),
-
-  worstInShortList:   () => void A.all(shortList, () => true),
-  bestInShortList:    () => void A.all(shortList, () => false),
-  averageInShortList: () => void A.all(shortList, i => i <= halfShortList),
-
-  inEmptyList:  () => void A.all(emptyList, () => true)
-})
 
 benchmarkSuite("#any", {
-  bestInLongList:    () => void A.any(longList, () => true),
-  worstInLongList:   () => void A.any(longList, () => false),
-  averageInLongList: () => void A.any(longList, i => i >= halfLongList),
+  ...multiImpBenchmark({
+    js: () => void ArrayJS.any(list, () => false),
+    ecma: () => void list.some(() => false)
+  }, "worst"),
 
-  bestInShortList:    () => void A.any(shortList, () => true),
-  worstInShortList:   () => void A.any(shortList, () => false),
-  averageInShortList: () => void A.any(shortList, i => i >= halfShortList),
+  ...multiImpBenchmark({
+    js: () => void ArrayJS.any(list, () => true),
+    ecma: () => void list.some(() => true)
+  }, "best"),
 
-  inEmptyList:  () => void A.any(emptyList, () => true)
+  ...multiImpBenchmark({
+    js: () => void ArrayJS.any([], () => true),
+    ecma: () => void [].some(() => true)
+  }, "empty list")
 })
 
 benchmarkSuite("#contains", {
-  worstInLongList:   () => void A.contains(longList, longListSize),
-  bestInLongList:    () => void A.contains(longList, 0),
-  averageInLongList: () => void A.contains(longList, halfLongList),
+  ...multiImpBenchmark({
+    js: () => void ArrayJS.contains(list, -1),
+    ecma: () => void list.includes(-1)
+  }, "worst"),
 
-  worstInShortList:   () => void A.contains(shortList, shortListSize),
-  bestInShortList:    () => void A.contains(shortList, 0),
-  averageInShortList: () => void A.contains(shortList, halfLongList),
+  ...multiImpBenchmark({
+    js: () => void ArrayJS.contains(list, 0),
+    ecma: () => void list.includes(0)
+  }, "best"),
 
-  inEmptyList:  () => void A.contains(emptyList, 0),
+  ...multiImpBenchmark({
+    js: () => void ArrayJS.contains([], 0),
+    ecma: () => void (<number[]> []).includes(0)
+  }, "empty list")
 })
 
+/*
 benchmarkSuite("#containsAll", {
   worstInLongList:   () => void A.containsAll(longList, [0, longListSize]),
   bestInLongList:    () => void A.containsAll(longList, [0]),
