@@ -74,7 +74,9 @@ This library is all inspired by Kotlin, so [their documentation](https://kotlinl
 
 ## Performance
 
-I haven't compared the benchmarks with similar libraries, but most of the functions use the stdlib under the hood so it may be very similar.
+I'm putting a huge effort in making this library perform well, and the benchmarks tell that it can already perform better than the stdlib in the tested functions.
+
+You can check the benchmarks (https://github.com/NathanPB/kext/actions/workflows/benchmark.yml)[here]. Navigate through the logs and attached report files...
 
 ## What's next
 
