@@ -78,6 +78,8 @@ I'm putting a huge effort in making this library perform well, and the benchmark
 
 You can check the benchmarks [here](https://github.com/NathanPB/kext/actions/workflows/benchmark.yml). Navigate through the logs and attached report files...
 
+Remamber, [this code very fast](https://github.com/torvalds/linux/pull/437)
+
 ## What's next
 
 - Do a proper documentation
