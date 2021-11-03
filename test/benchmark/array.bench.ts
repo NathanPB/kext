@@ -8,118 +8,76 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-// @ts-ignore
-import {multiImpBenchmark} from "../helper";
-
 import {benchmarkSuite} from '@nathanpb/jest-bench'
-import * as ArrayJS from '../../src/lib/js/array'
-import * as ArrayNative from '../../src/lib/native/array'
+import * as A from '../../src/array'
 
 const listSize = 10_000
 const list: number[]  = [...Array(listSize).keys()].map((_, idx) => idx)
 
 benchmarkSuite("#indexOfFirst", {
-  ...multiImpBenchmark({
-    js: () => void ArrayJS.indexOfFirst(list, () => false),
-    native: () => void ArrayNative.indexOfFirst(list, () => false),
-    ecma: () => void list.findIndex(() => false)
-  }, "worst"),
+  ["[JS] worst"]: () => void A.indexOfFirst(list, () => false),
+  ["[ECMA] worst"]: () => void list.findIndex(() => false),
 
-  ...multiImpBenchmark({
-    js: () => void ArrayJS.indexOfFirst(list, () => true),
-    native: () => void ArrayNative.indexOfFirst(list, () => true),
-    ecma: () => void list.findIndex(() => true)
-  }, "best"),
+  ["[JS] best"]: () => void A.indexOfFirst(list, () => true),
+  ["[ECMA] best"]: () => void list.findIndex(() => true),
 
-  ...multiImpBenchmark({
-    js: () => void ArrayJS.indexOfFirst([], () => true),
-    native: () => void ArrayNative.indexOfFirst([], () => true),
-    ecma: () => void [].findIndex(() => true)
-  }, "empty list")
+  ["[JS] empty list"]: () => void A.indexOfFirst([], () => true),
+  ["[ECMA] empty list"]: () => void [].findIndex(() => true),
 })
 
 benchmarkSuite("#all", {
-  ...multiImpBenchmark({
-    js: () => void ArrayJS.all(list, () => true),
-    ecma: () => void list.every(() => true)
-  }, "worst"),
+  ["[JS] worst"]: () => void A.all(list, () => true),
+  ["[ECMA] worst"]: () => void list.every(() => true),
 
-  ...multiImpBenchmark({
-    js: () => void ArrayJS.all(list, () => false),
-    ecma: () => void list.every(() => false)
-  }, "best"),
+  ["[JS] best"]: () => void A.all(list, () => false),
+  ["[ECMA] best"]: () => void list.every(() => false),
 
-  ...multiImpBenchmark({
-    js: () => void ArrayJS.all([], () => true),
-    ecma: () => void [].every(() => true)
-  }, "empty list")
+  ["[JS] empty list"]: () => void A.all([], () => true),
+  ["[ECMA] empty list"]: () => void [].every(() => true),
 })
 
 benchmarkSuite("#indexOfLast", {
-  ...multiImpBenchmark({
-    js: () => void ArrayJS.indexOfLast(list, () => false),
-    ecma: () => void (list.length - list.reverse().findIndex(() => false))
-  }, "worst"),
+  ["[JS] worst"]: () => void A.indexOfLast(list, () => false),
+  ["[ECMA] worst"]: () => void (list.length - list.reverse().findIndex(() => false)),
 
-  ...multiImpBenchmark({
-    js: () => void ArrayJS.indexOfLast(list, () => true),
-    ecma: () => void list.findIndex(() => true)
-  }, "best"),
+  ["[JS] best"]: () => void A.indexOfLast(list, () => true),
+  ["[ECMA] best"]: () => void list.findIndex(() => true),
 
-  ...multiImpBenchmark({
-    js: () => void ArrayJS.indexOfLast([], () => true)
-  }, "empty list")
+  ["[JS] empty list"]: () => void A.indexOfLast([], () => true),
 })
 
-// findLast, lastOrNull, lastNotNullableOf, indexOfLast
-
 benchmarkSuite("#any", {
-  ...multiImpBenchmark({
-    js: () => void ArrayJS.any(list, () => false),
-    ecma: () => void list.some(() => false)
-  }, "worst"),
+  ["[JS] worst"]: () => void A.any(list, () => false),
+  ["[ECMA] worst"]: () => void list.some(() => false),
 
-  ...multiImpBenchmark({
-    js: () => void ArrayJS.any(list, () => true),
-    ecma: () => void list.some(() => true)
-  }, "best"),
+  ["[JS] best"]: () => void A.any(list, () => true),
+  ["[ECMA] best"]: () => void list.some(() => true),
 
-  ...multiImpBenchmark({
-    js: () => void ArrayJS.any([], () => true),
-    ecma: () => void [].some(() => true)
-  }, "empty list")
+  ["[JS] empty list"]: () => void A.any([], () => true),
+  ["[ECMA] empty list"]: () => void [].some(() => true),
 })
 
 benchmarkSuite("#contains", {
-  ...multiImpBenchmark({
-    js: () => void ArrayJS.contains(list, -1),
-    ecma: () => void list.includes(-1)
-  }, "worst"),
+  ["[JS] worst"]: () => void A.contains(list, -1),
+  ["[ECMA] worst"]: () => void list.includes(-1),
 
-  ...multiImpBenchmark({
-    js: () => void ArrayJS.contains(list, 0),
-    ecma: () => void list.includes(0)
-  }, "best"),
+  ["[JS] best"]: () => void A.contains(list, 0),
+  ["[ECMA] best"]: () => void list.includes(0),
 
-  ...multiImpBenchmark({
-    js: () => void ArrayJS.contains([], 0),
-    ecma: () => void (<number[]> []).includes(0)
-  }, "empty list")
+  ["[JS] empty list"]: () => void A.contains([], 0),
+  ["[ECMA] empty list"]: () => void (<number[]> []).includes(0),
 })
 
 benchmarkSuite("#sum", {
-  ...multiImpBenchmark({
-    js: () => void ArrayJS.sum(list),
-    ecma: () => void list.reduce((a, b) => a + b, 0)
-  }, "worst"),
+  ["[JS] worst"]: () => void A.sum(list),
+  ["[ECMA] worst"]: () => void list.reduce((a, b) => a + b, 0),
 
-  ...multiImpBenchmark({
-    js: () => void ArrayJS.sum([]),
-    ecma: () => void [].reduce((a, b) => a + b, 0)
-  }, "empty list")
+  ["[JS] best / empty list"]: () => void A.sum([]),
+  ["[ECMA] best / empty list"]: () => void [].reduce((a, b) => a + b, 0),
 })
 
 /*
+findLast, lastOrNull, lastNotNullableOf, indexOfLast
 benchmarkSuite("#containsAll", {
   worstInLongList:   () => void A.containsAll(longList, [0, longListSize]),
   bestInLongList:    () => void A.containsAll(longList, [0]),

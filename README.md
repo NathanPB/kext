@@ -84,7 +84,6 @@ You can check the benchmarks [here](https://github.com/NathanPB/kext/actions/wor
 - Finish the unit tests and benchmarks for the Arrays module
 - Write a typescript plugin to invoke array functions as an extension-like function
 - Async-compatible functions
-- Rewrite performance critical functions with some compiled language
 
 ## Side Notes
 

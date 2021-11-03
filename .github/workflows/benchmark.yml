@@ -18,12 +18,6 @@ jobs:
       with:
         node-version: ${{ matrix.nodejs }}
 
-    - name: Set up GCC
-      uses: egor-tensin/setup-gcc@v1
-      with:
-        version: latest
-        platform: x64
-
     - run: npm install
     - run: npm run bench
     - run: npx jsonlint < benchmarks/result.txt > benchmarks/report.json
