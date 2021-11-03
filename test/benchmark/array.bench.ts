@@ -107,6 +107,18 @@ benchmarkSuite("#contains", {
   }, "empty list")
 })
 
+benchmarkSuite("#sum", {
+  ...multiImpBenchmark({
+    js: () => void ArrayJS.sum(list),
+    ecma: () => void list.reduce((a, b) => a + b, 0)
+  }, "worst"),
+
+  ...multiImpBenchmark({
+    js: () => void ArrayJS.sum([]),
+    ecma: () => void [].reduce((a, b) => a + b, 0)
+  }, "empty list")
+})
+
 /*
 benchmarkSuite("#containsAll", {
   worstInLongList:   () => void A.containsAll(longList, [0, longListSize]),

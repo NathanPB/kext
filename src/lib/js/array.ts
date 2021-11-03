@@ -603,7 +603,11 @@ export function sortedByDescending<T>(array: T[], selector: (it: T)=>number): T[
 }
 
 export function sum(array: number[]): number {
-  return array.reduce((a, b) => a + b, 0)
+  let acc=0;
+  for (let i=0; i<array.length; i++) {
+    acc += array[i]
+  }
+  return acc;
 }
 
 export function sumOf<T>(array: T[], selector: ArrayMapper<T, number>): number {
