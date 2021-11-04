@@ -6,6 +6,14 @@ Yes, it's that simple
 
 **If you get any questions or suggestions just open a [discussion](https://github.com/NathanPB/kext/discussions) or an [issue](https://github.com/NathanPB/kext/issues)**
 
+## Installation
+
+This package is published in [npmjs](https://www.npmjs.com/package/@nathanpb/kext):
+
+``npm i @nathanpb/kext`` or ``yarn add @nathanpb/kext``
+
+If you want to try the unstable features, use the ``next`` tag: ``npm i @nathanpb/kext@next``.
+
 ## Example and Use Cases
 
 ### Generic array usage
