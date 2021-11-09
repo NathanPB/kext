@@ -230,7 +230,7 @@ export class Result<T, E> {
  *
  * @param error The error to throw.
  */
-export function throwExpr(error: Error): never {
+export function throwExpr(error: any): never {
   throw error
 }
 
