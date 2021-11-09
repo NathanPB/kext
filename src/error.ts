@@ -131,12 +131,12 @@ export class Result<T, E> {
   }
 
   /**
-   * Transforms the value of the `Result` if it represents a failure. If not, returns the current result.
+   * Transforms the value of the `Result` if it represents a success. If not, returns the current result.
    *
    * The function on `transform` is used to transform the value in case the result represents success. If so, the `value` argument of this callback function will be the current value of the `Result`.
    * This operation does not mutate the current `Result`, instead returns a new one with the return of `value` wrapped.
    *
-   * If the current result represents an error, the current result is returned unchanged.
+   * If the current `Result` represents an error, the current result is returned unchanged.
    *
    * If the evaluation of the `transform` function fails, the error will be left uncatched.
    *
@@ -146,6 +146,24 @@ export class Result<T, E> {
   map<R>(transform: (value: T)=>R): Result<R, E> | Result<T, E> {
     return this.isSuccess
       ? Result.success(transform(this.result!!))
+      : this
+  }
+
+  /**
+   * Transforms the error of the `Result` if it represents a failure. If not, returns the current result.
+   *
+   * The function on `transform` is used to transform the value in case the result represents success. If so, the `error` argument of this callback function will be the current error of the `Result`.
+   * This operation does not mutate the current `Result`, instead returns a new one with the return of `value` wrapped as error.
+   *
+   * If the current `Result` represents a success, the current result is returned unchanged.
+   *
+   * If the evaluation of the `transform` function fails, the error will be left uncatched.
+   *
+   * @param transform The callback to be used to transform the current error.
+   */
+  mapError<RE>(transform: (error: E)=>RE): Result<T, RE> | Result<T, E> {
+    return this.error
+      ? Result.failure(transform(this.error!!))
       : this
   }
 

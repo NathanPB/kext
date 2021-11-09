@@ -86,6 +86,19 @@ describe('Result', () => {
       expect(callbackReturning).not.toBeCalled()
     })
 
+    test('mapError', () => {
+      const newError = new Error('transformed error')
+      const callback = fn(() => newError)
+      const mapped = result.mapError(callback)
+
+      expect(mapped.isFailure).toStrictEqual(true)
+      expect(mapped.errorOrUndefined()).toStrictEqual(newError)
+      expect(callback).toBeCalledWith(error)
+
+      const callbackThrowing = fn(() => { throw newError })
+      expect(fn(() => result.mapError(callbackThrowing))).toThrow(newError)
+    })
+
     test('mapCatching', () => {
       const callback = fn(() => { throw 'e' })
       const mapped = result.mapCatching(callback)
@@ -194,6 +207,12 @@ describe('Result', () => {
       const error = new Error('error')
       const callbackThrowing = fn(() => { throw error })
       expect(fn(() => result.map(callbackThrowing))).toThrow(error)
+    })
+
+    test('mapError', () => {
+      const callbackReturning = fn(() => 'foo')
+      expect(result.mapError(callbackReturning)).toStrictEqual(result)
+      expect(callbackReturning).not.toBeCalled()
     })
 
     test('mapCatching', () => {
