@@ -3,7 +3,10 @@
 
 name: Node.js Package Next
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   publish-npm-next:
