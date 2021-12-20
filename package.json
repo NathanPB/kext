@@ -19,7 +19,7 @@
   "devDependencies": {
     "@nathanpb/jest-bench": "^0.1.6-1",
     "@types/jest": "^27.0.1",
-    "@types/node": "^14.17.12",
+    "@types/node": "^17.0.1",
     "jest": "^27.1.0",
     "ts-jest": "^27.0.5",
     "tslib": "^2.3.1",
