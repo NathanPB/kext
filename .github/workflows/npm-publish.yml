@@ -29,6 +29,5 @@ jobs:
           add: ./package.json
           message: ${{ format('[CI] Bump version to {0}', github.ref_name) }}
           branch: main
-          tag: "${{github.ref_name}} --force"
 
       - run: yarn release
