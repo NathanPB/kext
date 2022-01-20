@@ -85,15 +85,32 @@ export function valueIsSpecificKey<T>(enumerator: Enumerator<T>, key: keyof T, v
  * @param search The value to be searched within the enum's values.
  * @param comparator Function used to check the equality between `search` and the enum values. Default is a strict equality check (a === b).
  */
-export function firstKeyWithValueOf<T, V>(
-  enumerator: Enumerator<T, V>,
+export function firstKeyWithValueOf<K, V>(
+  enumerator: Enumerator<K, V>,
   search: V | any,
   comparator: (search: V, enumValue: V)=>boolean = (search, enumValue) => search === enumValue
-): keyof T {
+): keyof K {
   const [key] = firstOrNull(Object.entries(enumerator), ([_, v]) => comparator(search, v))
     ?? throwExpr(new ValueNotFoundError(search, enumerator))
 
-  return key as keyof T
+  return key as keyof K
+}
+
+/**
+ * Casts a given string value into a TS comprehensible type
+ *
+ * Usually a shorthand for Enum[findFirstKeyWithValue(Enum, 'foo')]
+ *
+ * @param enumerator The enum.
+ * @param search The value to be searched within the enum's values.
+ * @param comparator Function used to check the equality between `search` and the enum values. Default is a strict equality check (a === b).
+ */
+export function firstValue<K, V>(
+  enumerator: Enumerator<K, V>,
+  search: V | any,
+  comparator: (search: V, enumValue: V)=>boolean = (search, enumValue) => search === enumValue
+) : V {
+  return enumerator[firstKeyWithValueOf(enumerator, search, comparator)]
 }
 
 /**

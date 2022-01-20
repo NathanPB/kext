@@ -10,6 +10,7 @@
 
 import {
   firstKeyWithValueOf,
+  firstValue,
   isKeyOf,
   isValueOf,
   keys,
@@ -97,6 +98,21 @@ describe('#firstKeyWithValueOf', () => {
 
   it('Should throw because the value was not found', () =>
     expect(() => firstKeyWithValueOf(TestEnum, '02'))
+      .toThrowError(ValueNotFoundError)
+  )
+})
+
+describe('#firstValue', () => {
+  it('Should be DEPOSIT', () =>
+    expect(firstValue(TestEnum, '00')).toEqual('00')
+  )
+
+  it('Should be WITHDRAW', () =>
+    expect(firstValue(TestEnum, '01')).toEqual('01')
+  )
+
+  it('Should throw because the value was not found', () =>
+    expect(() => firstValue(TestEnum, '02'))
       .toThrowError(ValueNotFoundError)
   )
 })

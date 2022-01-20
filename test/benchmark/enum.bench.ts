@@ -10,6 +10,8 @@
 
 import {benchmarkSuite} from "@nathanpb/jest-bench";
 import {
+  firstKeyWithValueOf,
+  firstValue,
   isKeyOf,
   isValueOf,
   keys,
@@ -54,5 +56,19 @@ benchmarkSuite('#valueIsSpecificKey', {
   ['best']: () => void valueIsSpecificKey(TestEnum, 'DEPOSIT', TestEnum.DEPOSIT),
   ['avg']: () => void valueIsSpecificKey(TestEnum, 'BAR', TestEnum.BAR),
   ['worst']: () => void valueIsSpecificKey(TestEnum, 'BOANOITE', TestEnum.BOANOITE),
-  ['case not found']: () => { try { valueIsSpecificKey(TestEnum, 'BOANOITE', 'not container here') } catch(_) {} }
+  ['case not found']: () => void valueIsSpecificKey(TestEnum, 'BOANOITE', 'not container here')
+})
+
+benchmarkSuite('#firstKeyWithValueOf', {
+  ['best']: () => void firstKeyWithValueOf(TestEnum, TestEnum.DEPOSIT),
+  ['avg']: () => void firstKeyWithValueOf(TestEnum, TestEnum.BAR),
+  ['worst']: () => void firstKeyWithValueOf(TestEnum, TestEnum.BOANOITE),
+  ['case not found']: () => { try { firstKeyWithValueOf(TestEnum, 'not container here') } catch(_) {} }
+})
+
+benchmarkSuite('#firstValue', {
+  ['best']: () => void firstValue(TestEnum, TestEnum.DEPOSIT),
+  ['avg']: () => void firstValue(TestEnum, TestEnum.BAR),
+  ['worst']: () => void firstValue(TestEnum, TestEnum.BOANOITE),
+  ['case not found']: () => { try { firstValue(TestEnum, 'not container here') } catch(_) {} }
 })
