@@ -20,6 +20,6 @@ jobs:
         with:
           node-version: 14
           registry-url: https://registry.npmjs.org/
-      - run: npm install
-      - run: npm version "0.0.0-$(git rev-parse HEAD)" --no-git-tag-version
-      - run: npm run release -- --tag next
+      - run: yarn
+      - run: yarn version --new-version "0.0.0-$(git rev-parse HEAD)" --no-git-tag-version
+      - run: yarn release -- --tag next

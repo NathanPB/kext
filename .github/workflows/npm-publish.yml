@@ -9,14 +9,26 @@ on:
 
 jobs:
   publish-npm:
+    if: github.repository == 'NathanPB/kext'
     runs-on: ubuntu-latest
     env:
       NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+      NEXT_VERSION: ${{github.ref_name}}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: 14
           registry-url: https://registry.npmjs.org/
-      - run: npm install
-      - run: npm run release
+      - run: yarn
+      - run: yarn version --new-version "$NEXT_VERSION"
+
+      - name: Commit version bump
+        uses: EndBug/add-and-commit@v7
+        with:
+          add: ./package.json
+          message: ${{ format('[CI] Bump version to {0}', github.ref_name) }}
+          branch: main
+          tag: "${{github.ref_name}} --force"
+
+      - run: yarn release

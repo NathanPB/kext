@@ -18,7 +18,12 @@ jobs:
       with:
         node-version: ${{ matrix.nodejs }}
 
-    - run: npm install
-    - run: npm i --save-dev esbuild
-    - run: npm run test
-    - run: npm run build
+    - run: yarn
+    - run: yarn add -D esbuild
+    - run: yarn test
+
+    - name: Coveralls
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        flag-name: Node.js ${{ matrix.node }}
