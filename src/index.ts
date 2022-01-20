@@ -13,6 +13,7 @@ export * as Scope from './scope'
 export * as Errors from './error'
 export * as Math from './math'
 export * as Random from './random'
+export * as Enum from './enum'
 
 /**
  * Represents a type which a key is associated with a value.
