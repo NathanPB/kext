@@ -1,3 +1,8 @@
+[![npm version](https://img.shields.io/npm/v/@nathanpb/kext.svg)](https://www.npmjs.com/package/@nathanpb/kext)
+[![Tests Status](https://github.com/NathanPB/kext/workflows/Test/badge.svg)](https://github.com/NathanPB/kext/actions/workflows/tests.yml)
+[![Coverage Status](https://img.shields.io/coveralls/NathanPB/kext.svg)](https://coveralls.io/github/NathanPB/kext?branch=main)
+
+
 ## The f
 
 I think that the ECMAScript stdlib is not enough for me, so I'm attempting to rewrite all of the usefull Kotlin's stdlib into Typescript.

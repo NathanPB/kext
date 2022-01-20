@@ -6,9 +6,6 @@
   "repository": "https://github.com/NathanPB/kext",
   "license": "MIT",
   "types": "./index.d.ts",
-  "engines": {
-    "node": ">14"
-  },
   "scripts": {
     "test": "jest --passWithNoTests",
     "bench": "jest --projects jest-bench.config.json",
