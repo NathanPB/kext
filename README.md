@@ -66,6 +66,34 @@ const token = runCatching(() => jwt.verify(req.body, secret))
   ```
 </details>
 
+### Enum utility functions
+
+```ts
+import {
+  isValueOf,
+  values,
+  regexKeyMatcher
+} from '@nathanpb/kext/enum'
+import {firstKeyWithValueOf} from "./enum";
+
+enum WordClass { VERB = '01', NOUN = '02', ADVERB = '03', PRONOUN = '04', OTHER = 'XX' }
+
+app.post('/word', async (req, res) => {
+  if (!isValueOf(WordClass, req.wordClass)) {
+    res.send(400, `word class is not a valid class. Posslbe values: ${values(WordClass)}`)
+  }
+
+  const wordClass = firstKeyWithValueOf(req.wordClass)
+  await db.insert({
+    word: String(req.word),
+    needsLaterClassification: wordClass === WordClass.OTHER,
+    wordClass
+  })
+})
+
+expect('PREPOSITION').not.toMatch(regexKeyMatcher(WordClass))
+```
+
 ## Documentation
 
 **For detailed information, see the [API Reference](https://kext.nathanpb.dev).**
