@@ -21,7 +21,7 @@ jobs:
           node-version: 14
           registry-url: https://registry.npmjs.org/
       - run: yarn
-      - run: yarn version --new-version "$NEXT_VERSION"
+      - run: yarn version --new-version "$NEXT_VERSION" --no-git-tag-version
 
       - name: Commit version bump
         uses: EndBug/add-and-commit@v7
