@@ -343,10 +343,6 @@ export function minusElements<T>(array: T[], element: T[]): T[] {
   return array.filter(it => !element.includes(it))
 }
 
-export function none<T>(array: T[], predicate: ArrayPredicate<T>): boolean {
-  return !array.some(predicate)
-}
-
 export function onEach<T>(array: T[], action: ArrayConsumer<T>): T[] {
   array.forEach(action)
   return array
