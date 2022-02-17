@@ -14,8 +14,6 @@ import {average, sumOf} from "../src/array";
 // I know testing random stuff is weird as fuck, but cmon, I'm trying
 // If a CI build fails because of that I'll be so upset
 
-// TODO why is the Jest coverage test report saying it covered 0% of the branches? It's literally 100%
-
 test('nextInt', () => {
   let a: number[] = []
   for (let i=0; i <= 1000; i++) {
@@ -56,15 +54,24 @@ test('nextBoolean', () => {
 
   let b: boolean[] = []
   for (let i=0; i <= 1000; i++) {
-    b = [...b, nextBoolean(.2)]
+    b = [...b, nextBoolean()]
+  }
+
+  let c: boolean[] = []
+  for (let i=0; i <= 1000; i++) {
+    c = [...c, nextBoolean(.2)]
   }
 
   const avgA = sumOf(a, it => it ? 1 : 0)
   const avgB = sumOf(b, it => it ? 1 : 0)
+  const avgC = sumOf(c, it => it ? 1 : 0)
 
   expect(avgA).toBeGreaterThanOrEqual(700)
   expect(avgA).toBeLessThanOrEqual(900)
 
-  expect(avgB).toBeGreaterThanOrEqual(100)
-  expect(avgB).toBeLessThanOrEqual(300)
+  expect(avgB).toBeGreaterThanOrEqual(400)
+  expect(avgB).toBeLessThanOrEqual(600)
+
+  expect(avgC).toBeGreaterThanOrEqual(100)
+  expect(avgC).toBeLessThanOrEqual(300)
 })

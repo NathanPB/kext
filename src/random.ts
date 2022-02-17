@@ -14,12 +14,12 @@
  * Delegates the `Math.random`'s PRNG algorithm to randomness.
  *
  * @param from Lower boundary to the generated value (inclusive).
- * @param to Upper boundary to the generated value (exclusive). Defaults to `Number.MAX_VALUE`.
+ * @param to Upper boundary to the generated value (exclusive).
  * @returns A floating point number between `from` and `to`.
  */
 // https://stackoverflow.com/a/7228322/9893963
 // https://stackoverflow.com/a/66083436/9893963
-export function nextDouble(from: number = 0, to: number = Number.MAX_VALUE): number {
+export function nextDouble(from: number, to: number): number {
   return Math.random() * (to - from) + from
 }
 
@@ -29,10 +29,10 @@ export function nextDouble(from: number = 0, to: number = Number.MAX_VALUE): num
  * Delegates the `Math.random`'s PRNG algorithm to randomness.
  *
  * @param from Lower boundary to the generated value (inclusive).
- * @param to Upper boundary to the generated value (exclusive). Defaults to `Number.MAX_SAFE_INTEGER`.
+ * @param to Upper boundary to the generated value (exclusive).
  * @returns A floating point number between `from` and `to`.
  */
-export function nextInt(from: number = 0, to: number = Number.MAX_SAFE_INTEGER): number {
+export function nextInt(from: number, to: number): number {
   return Math.floor(nextDouble(from, to))
 }
 
