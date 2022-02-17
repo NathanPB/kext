@@ -12,7 +12,7 @@
 import {ArrayMapper, ArrayPredicate, elementAt} from "../../array";
 import {elementAtOrElse, elementAtOrNull} from "./directAccess";
 import {findIndexOfFirst, findIndexOfFirstBy, findIndexOfLast, findIndexOfLastBy} from "./findIndex";
-import {EmptyArrayError} from "../../index";
+import {NoSuchElementError} from "../../index";
 
 export function findFirst<T>(array: T[], predicate: ArrayPredicate<T>): T {
   return elementAt(array, findIndexOfFirst(array, predicate))
@@ -85,7 +85,7 @@ export function findLastOrElseBy<T, V extends T> (array: T[], find: V, defaultVa
 
 export function findFirstNotNullable<T>(array: T[]): T {
   if (array.length === 0)
-    throw new EmptyArrayError()
+    throw new NoSuchElementError()
 
   return elementAt(
     array,
@@ -95,7 +95,7 @@ export function findFirstNotNullable<T>(array: T[]): T {
 
 export function findLastNotNullable<T>(array: T[]): T {
   if (array.length === 0)
-    throw new EmptyArrayError()
+    throw new NoSuchElementError()
 
   return elementAt(
     array,

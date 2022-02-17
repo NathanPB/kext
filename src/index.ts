@@ -31,10 +31,3 @@ export class NoSuchElementError extends Error {
     Object.setPrototypeOf(this, NoSuchElementError.prototype)
   }
 }
-
-export class EmptyArrayError extends Error {
-  constructor() {
-    super()
-    Object.setPrototypeOf(this, EmptyArrayError.prototype)
-  }
-}
