@@ -8,12 +8,31 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-export type ArrayMapper<T, O> = (it: T, index: number, array: T[]) => O
-export type ArrayPredicate<T> = ArrayMapper<T, boolean>
-export type ArrayConsumer<T> = ArrayMapper<T, void>
+import {ArrayPredicate} from "../../array";
+import {findIndexOfFirst, indexOfFirst} from "./findIndex";
 
+export function all<T>(array: T[], predicate: ArrayPredicate<T>): boolean {
+  for (let i=0; i<array.length; i++) {
+    if (!predicate(array[i], i, array)) {
+      return false
+    }
+  }
+  return true
+}
 
-// https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/
-// https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/
+export function any<T>(array: T[], predicate: ArrayPredicate<T>): boolean {
+  return findIndexOfFirst(array, predicate) !== -1
+}
 
-export * from './lib/array'
+export function none<T>(array: T[], predicate: ArrayPredicate<T>): boolean {
+  return !any(array, predicate)
+}
+
+export function contains<T>(array: T[], element: T): boolean {
+  return indexOfFirst(array, element) !== -1
+}
+
+export function containsAll<T>(array: T[], elements: T[]): boolean {
+  return all(elements, it => contains(array, it))
+}
+

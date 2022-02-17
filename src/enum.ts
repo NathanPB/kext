@@ -8,7 +8,7 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import {firstOrNull, toSet} from "./array";
+import {findFirstOrNull, toSet} from "./array";
 import {throwExpr} from "./error";
 
 /** Describes the possible keys of an enumerator. */
@@ -90,7 +90,7 @@ export function firstKeyWithValueOf<K, V>(
   search: V | any,
   comparator: (search: V, enumValue: V)=>boolean = (search, enumValue) => search === enumValue
 ): keyof K {
-  const [key] = firstOrNull(Object.entries(enumerator), ([_, v]) => comparator(search, v))
+  const [key] = findFirstOrNull(Object.entries(enumerator), ([_, v]) => comparator(search, v))
     ?? throwExpr(new ValueNotFoundError(search, enumerator))
 
   return key as keyof K

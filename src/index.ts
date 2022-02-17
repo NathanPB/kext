@@ -24,3 +24,17 @@ export type Pair<K, V> = [K, V]
  * Represents a type which it's data can safely be compared, excluding nullables.
  */
 export type ComparableSafe = string | number | boolean | undefined | null
+
+export class NoSuchElementError extends Error {
+  constructor() {
+    super()
+    Object.setPrototypeOf(this, NoSuchElementError.prototype)
+  }
+}
+
+export class EmptyArrayError extends Error {
+  constructor() {
+    super()
+    Object.setPrototypeOf(this, EmptyArrayError.prototype)
+  }
+}

@@ -1,56 +1,187 @@
 import * as A from '../src/array'
+import {NoSuchElementError} from "../src";
 
-test('all', () => {
-  expect(A.all([-2, -1, 0, 1, 2], it => it > 0)).toBeFalsy()
-  expect(A.all([0, 1, 2], it => it > 0)).toBeFalsy()
-  expect(A.all([1, 2], it => it > 0)).toBeTruthy()
+describe('directAccess', () => {
+  describe('#elementAt', () => {
+    it('Should crash when out of range', () => {
+      expect(() => A.elementAt([0], -1)).toThrow(NoSuchElementError)
+      expect(() => A.elementAt([0], 1)).toThrow(NoSuchElementError)
+      expect(() => A.elementAt([], 0)).toThrow(NoSuchElementError)
+    })
+
+    it('Should find element at index', () => {
+      expect(A.elementAt([0], 0)).toEqual(0)
+    })
+  })
+
+  describe('#elementAtOrElse', () => {
+    it('Should use the default value', () => {
+      const obj = { foo: 'bar' }
+      expect(A.elementAtOrElse([0], -1, obj)).toStrictEqual(obj)
+      expect(A.elementAtOrElse([0], 1, obj)).toStrictEqual(obj)
+      expect(A.elementAtOrElse([], 0, obj)).toStrictEqual(obj)
+    })
+
+    it('Should find element at index', () => {
+      expect(A.elementAtOrElse([0], 0, 1)).toEqual(0)
+    })
+  })
+
+  describe('#elementAtOrNull', () => {
+    it('Should be undefined', () => {
+      expect(A.elementAtOrNull([0], -1)).toBeUndefined()
+      expect(A.elementAtOrNull([0], 1)).toBeUndefined()
+      expect(A.elementAtOrNull([], 0)).toBeUndefined()
+    })
+
+    it('Should find element at index', () => {
+      expect(A.elementAtOrNull([0], 0)).toEqual(0)
+    })
+  })
+
+  describe('#elementAtOrElseBy', () => {
+    it('Should use the default value', () => {
+      const obj = { foo: 'bar' }
+      const fn1 = jest.fn(() => obj)
+      const fn2 = jest.fn(() => obj)
+      const fn3 = jest.fn(() => obj)
+
+      expect(A.elementAtOrElseBy([0], -1, fn1)).toStrictEqual(obj)
+      expect(fn1).toHaveBeenCalledTimes(1)
+      expect(fn1).toHaveBeenCalledWith(-1)
+
+      expect(A.elementAtOrElseBy([0], 1, fn2)).toStrictEqual(obj)
+      expect(fn2).toHaveBeenCalledTimes(1)
+      expect(fn2).toHaveBeenCalledWith(1)
+
+      expect(A.elementAtOrElseBy([], 0, fn3)).toStrictEqual(obj)
+      expect(fn3).toHaveBeenCalledTimes(1)
+      expect(fn3).toHaveBeenCalledWith(0)
+    })
+
+    it('Should find element at index', () => {
+      expect(A.elementAtOrElseBy([0], 0, () => 1)).toEqual(0)
+    })
+  });
+
+  describe('#first', () => {
+    it('Should throw', () => {
+      expect(() => A.first([])).toThrow(NoSuchElementError)
+    })
+
+    it('Should find the first element', () => {
+      expect(A.first([-1, 0, 1])).toEqual(-1)
+    })
+  })
+
+  describe('#last', () => {
+    it('Should throw', () => {
+      expect(() => A.last([])).toThrow(NoSuchElementError)
+    })
+
+    it('Should find the last element', () => {
+      expect(A.last([-1, 0, 1])).toEqual(1)
+    })
+  })
+
+  describe('#firstOrElse', () => {
+    it('Should return the default element', () => {
+      expect(A.firstOrElse([], 'foo')).toEqual('foo')
+    })
+
+    it('Should find the first element', () => {
+      expect(A.firstOrElse([-1, 0, 1], 'foo')).toEqual(-1)
+    })
+  })
+
+  describe('#lastOrElse', () => {
+    it('Should return the default element', () => {
+      expect(A.lastOrElse([], 'foo')).toEqual('foo')
+    })
+
+    it('Should find the last element', () => {
+      expect(A.lastOrElse([-1, 0, 1], 'foo')).toEqual(1)
+    })
+  })
+
+
+  describe('#firstOrNull', () => {
+    it('Should return undefined', () => {
+      expect(A.firstOrNull([])).toBeUndefined()
+    })
+
+    it('Should find the first element', () => {
+      expect(A.firstOrNull([-1, 0, 1])).toEqual(-1)
+    })
+  })
+
+  describe('#lastOrNull', () => {
+    it('Should return the default element', () => {
+      expect(A.lastOrNull([])).toBeUndefined()
+    })
+
+    it('Should find the last element', () => {
+      expect(A.lastOrNull([-1, 0, 1])).toEqual(1)
+    })
+  })
 })
 
-describe('indexOfFirst', () => {
+describe('existential', () => {
+  test('#all', () => {
+    expect(A.all([-2, -1, 0, 1, 2], it => it > 0)).toBeFalsy()
+    expect(A.all([0, 1, 2], it => it > 0)).toBeFalsy()
+    expect(A.all([1, 2], it => it > 0)).toBeTruthy()
+  })
+
+  test('#any', () => {
+    expect(A.any([-2, -1, 0, 1, 2], it => it > 0)).toBeTruthy()
+    expect(A.any([0, 1, 2], it => it > 0)).toBeTruthy()
+    expect(A.any([1, 2], it => it > 0)).toBeTruthy()
+    expect(A.any([-2, -1], it => it > 0)).toBeFalsy()
+  })
+
+  test('#none', () => {
+    expect(A.none([0, 1, 2], it => it === 3)).toBeTruthy()
+    expect(A.none([0, 1, 2], it => it === 1)).toBeFalsy()
+  })
+
+  test('#contains', () => {
+    expect(A.contains([0, 1, 2], 1)).toBeTruthy()
+    expect(A.contains([0, 1, 2], 4)).toBeFalsy()
+  })
+
+  test('#containsAll', () => {
+    expect(A.containsAll([0, 1, 2], [1])).toBeTruthy()
+    expect(A.containsAll([0, 1, 2], [4])).toBeFalsy()
+
+    expect(A.containsAll([0, 1, 2], [1, 2])).toBeTruthy()
+    expect(A.containsAll([0, 1, 2], [1, 4])).toBeFalsy()
+
+    expect(A.containsAll([0, 1, 2], [])).toBeTruthy()
+  })
+})
+
+describe('findIndexOfFirst', () => {
   const data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 90]
   test('return', () => {
-    expect(A.indexOfFirst(data, it => it === 0)).toEqual(0)
-    expect(A.indexOfFirst(data, it => it === 90)).toEqual(10)
-    expect(A.indexOfFirst(data, it => it === 99)).toEqual(-1)
+    expect(A.findIndexOfFirst(data, it => it === 0)).toEqual(0)
+    expect(A.findIndexOfFirst(data, it => it === 90)).toEqual(10)
+    expect(A.findIndexOfFirst(data, it => it === 99)).toEqual(-1)
   })
 
   test('callback params', () => {
     const fnWorst = jest.fn(() => false)
-    A.indexOfFirst(data, fnWorst)
+    A.findIndexOfFirst(data, fnWorst)
 
     expect(fnWorst).toHaveBeenCalledTimes(11)
     expect(fnWorst).toHaveBeenNthCalledWith(1, 0, 0, data)
     expect(fnWorst).toHaveBeenNthCalledWith(11, 90, 10, data)
 
     const fnBest = jest.fn(() => true)
-    A.indexOfFirst(data, fnBest)
+    A.findIndexOfFirst(data, fnBest)
     expect(fnBest).toHaveBeenCalledTimes(1)
     expect(fnBest).toHaveBeenNthCalledWith(1, 0, 0, data)
   })
-})
-
-
-test('any', () => {
-  expect(A.any([-2, -1, 0, 1, 2], it => it > 0)).toBeTruthy()
-  expect(A.any([0, 1, 2], it => it > 0)).toBeTruthy()
-  expect(A.any([1, 2], it => it > 0)).toBeTruthy()
-  expect(A.any([-2, -1], it => it > 0)).toBeFalsy()
-})
-
-
-test('contains', () => {
-  expect(A.contains([0, 1, 2], 1)).toBeTruthy()
-  expect(A.contains([0, 1, 2], 4)).toBeFalsy()
-})
-
-test('containsAll', () => {
-  expect(A.containsAll([0, 1, 2], [1])).toBeTruthy()
-  expect(A.containsAll([0, 1, 2], [4])).toBeFalsy()
-
-  expect(A.containsAll([0, 1, 2], [1, 2])).toBeTruthy()
-  expect(A.containsAll([0, 1, 2], [1, 4])).toBeFalsy()
-
-  expect(A.containsAll([0, 1, 2], [])).toBeTruthy()
 })
 
 test('firstOrNullBy', () => {
@@ -62,11 +193,11 @@ test('firstOrNullBy', () => {
     { id: 'E', name: 'Nathan' }
   ]
 
-  expect(A.firstOrNullBy(sample, 'Nathan', it => it.name)).toEqual({ id: 'B', name: 'Nathan' })
-  expect(A.firstOrNullBy(sample, 'Pedro', it => it.name)).toEqual(undefined)
+  expect(A.findFirstOrNullBy(sample, 'Nathan', it => it.name)).toEqual({ id: 'B', name: 'Nathan' })
+  expect(A.findFirstOrNullBy(sample, 'Pedro', it => it.name)).toEqual(undefined)
 })
 
-test('firstOrNullByTransforming', () => {
+test('findFirstOrNullBy', () => {
   const sample = [
     { id: 'A', name: 'Joan' },
     { id: 'B', name: 'Nathan' },
@@ -75,11 +206,11 @@ test('firstOrNullByTransforming', () => {
     { id: 'E', name: 'Nathan' }
   ]
 
-  expect(A.firstOrNullByTransforming(sample, 'Nathan', it => it.name, it => it.id)).toStrictEqual('B')
-  expect(A.firstOrNullByTransforming(sample, 'Pedro', it => it.name, it => it.id)).toEqual(undefined)
+  expect(A.findFirstOrNullBy(sample, 'Nathan', it => it.name)?.id).toStrictEqual('B')
+  expect(A.findFirstOrNullBy(sample, 'Pedro', it => it.name)).toEqual(undefined)
 })
 
-test('lastOrNullBy', () => {
+test('findLastOrNullBy', () => {
   const sample = [
     { id: 'A', name: 'Joan' },
     { id: 'B', name: 'Nathan' },
@@ -88,21 +219,8 @@ test('lastOrNullBy', () => {
     { id: 'E', name: 'Nathan' }
   ]
 
-  expect(A.lastOrNullBy(sample, 'Nathan', it => it.name)).toEqual({ id: 'E', name: 'Nathan' })
-  expect(A.lastOrNullBy(sample, 'Pedro', it => it.name)).toEqual(undefined)
-})
-
-test('firstOrNullByTransforming', () => {
-  const sample = [
-    { id: 'A', name: 'Joan' },
-    { id: 'B', name: 'Nathan' },
-    { id: 'C', name: 'Marcus' },
-    { id: 'D', name: 'Cris' },
-    { id: 'E', name: 'Nathan' }
-  ]
-
-  expect(A.lastOrNullByTransforming(sample, 'Nathan', it => it.name, it => it.id)).toStrictEqual('E')
-  expect(A.lastOrNullByTransforming(sample, 'Pedro', it => it.name, it => it.id)).toEqual(undefined)
+  expect(A.findLastOrNullBy(sample, 'Nathan', it => it.name)).toEqual({ id: 'E', name: 'Nathan' })
+  expect(A.findLastOrNullBy(sample, 'Pedro', it => it.name)).toEqual(undefined)
 })
 
 test('subList', () => {
@@ -251,3 +369,4 @@ test('distinctBy', () => {
 
   expect(A.distinctBy(<{ age: number }[]>[], it => it.age)).toStrictEqual([])
 })
+

@@ -15,10 +15,10 @@ const listSize = 10_000
 const list: number[]  = [...Array(listSize).keys()].map((_, idx) => idx)
 
 benchmarkSuite("#indexOfFirst", {
-  ["[JS] worst"]: () => void A.indexOfFirst(list, () => false),
+  ["[JS] worst"]: () => void A.findIndexOfFirst(list, () => false),
   ["[ECMA] worst"]: () => void list.findIndex(() => false),
 
-  ["[JS] best"]: () => void A.indexOfFirst(list, () => true),
+  ["[JS] best"]: () => void A.findIndexOfFirst(list, () => true),
   ["[ECMA] best"]: () => void list.findIndex(() => true),
 
   ["[JS] empty list"]: () => void A.indexOfFirst([], () => true),
@@ -37,10 +37,10 @@ benchmarkSuite("#all", {
 })
 
 benchmarkSuite("#indexOfLast", {
-  ["[JS] worst"]: () => void A.indexOfLast(list, () => false),
+  ["[JS] worst"]: () => void A.findIndexOfLast(list, () => false),
   ["[ECMA] worst"]: () => void (list.length - list.reverse().findIndex(() => false)),
 
-  ["[JS] best"]: () => void A.indexOfLast(list, () => true),
+  ["[JS] best"]: () => void A.findIndexOfLast(list, () => true),
   ["[ECMA] best"]: () => void list.findIndex(() => true),
 
   ["[JS] empty list"]: () => void A.indexOfLast([], () => true),
