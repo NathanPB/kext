@@ -13,6 +13,7 @@ export * as Chainer from './chainer'
 export * as Enum from './enum'
 export * as Errors from './error'
 export * as Math from './math'
+export * as Object from './object'
 export * as Random from './random'
 export * as Scope from './scope'
 
