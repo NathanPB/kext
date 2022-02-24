@@ -9,9 +9,9 @@
  */
 
 export * as Array from './array'
+export * as Chainer from './chainer'
 export * as Enum from './enum'
 export * as Errors from './error'
-export * as Function from './function'
 export * as Math from './math'
 export * as Random from './random'
 export * as Scope from './scope'

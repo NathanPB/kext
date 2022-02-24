@@ -9,39 +9,24 @@
  */
 
 /**
- * Async version of {@link Chainer}.
- * Used to chain multiple function calls in a curry-like style.
+ * Takes `value` and apply it to `next`. Use it's result to create a new chainer.
+ * @param next
+ * @see chainer
  */
-export type AsyncChainer<I> = {
-  /**
-   * Takes `value` and apply it to `next`. Use it's result to create a new async chainer.
-   * @param next
-   */
-  nextAsync: <O> (next: (input: Promise<I> | I)=>Promise<O> | O) => AsyncChainer<O>
+type NextChainer<I> = <O> (next: (input: I)=>O) => Chainer<O>
 
-  /**
-   * The current `value` of the chainer.
-   */
-  value: Promise<I>
-}
+/**
+ * Takes `value` and apply it to `next`. Use it's result to create a promise with.
+ * @param next
+ */
+type NextPromise<I> = <O> (next: (input: I)=>Promise<O> | O) => Promise<O>
 
 /**
  * Used to chain multiple function calls in a curry-like style.
  */
 export type Chainer<I> = {
-  /**
-   * Takes `value` and apply it to `next`. Use it's result to create a new chainer.
-   * @param next
-   * @see chainer
-   */
-  next: <O> (next: (input: I)=>O) => Chainer<O>
-
-  /**
-   * Takes `value` and apply it to `next`. Use it's result to create a new async chainer.
-   * @param next
-   * @see aChainer
-   */
-  nextAsync: <O> (next: (input: Promise<I> | I)=>Promise<O> | O) => AsyncChainer<O>
+  next: NextChainer<I>
+  then: NextPromise<I>
 
   /**
    * The current `value` of the chainer.
@@ -56,18 +41,7 @@ export type Chainer<I> = {
 export function chainer<I>(value: I): Chainer<I> {
   return {
     next: next => chainer(next(value)),
-    nextAsync: next => aChainer(Promise.resolve(next(value))),
-    value
-  }
-}
-
-/**
- * Creates an async chainer starting with `value`.
- * @param value The value which the chainer starts with.
- */
-export function aChainer<I>(value: Promise<I>): AsyncChainer<I> {
-  return {
-    nextAsync: next => aChainer(Promise.resolve(next(value))),
+    then: next => Promise.resolve(next(value)),
     value
   }
 }
