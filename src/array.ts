@@ -16,4 +16,10 @@ export type ArrayConsumer<T> = ArrayMapper<T, void>
 // https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/
 // https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/
 
-export * from './lib/array'
+export * from './lib/array/directAccess'
+export * from './lib/array/directAccess.curry'
+export * from './lib/array/existential'
+export * from './lib/array/existential.curry'
+export * from './lib/array/findElement'
+export * from './lib/array/findIndex'
+export * from './lib/array/operations'

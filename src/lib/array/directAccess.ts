@@ -11,8 +11,6 @@
 import {throwExpr} from "../../error";
 import {NoSuchElementError} from "../../index";
 
-export * from './directAccess.curry'
-
 export function elementAt<T>(array: T[], index: number): T {
   return index < 0 || index >= array.length ? throwExpr(new NoSuchElementError()) : array[index]
 }

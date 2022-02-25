@@ -15,11 +15,6 @@ import {any} from "./existential";
 // https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-iterable/
 // https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/
 
-export * from './directAccess'
-export * from './existential'
-export * from './findElement'
-export * from './findIndex'
-
 export function subList<T>(array: T[], startIndex: number, endIndex: number): T[] {
   return array.slice(startIndex, endIndex)
 }

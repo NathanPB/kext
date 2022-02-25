@@ -11,8 +11,6 @@
 import {ArrayPredicate} from "../../array";
 import {findIndexOfFirst, indexOfFirst} from "./findIndex";
 
-export * from './existential.curry'
-
 export function all<T>(array: T[], predicate: ArrayPredicate<T>): boolean {
   for (let i=0; i<array.length; i++) {
     if (!predicate(array[i], i, array)) {
