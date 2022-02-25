@@ -125,7 +125,7 @@ describe('curry', () => {
   beforeEach(jest.restoreAllMocks)
 
   it('#yHasKey', () => {
-    const spy = jest.spyOn(O, 'hasKey')
+    const spy = jest.spyOn(O, 'hasKey').mockImplementation(()=>false)
     const obj = {}
     yHasKey('foo')(obj)
     expect(spy).toHaveBeenLastCalledWith(obj, 'foo')
@@ -133,14 +133,14 @@ describe('curry', () => {
 
 
   it('#yDoesntHaveKey', () => {
-    const spy = jest.spyOn(O, 'doesntHaveKey')
+    const spy = jest.spyOn(O, 'doesntHaveKey').mockImplementation(()=>false)
     const obj = {}
     yDoesntHaveKey('foo')(obj)
     expect(spy).toHaveBeenLastCalledWith(obj, 'foo')
   })
 
   it('#yfHasKey', () => {
-    const spy = jest.spyOn(O, 'hasKey')
+    const spy = jest.spyOn(O, 'hasKey').mockImplementation(()=>false)
     const obj = {}
     yfHasKey(obj)('foo')
     expect(spy).toHaveBeenLastCalledWith(obj, 'foo')
@@ -148,7 +148,7 @@ describe('curry', () => {
 
 
   it('#yfDoesntHaveKey', () => {
-    const spy = jest.spyOn(O, 'doesntHaveKey')
+    const spy = jest.spyOn(O, 'doesntHaveKey').mockImplementation(()=>false)
     const obj = {}
     yfDoesntHaveKey(obj)('foo')
     expect(spy).toHaveBeenLastCalledWith(obj, 'foo')
