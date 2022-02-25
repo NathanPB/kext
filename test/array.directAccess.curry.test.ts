@@ -24,7 +24,7 @@ import {
   yFirstOrElse,
   yfLastOrElse,
   yLastOrElse
-} from '../src/lib/array';
+} from '../src/lib/array/directAccess.curry';
 
 beforeEach(jest.restoreAllMocks)
 
