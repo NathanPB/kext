@@ -19,7 +19,7 @@ export function yElementAt(index: number) {
 }
 
 /**
- * Curried + flipped version of {@link elementAt}.
+ * Curried version of {@link elementAt}.
  * {@inheritDoc elementAt}
  */
 export function yfElementAt<T>(array: T[]) {
@@ -35,7 +35,7 @@ export function yElementAtOrElse<D>(index: number, defaultValue: D) {
 }
 
 /**
- * Curried + flipped version of {@link elementAtOrElse}.
+ * Curried version of {@link elementAtOrElse}.
  * {@inheritDoc elementAtOrElse}
  */
 export function yfElementAtOrElse<T, D>(array: T[], defaultValue: D) {
@@ -43,7 +43,7 @@ export function yfElementAtOrElse<T, D>(array: T[], defaultValue: D) {
 }
 
 /**
- * Curried + flipped version of {@link elementAtOrElseBy}.
+ * Curried version of {@link elementAtOrElseBy}.
  * {@inheritDoc elementAtOrElse}
  */
 export function yffElementAtOrElse<T>(array: T[], index: number) {
@@ -59,7 +59,7 @@ export function yElementAtOrNull(index: number) {
 }
 
 /**
- * Curried + flipped version of {@link elementAtOrNull}.
+ * Curried version of {@link elementAtOrNull}.
  * {@inheritDoc elementAtOrNull}
  */
 export function yfElementAtOrNull<T>(array: T[]) {
@@ -75,7 +75,7 @@ export function yElementAtOrElseBy<D>(index: number, defaultValue: (index: numbe
 }
 
 /**
- * Curried + flipped version of {@link elementAtOrElseBy}.
+ * Curried version of {@link elementAtOrElseBy}.
  * {@inheritDoc elementAtOrElseBy}
  */
 export function yfElementAtOrElseBy<T, D>(array: T[], defaultValue: (index: number)=>D) {
@@ -83,7 +83,7 @@ export function yfElementAtOrElseBy<T, D>(array: T[], defaultValue: (index: numb
 }
 
 /**
- * Curried + flipped version of {@link elementAtOrElseBy}.
+ * Curried version of {@link elementAtOrElseBy}.
  * {@inheritDoc elementAtOrElseBy}
  */
 export function yffElementAtOrElseBy<T>(array: T[], index: number) {
@@ -99,7 +99,7 @@ export function yFirstOrElse<D>(defaultValue: D) {
 }
 
 /**
- * Curried + flipped version of {@link firstOrElse}.
+ * Curried version of {@link firstOrElse}.
  * {@inheritDoc firstOrElse}
  */
 export function yfFirstOrElse<T>(array: T[]) {
@@ -115,7 +115,7 @@ export function yLastOrElse<D>(defaultValue: D) {
 }
 
 /**
- * Curried + flipped version of {@link lastOrElse}.
+ * Curried version of {@link lastOrElse}.
  * {@inheritDoc lastOrElse}
  */
 export function yfLastOrElse<T>(array: T[]) {
