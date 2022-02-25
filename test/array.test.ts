@@ -1,40 +1,5 @@
 import * as A from '../src/array'
 
-describe('existential', () => {
-  test('#all', () => {
-    expect(A.all([-2, -1, 0, 1, 2], it => it > 0)).toBeFalsy()
-    expect(A.all([0, 1, 2], it => it > 0)).toBeFalsy()
-    expect(A.all([1, 2], it => it > 0)).toBeTruthy()
-  })
-
-  test('#any', () => {
-    expect(A.any([-2, -1, 0, 1, 2], it => it > 0)).toBeTruthy()
-    expect(A.any([0, 1, 2], it => it > 0)).toBeTruthy()
-    expect(A.any([1, 2], it => it > 0)).toBeTruthy()
-    expect(A.any([-2, -1], it => it > 0)).toBeFalsy()
-  })
-
-  test('#none', () => {
-    expect(A.none([0, 1, 2], it => it === 3)).toBeTruthy()
-    expect(A.none([0, 1, 2], it => it === 1)).toBeFalsy()
-  })
-
-  test('#contains', () => {
-    expect(A.contains([0, 1, 2], 1)).toBeTruthy()
-    expect(A.contains([0, 1, 2], 4)).toBeFalsy()
-  })
-
-  test('#containsAll', () => {
-    expect(A.containsAll([0, 1, 2], [1])).toBeTruthy()
-    expect(A.containsAll([0, 1, 2], [4])).toBeFalsy()
-
-    expect(A.containsAll([0, 1, 2], [1, 2])).toBeTruthy()
-    expect(A.containsAll([0, 1, 2], [1, 4])).toBeFalsy()
-
-    expect(A.containsAll([0, 1, 2], [])).toBeTruthy()
-  })
-})
-
 describe('findIndexOfFirst', () => {
   const data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 90]
   test('return', () => {
