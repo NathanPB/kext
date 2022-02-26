@@ -8,7 +8,7 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import {elementAt, elementAtOrElse, elementAtOrElseBy, elementAtOrNull, firstOrElse, lastOrElse} from "./directAccess";
+import {elementAt, elementAtOrNull} from "./directAccess";
 
 /**
  * Curried version of {@link elementAt}.
@@ -27,30 +27,6 @@ export function yfElementAt<T>(array: T[]) {
 }
 
 /**
- * Curried version of {@link elementAtOrElse}.
- * {@inheritDoc elementAtOrElse}
- */
-export function yElementAtOrElse<D>(index: number, defaultValue: D) {
-  return <T> (array: T[]) => elementAtOrElse(array, index, defaultValue)
-}
-
-/**
- * Curried version of {@link elementAtOrElse}.
- * {@inheritDoc elementAtOrElse}
- */
-export function yfElementAtOrElse<T, D>(array: T[], defaultValue: D) {
-  return (index: number) => elementAtOrElse(array, index, defaultValue)
-}
-
-/**
- * Curried version of {@link elementAtOrElseBy}.
- * {@inheritDoc elementAtOrElse}
- */
-export function yffElementAtOrElse<T>(array: T[], index: number) {
-  return <D> (defaultValue: D) => elementAtOrElse(array, index, defaultValue)
-}
-
-/**
  * Curried version of {@link elementAtOrNull}.
  * {@inheritDoc elementAtOrNull}
  */
@@ -64,60 +40,4 @@ export function yElementAtOrNull(index: number) {
  */
 export function yfElementAtOrNull<T>(array: T[]) {
   return (index: number) => elementAtOrNull(array, index)
-}
-
-/**
- * Curried version of {@link elementAtOrElseBy}.
- * {@inheritDoc elementAtOrElseBy}
- */
-export function yElementAtOrElseBy<D>(index: number, defaultValue: (index: number)=>D) {
-  return <T> (array: T[]) => elementAtOrElseBy(array, index, defaultValue)
-}
-
-/**
- * Curried version of {@link elementAtOrElseBy}.
- * {@inheritDoc elementAtOrElseBy}
- */
-export function yfElementAtOrElseBy<T, D>(array: T[], defaultValue: (index: number)=>D) {
-  return (index: number) => elementAtOrElseBy(array, index, defaultValue)
-}
-
-/**
- * Curried version of {@link elementAtOrElseBy}.
- * {@inheritDoc elementAtOrElseBy}
- */
-export function yffElementAtOrElseBy<T>(array: T[], index: number) {
-  return <D> (defaultValue: (index: number)=>D) => elementAtOrElseBy(array, index, defaultValue)
-}
-
-/**
- * Curried version of {@link firstOrElse}.
- * {@inheritDoc firstOrElse}
- */
-export function yFirstOrElse<D>(defaultValue: D) {
-  return <T> (array: T[]) => firstOrElse(array, defaultValue)
-}
-
-/**
- * Curried version of {@link firstOrElse}.
- * {@inheritDoc firstOrElse}
- */
-export function yfFirstOrElse<T>(array: T[]) {
-  return <D> (defaultValue: D) => firstOrElse(array, defaultValue)
-}
-
-/**
- * Curried version of {@link lastOrElse}.
- * {@inheritDoc lastOrElse}
- */
-export function yLastOrElse<D>(defaultValue: D) {
-  return <T> (array: T[]) => lastOrElse(array, defaultValue)
-}
-
-/**
- * Curried version of {@link lastOrElse}.
- * {@inheritDoc lastOrElse}
- */
-export function yfLastOrElse<T>(array: T[]) {
-  return <D> (defaultValue: D) => lastOrElse(array, defaultValue)
 }

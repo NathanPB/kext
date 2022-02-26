@@ -10,7 +10,7 @@
 
 
 import {ArrayMapper, ArrayPredicate, elementAt} from "../../array";
-import {elementAtOrElse, elementAtOrNull} from "./directAccess";
+import {elementAtOrNull} from "./directAccess";
 import {findIndexOfFirst, findIndexOfFirstBy, findIndexOfLast, findIndexOfLastBy} from "./findIndex";
 import {NoSuchElementError} from "../../index";
 
@@ -65,22 +65,6 @@ export function findFirstOrNullBy<T, V> (array: T[], find: V, select: ArrayMappe
  */
 export function findLastOrNullBy<T, V> (array: T[], find: V, select: ArrayMapper<T, V>): T | undefined {
   return elementAtOrNull(array, findIndexOfLastBy(array, find, select))
-}
-
-export function findFirstOrElse<T>(array: T[], defaultValue: T, predicate: ArrayPredicate<T>): T {
-  return elementAtOrElse(array, findIndexOfFirst(array, predicate), defaultValue)
-}
-
-export function findLastOrElse<T>(array: T[], defaultValue: T, predicate: ArrayPredicate<T>): T{
-  return elementAtOrElse(array, findIndexOfLast(array, predicate), defaultValue)
-}
-
-export function findFirstOrElseBy<T, V extends T> (array: T[], defaultValue: T, find: V, select: ArrayMapper<T, V>): T {
-  return elementAtOrElse(array, findIndexOfFirstBy(array, find, select), defaultValue)
-}
-
-export function findLastOrElseBy<T, V extends T> (array: T[], find: V, defaultValue: T, select: ArrayMapper<T, V>): T {
-  return elementAtOrElse(array, findIndexOfLastBy(array, find, select), defaultValue)
 }
 
 export function findFirstNotNullable<T>(array: T[]): T {

@@ -9,22 +9,7 @@
  */
 
 import * as A from '../src/lib/array/directAccess';
-import {
-  yElementAt,
-  yElementAtOrElse,
-  yElementAtOrElseBy,
-  yElementAtOrNull,
-  yfElementAt,
-  yfElementAtOrElse,
-  yfElementAtOrElseBy,
-  yfElementAtOrNull,
-  yffElementAtOrElse,
-  yffElementAtOrElseBy,
-  yfFirstOrElse,
-  yFirstOrElse,
-  yfLastOrElse,
-  yLastOrElse
-} from '../src/lib/array/directAccess.curry';
+import {yElementAt, yElementAtOrNull, yfElementAt, yfElementAtOrNull,} from '../src/lib/array/directAccess.curry';
 
 beforeEach(jest.restoreAllMocks)
 
@@ -42,30 +27,6 @@ it('#yfElementAt', () => {
   expect(spy).toHaveBeenLastCalledWith(arr, 0)
 })
 
-it('#yElementAtOrElse', () => {
-  const spy = jest.spyOn(A, 'elementAtOrElse').mockImplementation(()=>{})
-  const arr = [1]
-  const def = 2
-  yElementAtOrElse(0, def)(arr)
-  expect(spy).toHaveBeenLastCalledWith(arr, 0, def)
-})
-
-it('yfElementAtOrElse', () => {
-  const spy = jest.spyOn(A, 'elementAtOrElse').mockImplementation(()=>{})
-  const arr = [1]
-  const def = 2
-  yfElementAtOrElse(arr, def)(0)
-  expect(spy).toHaveBeenLastCalledWith(arr, 0, def)
-})
-
-it('yffElementAtOrElse', () => {
-  const spy = jest.spyOn(A, 'elementAtOrElse').mockImplementation(()=>{})
-  const arr = [1]
-  const def = 2
-  yffElementAtOrElse(arr, 0)(def)
-  expect(spy).toHaveBeenLastCalledWith(arr, 0, def)
-})
-
 it('yElementAtOrNull', () => {
   const spy = jest.spyOn(A, 'elementAtOrNull').mockImplementation(()=>{})
   const arr = [1]
@@ -78,56 +39,4 @@ it('yfElementAtOrNull', () => {
   const arr = [1]
   yfElementAtOrNull(arr)(0)
   expect(spy).toHaveBeenLastCalledWith(arr, 0)
-})
-
-it('#yElementAtOrElseBy', () => {
-  const spy = jest.spyOn(A, 'elementAtOrElseBy').mockImplementation(()=>{})
-  const arr = [1]
-  const fn = jest.fn()
-  yElementAtOrElseBy(0, fn)(arr)
-  expect(spy).toHaveBeenLastCalledWith(arr, 0, fn)
-})
-
-it('yfElementAtOrElseBy', () => {
-  const spy = jest.spyOn(A, 'elementAtOrElseBy').mockImplementation(()=>{})
-  const arr = [1]
-  const fn = jest.fn()
-  yfElementAtOrElseBy(arr, fn)(0)
-  expect(spy).toHaveBeenLastCalledWith(arr, 0, fn)
-})
-
-it('yffElementAtOrElseBy', () => {
-  const spy = jest.spyOn(A, 'elementAtOrElseBy').mockImplementation(()=>{})
-  const arr = [1]
-  const fn = jest.fn()
-  yffElementAtOrElseBy(arr, 0)(fn)
-  expect(spy).toHaveBeenLastCalledWith(arr, 0, fn)
-})
-
-it('yFirstOrElse', () => {
-  const spy = jest.spyOn(A, 'firstOrElse').mockImplementation(()=>{})
-  const arr = [1]
-  yFirstOrElse(2)(arr)
-  expect(spy).toHaveBeenLastCalledWith(arr, 2)
-})
-
-it('yfFirstOrElse', () => {
-  const spy = jest.spyOn(A, 'firstOrElse').mockImplementation(()=>{})
-  const arr = [1]
-  yfFirstOrElse(arr)(2)
-  expect(spy).toHaveBeenLastCalledWith(arr, 2)
-})
-
-it('yLastOrElse', () => {
-  const spy = jest.spyOn(A, 'lastOrElse').mockImplementation(()=>{})
-  const arr = [1]
-  yLastOrElse(2)(arr)
-  expect(spy).toHaveBeenLastCalledWith(arr, 2)
-})
-
-it('yfLastOrElse', () => {
-  const spy = jest.spyOn(A, 'lastOrElse').mockImplementation(()=>{})
-  const arr = [1]
-  yfLastOrElse(arr)(2)
-  expect(spy).toHaveBeenLastCalledWith(arr, 2)
 })

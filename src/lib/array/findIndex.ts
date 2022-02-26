@@ -10,7 +10,7 @@
 
 import {ArrayMapper, ArrayPredicate} from "../../array";
 
-export function indexOfFirst<T>(array: T[], find: T): number {
+export function indexOfFirst<T, V extends T>(array: T[], find: V): number {
   for (let i=0; i<array.length; i++) {
     if (array[i] === find) {
       return i
@@ -20,7 +20,7 @@ export function indexOfFirst<T>(array: T[], find: T): number {
   return -1
 }
 
-export function indexOfLast<T>(array: T[], find: T): number {
+export function indexOfLast<T, V extends T>(array: T[], find: V): number {
   for (let i = array.length-1; i>=0; i--) {
     if (array[i] === find) {
       return i

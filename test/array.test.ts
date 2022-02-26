@@ -23,45 +23,6 @@ describe('findIndexOfFirst', () => {
   })
 })
 
-test('firstOrNullBy', () => {
-  const sample = [
-    { id: 'A', name: 'Joan' },
-    { id: 'B', name: 'Nathan' },
-    { id: 'C', name: 'Marcus' },
-    { id: 'D', name: 'Cris' },
-    { id: 'E', name: 'Nathan' }
-  ]
-
-  expect(A.findFirstOrNullBy(sample, 'Nathan', it => it.name)).toEqual({ id: 'B', name: 'Nathan' })
-  expect(A.findFirstOrNullBy(sample, 'Pedro', it => it.name)).toEqual(undefined)
-})
-
-test('findFirstOrNullBy', () => {
-  const sample = [
-    { id: 'A', name: 'Joan' },
-    { id: 'B', name: 'Nathan' },
-    { id: 'C', name: 'Marcus' },
-    { id: 'D', name: 'Cris' },
-    { id: 'E', name: 'Nathan' }
-  ]
-
-  expect(A.findFirstOrNullBy(sample, 'Nathan', it => it.name)?.id).toStrictEqual('B')
-  expect(A.findFirstOrNullBy(sample, 'Pedro', it => it.name)).toEqual(undefined)
-})
-
-test('findLastOrNullBy', () => {
-  const sample = [
-    { id: 'A', name: 'Joan' },
-    { id: 'B', name: 'Nathan' },
-    { id: 'C', name: 'Marcus' },
-    { id: 'D', name: 'Cris' },
-    { id: 'E', name: 'Nathan' }
-  ]
-
-  expect(A.findLastOrNullBy(sample, 'Nathan', it => it.name)).toEqual({ id: 'E', name: 'Nathan' })
-  expect(A.findLastOrNullBy(sample, 'Pedro', it => it.name)).toEqual(undefined)
-})
-
 test('subList', () => {
   const list = [0, 1, 2, 3]
   expect(A.subList(list, 0, 99)).toStrictEqual([0, 1, 2, 3])
@@ -105,7 +66,6 @@ test('associateByTransforming', () => {
     ])
 })
 
-
 test('associateWith', () => {
   expect(A.associateWith([0, 1, 2, 3], it => it * 100))
     .toStrictEqual([
@@ -122,7 +82,6 @@ test('average', () => {
   expect(A.average([0, 0, 0, 0])).toEqual(0)
   expect(A.average([])).toEqual(NaN)
 })
-
 
 test('averageBy', () => {
   expect(A.averageBy([0, 0, 5, 5], it => it * 100)).toEqual(250)
@@ -160,7 +119,6 @@ test('distinct', () => {
   expect(A.distinct([0, 0, 0 ,0])).toStrictEqual([0])
   expect(A.distinct([])).toStrictEqual([])
 })
-
 
 test('distinctWith', () => {
   const comp = (a: { age: number }, b: { age: number }) => a.age === b.age

@@ -23,19 +23,6 @@ describe('#elementAt', () => {
   })
 })
 
-describe('#elementAtOrElse', () => {
-  it('Should use the default value', () => {
-    const obj = { foo: 'bar' }
-    expect(A.elementAtOrElse([0], -1, obj)).toStrictEqual(obj)
-    expect(A.elementAtOrElse([0], 1, obj)).toStrictEqual(obj)
-    expect(A.elementAtOrElse([], 0, obj)).toStrictEqual(obj)
-  })
-
-  it('Should find element at index', () => {
-    expect(A.elementAtOrElse([0], 0, 1)).toEqual(0)
-  })
-})
-
 describe('#elementAtOrNull', () => {
   it('Should be undefined', () => {
     expect(A.elementAtOrNull([0], -1)).toBeUndefined()
@@ -47,31 +34,6 @@ describe('#elementAtOrNull', () => {
     expect(A.elementAtOrNull([0], 0)).toEqual(0)
   })
 })
-
-describe('#elementAtOrElseBy', () => {
-  it('Should use the default value', () => {
-    const obj = { foo: 'bar' }
-    const fn1 = jest.fn(() => obj)
-    const fn2 = jest.fn(() => obj)
-    const fn3 = jest.fn(() => obj)
-
-    expect(A.elementAtOrElseBy([0], -1, fn1)).toStrictEqual(obj)
-    expect(fn1).toHaveBeenCalledTimes(1)
-    expect(fn1).toHaveBeenCalledWith(-1)
-
-    expect(A.elementAtOrElseBy([0], 1, fn2)).toStrictEqual(obj)
-    expect(fn2).toHaveBeenCalledTimes(1)
-    expect(fn2).toHaveBeenCalledWith(1)
-
-    expect(A.elementAtOrElseBy([], 0, fn3)).toStrictEqual(obj)
-    expect(fn3).toHaveBeenCalledTimes(1)
-    expect(fn3).toHaveBeenCalledWith(0)
-  })
-
-  it('Should find element at index', () => {
-    expect(A.elementAtOrElseBy([0], 0, () => 1)).toEqual(0)
-  })
-});
 
 describe('#first', () => {
   it('Should throw', () => {
@@ -92,27 +54,6 @@ describe('#last', () => {
     expect(A.last([-1, 0, 1])).toEqual(1)
   })
 })
-
-describe('#firstOrElse', () => {
-  it('Should return the default element', () => {
-    expect(A.firstOrElse([], 'foo')).toEqual('foo')
-  })
-
-  it('Should find the first element', () => {
-    expect(A.firstOrElse([-1, 0, 1], 'foo')).toEqual(-1)
-  })
-})
-
-describe('#lastOrElse', () => {
-  it('Should return the default element', () => {
-    expect(A.lastOrElse([], 'foo')).toEqual('foo')
-  })
-
-  it('Should find the last element', () => {
-    expect(A.lastOrElse([-1, 0, 1], 'foo')).toEqual(1)
-  })
-})
-
 
 describe('#firstOrNull', () => {
   it('Should return undefined', () => {
