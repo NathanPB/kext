@@ -10,9 +10,10 @@
 
 import {ArrayMapper, ArrayPredicate} from "../../array";
 
-export function indexOfFirst<T, V extends T>(array: T[], find: V): number {
+export function indexOfFirst<T, V>(array: T[], find: V, select?: ArrayMapper<T, V>): number {
   for (let i=0; i<array.length; i++) {
-    if (array[i] === find) {
+    const element = array[i]
+    if (find === (select ? select(element, i, array) : element)) {
       return i
     }
   }
@@ -20,9 +21,10 @@ export function indexOfFirst<T, V extends T>(array: T[], find: V): number {
   return -1
 }
 
-export function indexOfLast<T, V extends T>(array: T[], find: V): number {
+export function indexOfLast<T, V>(array: T[], find: V, select?: ArrayMapper<T, V>): number {
   for (let i = array.length-1; i>=0; i--) {
-    if (array[i] === find) {
+    const element = array[i]
+    if (find === (select ? select(element, i, array) : element)) {
       return i
     }
   }
@@ -43,26 +45,6 @@ export function findIndexOfFirst<T>(array: T[], predicate: ArrayPredicate<T>): n
 export function findIndexOfLast<T>(array: T[], predicate: ArrayPredicate<T>): number {
   for (let i = array.length-1; i>=0; i--) {
     if (predicate(array[i], i, array)) {
-      return i
-    }
-  }
-
-  return -1
-}
-
-export function findIndexOfFirstBy<T, V> (array: T[], find: V, select: ArrayMapper<T, V>): number {
-  for (let i=0; i<array.length; i++) {
-    if (find === select(array[i], i, array)) {
-      return i
-    }
-  }
-
-  return -1
-}
-
-export function findIndexOfLastBy<T, V> (array: T[], find: V, select: ArrayMapper<T, V>): number {
-  for (let i = array.length-1; i>=0; i--) {
-    if (find === select(array[i], i, array)) {
       return i
     }
   }

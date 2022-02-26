@@ -9,9 +9,9 @@
  */
 
 
-import {ArrayMapper, ArrayPredicate, elementAt} from "../../array";
+import {ArrayMapper, ArrayPredicate, elementAt, indexOfFirst, indexOfLast} from "../../array";
 import {elementAtOrNull} from "./directAccess";
-import {findIndexOfFirst, findIndexOfFirstBy, findIndexOfLast, findIndexOfLastBy} from "./findIndex";
+import {findIndexOfFirst, findIndexOfLast} from "./findIndex";
 import {NoSuchElementError} from "../../index";
 
 export function findFirst<T>(array: T[], predicate: ArrayPredicate<T>): T {
@@ -22,12 +22,12 @@ export function findLast<T>(array: T[], predicate: ArrayPredicate<T>): T {
   return elementAt(array, findIndexOfLast(array, predicate))
 }
 
-export function findFirstBy<T, V extends T> (array: T[], find: V, select: ArrayMapper<T, V>): T {
-  return elementAt(array, findIndexOfFirstBy(array, find, select))
+export function findFirstBy<T, V>(array: T[], find: V, select: ArrayMapper<T, V>): T {
+  return elementAt(array, indexOfFirst(array, find, select))
 }
 
-export function findLastBy<T, V extends T> (array: T[], find: V, select: ArrayMapper<T, V>): T {
-  return elementAt(array, findIndexOfLastBy(array, find, select))
+export function findLastBy<T, V>(array: T[], find: V, select: ArrayMapper<T, V>): T {
+  return elementAt(array, indexOfLast(array, find, select))
 }
 
 export function findFirstOrNull<T>(array: T[], predicate: ArrayPredicate<T>): T | undefined {
@@ -50,7 +50,7 @@ export function findLastOrNull<T>(array: T[], predicate: ArrayPredicate<T>): T |
  * @param select The selector which should be applied to compare with `find`
  */
 export function findFirstOrNullBy<T, V> (array: T[], find: V, select: ArrayMapper<T, V>): T | undefined {
-  return elementAtOrNull(array, findIndexOfFirstBy(array, find, select))
+  return elementAtOrNull(array, indexOfFirst(array, find, select))
 }
 
 /**
@@ -64,7 +64,7 @@ export function findFirstOrNullBy<T, V> (array: T[], find: V, select: ArrayMappe
  * @param select The selector which should be applied to compare with `find`
  */
 export function findLastOrNullBy<T, V> (array: T[], find: V, select: ArrayMapper<T, V>): T | undefined {
-  return elementAtOrNull(array, findIndexOfLastBy(array, find, select))
+  return elementAtOrNull(array, indexOfLast(array, find, select))
 }
 
 export function findFirstNotNullable<T>(array: T[]): T {
