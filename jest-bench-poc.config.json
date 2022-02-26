@@ -10,5 +10,5 @@
     "^.+\\.(ts|tsx)$": "ts-jest"
   },
   "reporters": ["default", "@nathanpb/jest-bench/reporter"],
-  "testRegex": "(\\__benchmarks\\__.*|\\.(?<!poc\\.)(bench))\\.(ts|tsx|js)$"
+  "testRegex": "(/__benchmarks__/.*|\\.poc\\.bench)\\.(ts|tsx|js)$"
 }

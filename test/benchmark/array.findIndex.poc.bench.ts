@@ -25,10 +25,20 @@ export function noCallback<T, V>(array: T[], find: V): number {
   return -1
 }
 
-export function withOptCallback<T, V>(array: T[], find: V, select?: ArrayMapper<T, V>): number {
+export function withOptCallback1<T, V>(array: T[], find: V, select?: ArrayMapper<T, V>): number {
   for (let i=0; i<array.length; i++) {
     const element = array[i]
     if (find === (select ? select(element, i, array) : element)) {
+      return i
+    }
+  }
+
+  return -1
+}
+
+export function withOptCallback2<T, V>(array: T[], find: V, select?: ArrayMapper<T, V>): number {
+  for (let i=0; i<array.length; i++) {
+    if (find === (select ? select(array[i], i, array) : array[i])) {
       return i
     }
   }
@@ -61,8 +71,10 @@ export function withDefaultedCallbackR<T, V>(array: T[], find: V, select: ArrayM
 
 benchmarkSuite('Array findIndex proof of concept', {
   'noCallback': () => void noCallback(list, 9999),
-  'withOptCallback | present': () => void withOptCallback(list, 9999, it => it),
-  'withOptCallback | not present': () => void withOptCallback(list, 9999),
+  'withOptCallback1 | present': () => void withOptCallback1(list, 9999, it => it),
+  'withOptCallback1 | not present': () => void withOptCallback1(list, 9999),
+  'withOptCallback2 | present': () => void withOptCallback2(list, 9999, it => it),
+  'withOptCallback2 | not present': () => void withOptCallback2(list, 9999),
   'withRequiredCallback': () => void withRequiredCallbackR(list, 9999, it => it),
   'withDefaultedCallback | present': () => void withDefaultedCallbackR(list, 9999, it => it),
   'withDefaultedCallback | not present': () => void withDefaultedCallbackR(list, 9999),
@@ -70,12 +82,14 @@ benchmarkSuite('Array findIndex proof of concept', {
 
 /*
 Preview:
-  noCallback                           0.005 ms ± 0.60 %   (90 runs sampled)
-  withOptCallback | present            0.006 ms ± 2.66 %   (84 runs sampled)
-  withOptCallback | not present        0.006 ms ± 0.57 %   (88 runs sampled)
-  withRequiredCallback                 0.005 ms ± 0.51 %   (90 runs sampled)
-  withDefaultedCallback | present      0.087 ms ± 14.38 %  (11 runs sampled)
-  withDefaultedCallback | not present  0.104 ms ± 2.16 %   (85 runs sampled)
+    noCallback                           0.006 ms ± 0.71 %   (85 runs sampled)
+    withOptCallback1 | present           0.005 ms ± 0.51 %   (89 runs sampled)
+    withOptCallback1 | not present       0.005 ms ± 1.02 %   (87 runs sampled)
+    withOptCallback2 | present           0.006 ms ± 17.55 %  (80 runs sampled)
+    withOptCallback2 | not present       0.006 ms ± 2.00 %   (86 runs sampled)
+    withRequiredCallback                 0.006 ms ± 0.83 %   (89 runs sampled)
+    withDefaultedCallback | present      0.087 ms ± 15.40 %  (12 runs sampled)
+    withDefaultedCallback | not present  0.103 ms ± 2.07 %   (85 runs sampled)
 
 Why the fuck are optional arguments so slow?
 */

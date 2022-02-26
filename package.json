@@ -9,6 +9,7 @@
   "scripts": {
     "test": "jest --passWithNoTests",
     "bench": "jest --projects jest-bench.config.json",
+    "bench:poc": "jest --projects jest-bench-poc.config.json",
     "clean": "rm -rf dist coverage docs benchmarks",
     "docs": "typedoc --entryPoints src/index.ts",
     "prebuild": "yarn clean",
