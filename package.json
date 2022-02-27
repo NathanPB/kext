@@ -16,7 +16,7 @@
     "build": "tsc -p tsconfig.json && cp package.json dist && cp README.md dist && cp LICENSE dist",
     "prerelease": "yarn build",
     "release": "cd dist && npm publish --access public",
-    "dev": "mkdir -p node_modules/@nathanpb && ln -s \"$PWD/src\" node_modules/@nathanpb/progress",
+    "dev": "mkdir -p node_modules/@nathanpb && rm -rf node_modules/@nathanpb/kext && ln -s \"$PWD/src\" node_modules/@nathanpb/kext",
     "dev:docs": "docsify serve docs"
   },
   "devDependencies": {
