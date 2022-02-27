@@ -11,7 +11,7 @@
 export * as Array from './array'
 export * as Chainer from './chainer'
 export * as Enum from './enum'
-export * as Errors from './error'
+export * as Error from './error'
 export * as Math from './math'
 export * as Object from './object'
 export * as Random from './random'
