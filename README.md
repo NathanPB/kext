@@ -7,6 +7,9 @@
 
 I think that the ECMAScript stdlib is not enough for me, so I'm attempting to rewrite all of the usefull Kotlin's stdlib into Typescript.
 
+Along the way, I discovered many possibilities to improve it and make the life of the JS/TS developer much easier.
+So I plan to, with this lib, expose a bunch of useful and type-safe functions to make the development experience much easier and more pleasant.
+
 Yes, it's that simple
 
 **If you get any questions or suggestions just open a [discussion](https://github.com/NathanPB/kext/discussions) or an [issue](https://github.com/NathanPB/kext/issues)**
@@ -19,120 +22,17 @@ This package is published in [npmjs](https://www.npmjs.com/package/@nathanpb/kex
 
 If you want to try the unstable features, use the ``next`` tag: ``npm i @nathanpb/kext@next``.
 
-## Example and Use Cases
-
-### Generic array usage
-
-```ts
-import { any, sumBy } from '@nathanpb/kext/array'
-
-const hasNonFriends = any(users, it => !it.areFriends(user))
-const agesSum = sumBy(users, it => it.age)
-```
-
-### Try/catch as an expression
-
-**Typescript:**
-
-```ts
-let token: JwtPayload | undefined = undefined // mutable variable bad, also can't have it's type inferred
-try {
-  token = jwt.verify(req.body, secret)
-} catch (e) {
-  throw error(403, 'Token not present')
-}
-
-// Here, the TS compiler still thinks that ``token`` can be undefined
-```
-
-**Typescript + @nathanpb/kext:**
-
-```ts
-import { runCatching, throwExpr } from "@nathanpb/kext/error";
-
-const token = runCatching(() => jwt.verify(req.body, secret))
-  .onFailure(() => throwExpr(error(403, 'Token not present')))
-  .getOrUndefined()!!
-```
-
-<details>
-  <summary>If you prefer, this can also be written as</summary>
-
-  ```ts
-  const token = runCatching(() => jwt.verify(req.body, secret))
-    .recover(() => throwExpr(error(403, 'Token not present')))
-    .getOrThrow()
-  ```
-
-  ```ts
-  const token = runCatching(() => jwt.verify(req.body, secret))
-    .recover(() => { throw error(403, 'Token not present') })
-    .getOrThrow()
-  ```
-</details>
-
-### Enum utility functions
-
-```ts
-import {
-  isValueOf,
-  values,
-  regexKeyMatcher
-} from '@nathanpb/kext/enum'
-import {firstKeyWithValueOf} from "./enum";
-
-enum WordClass { VERB = '01', NOUN = '02', ADVERB = '03', PRONOUN = '04', OTHER = 'XX' }
-
-app.post('/word', async (req, res) => {
-  if (!isValueOf(WordClass, req.wordClass)) {
-    res.send(400, `word class is not a valid class. Posslbe values: ${values(WordClass)}`)
-  }
-
-  const wordClass = firstKeyWithValueOf(req.wordClass)
-  await db.insert({
-    word: String(req.word),
-    needsLaterClassification: wordClass === WordClass.OTHER,
-    wordClass
-  })
-})
-
-expect('PREPOSITION').not.toMatch(regexKeyMatcher(WordClass))
-```
-
 ## Documentation
 
-**For detailed information, see the [API Reference](https://kext.nathanpb.dev).**
+- [Docs](https://kext.nathanpb.dev)
+- [API Reference](https://kext.nathanpb.dev/api)
 
 This library is all inspired by Kotlin, so [their documentation](https://kotlinlang.org/docs/home.html) may be useful.
 
-- [Arrays](https://kext.nathanpb.dev/modules/array.html) - Functions for array manipulation. Details on the Kotlin imp [here](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/)
-- [Scope](https://kext.nathanpb.dev/modules/scope.html) - Functions for scope manipulation. Details on the Kotlin imp [here](https://kotlinlang.org/docs/scope-functions.html)
-- [Math](https://kext.nathanpb.dev/modules/math.html) - Functions for common math equations. Still incomplete.
-- [Error](https://kext.nathanpb.dev/modules/error.html) - Functions for error/exception manipulation that I find handy.
-
-## Showcase (Brief demonstration of the Arrays Module)
-![showcase](https://user-images.githubusercontent.com/18128642/125735762-57d008b4-73c2-4d85-b6b8-87f3a37d5e08.gif)
-
-## Performance
-
-I'm putting a huge effort in making this library perform well, and the benchmarks tell that it can already perform better than the stdlib in the tested functions.
-
-You can check the benchmarks [here](https://github.com/NathanPB/kext/actions/workflows/benchmark.yml). Navigate through the logs and attached report files...
-
-Remamber, [this code very fast](https://github.com/torvalds/linux/pull/437)
-
-## What's next
-
-- Do a proper documentation
-- Finish the unit tests and benchmarks for the Arrays module
-- Write a typescript plugin to invoke array functions as an extension-like function
-- Async-compatible functions
-
 ## Side Notes
 
-- Project is in the very beginning
-- Performance is questionable
-
+- Project is in the beginning, breaking changes are expected
+- Performance may be questionable, but always considered before implementing a new feature. See [benchmarks](https://kext.nathanpb.dev/#/benchmarks).
 
 ## License
 

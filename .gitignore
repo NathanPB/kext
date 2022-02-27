@@ -2,7 +2,8 @@
 /build/
 /lib/
 /dist/
-/docs/
+/docs/api
+/docs/README.md
 .idea/*
 
 .DS_Store
