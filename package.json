@@ -1,6 +1,6 @@
 {
   "name": "@nathanpb/kext",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Kotlin inspired extension library for declarative programming with NodeJS",
   "author": "Nathan P. Bombana <nathan.pbombana@gmail.com>",
   "repository": "https://github.com/NathanPB/kext",
