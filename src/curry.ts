@@ -26,53 +26,58 @@ export type FourthParam4<T extends any[]> = T extends [unknown, unknown, unknown
 
 type PopParams<F> = F extends (arg0: any, ...rest: infer R) => any ? R : never
 
+function withBase<T, F>(newFunction: T, baseFunction: F) {
+  Object.assign(newFunction, { kext$baseFunction: baseFunction })
+  return newFunction
+}
+
 /**
  * Curry a function with two parameters
- * @param f Function to be curried
+ * @param func Function to be curried
  */
 export function curry2<
   F extends (a: any, b: any) => any,
   R = ReturnType<F>
->(f: F): (...b: SecondParam2<Parameters<F>>) => (...a: FirstParam2<Parameters<F>>) => R {
-  return b => a => f(a, b)
+>(func: F): (...b: SecondParam2<Parameters<F>>) => (...a: FirstParam2<Parameters<F>>) => R {
+  return withBase(b => a => func(a, b), func)
 }
 
 /**
  * Curry a function with three parameters
- * @param f Function to be curried
+ * @param func Function to be curried
  */
 export function curry3<
   F extends (a: any, b: any, c: any) => any,
   R = ReturnType<F>,
->(f: F): (...c: ThirdParam3<Parameters<F>>) => (...b: SecondParam3<Parameters<F>>) => (...a: FirstParam3<Parameters<F>>) => R {
-  return c => b => a => f(a, b, c)
+>(func: F): (...c: ThirdParam3<Parameters<F>>) => (...b: SecondParam3<Parameters<F>>) => (...a: FirstParam3<Parameters<F>>) => R {
+  return withBase(c => b => a => func(a, b, c), func)
 }
 
 /**
  * Curry a function with four parameters
- * @param f Function to be curried
+ * @param func Function to be curried
  */
 export function curry4<
   F extends (a: any, b: any, c: any, d: any) => any,
   R = ReturnType<F>
->(f: F): (...d: FourthParam4<Parameters<F>>) => (...c: ThirdParam4<Parameters<F>>) => (...b: SecondParam4<Parameters<F>>) => (...a: FirstParam4<Parameters<F>>) => R {
-  return d => c => b => a => f(a, b, c, d)
+>(func: F): (...d: FourthParam4<Parameters<F>>) => (...c: ThirdParam4<Parameters<F>>) => (...b: SecondParam4<Parameters<F>>) => (...a: FirstParam4<Parameters<F>>) => R {
+  return withBase(d => c => b => a => func(a, b, c, d), func)
 }
 
 export function curryFirst3<
   F extends (a: any, b: any, c: any) => any,
   R = ReturnType<F>
->(f: F): (...params: PopParams<Parameters<F>>) => (...a: FirstParam3<Parameters<F>>) => R {
+>(func: F): (...params: PopParams<Parameters<F>>) => (...a: FirstParam3<Parameters<F>>) => R {
   /* @ts-ignore */
-  return (b, c) => a => f(a, b, c)
+  return withBase((b, c) => a => func(a, b, c), func)
 }
 
 export function curryFirst4<
   F extends (a: any, b: any, c: any, d: any) => any,
   R = ReturnType<F>
->(f: F): (...params: PopParams<Parameters<F>>) => (...a: FirstParam3<Parameters<F>>) => R {
+>(func: F): (...params: PopParams<Parameters<F>>) => (...a: FirstParam3<Parameters<F>>) => R {
   /* @ts-ignore */
-  return (b, c, d) => a => f(a, b, c, d)
+  return withBase((b, c, d) => a => func(a, b, c, d), func)
 }
 
 /**
@@ -80,7 +85,7 @@ export function curryFirst4<
  * @param func The function whose parameters are to be flipped.
  */
 export function flip2<R, A, B>(func: (a: A, b: B)=>R) {
-  return (b: B, a: A) => func(a, b)
+  return withBase((b: B, a: A) => func(a, b), func)
 }
 
 /**
@@ -88,7 +93,7 @@ export function flip2<R, A, B>(func: (a: A, b: B)=>R) {
  * @param func The function whose parameters are to be flipped.
  */
 export function flip3<R, A, B, C>(func: (a: A, b: B, c: C)=>R) {
-  return (c: C, b: B, a: A) => func(a, b, c)
+  return withBase((c: C, b: B, a: A) => func(a, b, c), func)
 }
 
 /**
@@ -96,7 +101,7 @@ export function flip3<R, A, B, C>(func: (a: A, b: B, c: C)=>R) {
  * @param func The function whose parameters are to be flipped.
  */
 export function flip4<R, A, B, C, D>(func: (a: A, b: B, c: C, d: D)=>R) {
-  return (d: D, c: C, b: B, a: A) => func(a, b, c, d)
+  return withBase((d: D, c: C, b: B, a: A) => func(a, b, c, d), func)
 }
 
 /**
@@ -104,7 +109,7 @@ export function flip4<R, A, B, C, D>(func: (a: A, b: B, c: C, d: D)=>R) {
  * @param func The function whose parameters are to be flipped.
  */
 export function flipSecond2<R, A, B>(func: (a: A, b: B)=>R) {
-  return (b: B, a: A) => func(a, b)
+  return withBase((b: B, a: A) => func(a, b), func)
 }
 
 /**
@@ -112,7 +117,7 @@ export function flipSecond2<R, A, B>(func: (a: A, b: B)=>R) {
  * @param func The function whose parameters are to be flipped.
  */
 export function flipSecond3<R, A, B, C>(func: (a: A, b: B, c: C)=>R) {
-  return (b: B, a: A, c: C) => func(a, b, c)
+  return withBase((b: B, a: A, c: C) => func(a, b, c), func)
 }
 
 /**
@@ -120,7 +125,7 @@ export function flipSecond3<R, A, B, C>(func: (a: A, b: B, c: C)=>R) {
  * @param func The function whose parameters are to be flipped.
  */
 export function flipSecond4<R, A, B, C, D>(func: (a: A, b: B, c: C, d: D)=>R) {
-  return (b: B, a: A, c: C, d: D) => func(a, b, c, d)
+  return withBase((b: B, a: A, c: C, d: D) => func(a, b, c, d), func)
 }
 
 /**
@@ -128,7 +133,7 @@ export function flipSecond4<R, A, B, C, D>(func: (a: A, b: B, c: C, d: D)=>R) {
  * @param func The function whose parameters are to be flipped.
  */
 export function flipThird3<R, A, B, C>(func: (a: A, b: B, c: C)=>R) {
-  return (c: C, a: A, b: B) => func(a, b, c)
+  return withBase((c: C, a: A, b: B) => func(a, b, c), func)
 }
 
 /**
@@ -136,7 +141,7 @@ export function flipThird3<R, A, B, C>(func: (a: A, b: B, c: C)=>R) {
  * @param func The function whose parameters are to be flipped.
  */
 export function flipThird4<R, A, B, C, D>(func: (a: A, b: B, c: C, d: D)=>R) {
-  return (c: C, a: A, b: B, d: D) => func(a, b, c, d)
+  return withBase((c: C, a: A, b: B, d: D) => func(a, b, c, d), func)
 }
 
 /**
@@ -144,5 +149,5 @@ export function flipThird4<R, A, B, C, D>(func: (a: A, b: B, c: C, d: D)=>R) {
  * @param func The function whose parameters are to be flipped.
  */
 export function flipFourth4<R, A, B, C, D>(func: (a: A, b: B, c: C, d: D)=>R) {
-  return (d: D, a: A, b: B, c: C) => func(a, b, c, d)
+  return withBase((d: D, a: A, b: B, c: C) => func(a, b, c, d), func)
 }

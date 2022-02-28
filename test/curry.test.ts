@@ -17,74 +17,102 @@ afterEach(() => expect(fn).toBeCalledTimes(1))
 
 describe('#curry', () => {
   it('#curry2', () => {
-    Y.curry2(fn)(1)(0)
+    const func = Y.curry2(fn)
+    func(1)(0)
     expect(fn).toHaveBeenLastCalledWith(0, 1)
+    expect((func as any).kext$baseFunction).toStrictEqual(fn)
   })
 
   it('#curry3', () => {
-    Y.curry3(fn)(2)(1)(0)
+    const func = Y.curry3(fn)
+    func(2)(1)(0)
     expect(fn).toHaveBeenLastCalledWith(0, 1, 2)
+    expect((func as any).kext$baseFunction).toStrictEqual(fn)
   })
 
   it('#curry4', () => {
-    Y.curry4(fn)(3)(2)(1)(0)
+    const func = Y.curry4(fn)
+    func(3)(2)(1)(0)
     expect(fn).toHaveBeenLastCalledWith(0, 1, 2, 3)
+    expect((func as any).kext$baseFunction).toStrictEqual(fn)
   })
 
   it('#curryFirst3', () => {
-    Y.curryFirst3(fn)(1, 2)(0)
+    const func = Y.curryFirst3(fn)
+    func(1, 2)(0)
     expect(fn).toHaveBeenLastCalledWith(0, 1, 2)
+    expect((func as any).kext$baseFunction).toStrictEqual(fn)
   })
 
   it('#curryFirst4', () => {
-    Y.curryFirst4(fn)(1, 2, 3)(0)
+    const func = Y.curryFirst4(fn)
+    func(1, 2, 3)(0)
     expect(fn).toHaveBeenLastCalledWith(0, 1, 2, 3)
+    expect((func as any).kext$baseFunction).toStrictEqual(fn)
   })
 });
 
 describe('#flip', () => {
   it('#flip2', () => {
-    Y.flip2(fn)(1, 0)
+    const func = Y.flip2(fn)
+    func(1, 0)
     expect(fn).toHaveBeenLastCalledWith(0, 1)
+    expect((func as any).kext$baseFunction).toStrictEqual(fn)
   })
 
   it('#flip3', () => {
-    Y.flip3(fn)(2, 1, 0)
+    const func = Y.flip3(fn)
+    func(2, 1, 0)
     expect(fn).toHaveBeenLastCalledWith(0, 1, 2)
+    expect((func as any).kext$baseFunction).toStrictEqual(fn)
   })
 
   it('#flip4', () => {
-    Y.flip4(fn)(3, 2, 1, 0)
+    const func = Y.flip4(fn)
+    func(3, 2, 1, 0)
     expect(fn).toHaveBeenLastCalledWith(0, 1, 2, 3)
+    expect((func as any).kext$baseFunction).toStrictEqual(fn)
   })
 
   it('#flipSecond2', () => {
-    Y.flipSecond2(fn)(1, 0)
+    const func = Y.flipSecond2(fn)
+    func(1, 0)
     expect(fn).toHaveBeenLastCalledWith(0, 1)
+    expect((func as any).kext$baseFunction).toStrictEqual(fn)
   })
 
   it('#flipSecond3', () => {
-    Y.flipSecond3(fn)(1, 0, 2)
+    const func = Y.flipSecond3(fn)
+    func(1, 0, 2)
     expect(fn).toHaveBeenLastCalledWith(0, 1, 2)
+    expect((func as any).kext$baseFunction).toStrictEqual(fn)
   })
 
   it('#flipSecond4', () => {
-    Y.flipSecond4(fn)(1, 0, 2, 3)
+    const func = Y.flipSecond4(fn)
+    func(1, 0, 2, 3)
     expect(fn).toHaveBeenLastCalledWith(0, 1, 2, 3)
+    expect((func as any).kext$baseFunction).toStrictEqual(fn)
   })
 
   it('#flipThird3', () => {
-    Y.flipThird3(fn)(2, 0, 1)
+    const func = Y.flipThird3(fn)
+    func(2, 0, 1)
     expect(fn).toHaveBeenLastCalledWith(0, 1, 2)
+    expect((func as any).kext$baseFunction).toStrictEqual(fn)
   })
 
   it('#flipThird4', () => {
-    Y.flipThird4(fn)(2, 0, 1, 3)
+    const func = Y.flipThird4(fn)
+    func(2, 0, 1, 3)
     expect(fn).toHaveBeenLastCalledWith(0, 1, 2, 3)
+    expect((func as any).kext$baseFunction).toStrictEqual(fn)
   })
 
   it('#flipFourth4', () => {
-    Y.flipFourth4(fn)(3, 0, 1, 2)
+    const func = Y.flipFourth4(fn)
+    func(3, 0, 1, 2)
     expect(fn).toHaveBeenLastCalledWith(0, 1, 2, 3)
+    expect((func as any).kext$baseFunction).toStrictEqual(fn)
   })
 });
