@@ -36,20 +36,6 @@ describe('#curry', () => {
     expect(fn).toHaveBeenLastCalledWith(0, 1, 2, 3)
     expect((func as any).kext$baseFunction).toStrictEqual(fn)
   })
-
-  it('#curryFirst3', () => {
-    const func = Y.curryFirst3(fn)
-    func(1, 2)(0)
-    expect(fn).toHaveBeenLastCalledWith(0, 1, 2)
-    expect((func as any).kext$baseFunction).toStrictEqual(fn)
-  })
-
-  it('#curryFirst4', () => {
-    const func = Y.curryFirst4(fn)
-    func(1, 2, 3)(0)
-    expect(fn).toHaveBeenLastCalledWith(0, 1, 2, 3)
-    expect((func as any).kext$baseFunction).toStrictEqual(fn)
-  })
 });
 
 describe('#flip', () => {

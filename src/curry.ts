@@ -24,8 +24,6 @@ export type SecondParam4<T extends any[]> = T extends [unknown, ...infer P, unkn
 export type ThirdParam4<T extends any[]>  = T extends [unknown, unknown, ...infer P, unknown] ? [...P] : never;
 export type FourthParam4<T extends any[]> = T extends [unknown, unknown, unknown, ...infer P] ? [...P] : never;
 
-type PopParams<F> = F extends (arg0: any, ...rest: infer R) => any ? R : never
-
 function withBase<T, F>(newFunction: T, baseFunction: F) {
   Object.assign(newFunction, { kext$baseFunction: baseFunction })
   return newFunction
@@ -62,22 +60,6 @@ export function curry4<
   R = ReturnType<F>
 >(func: F): (...d: FourthParam4<Parameters<F>>) => (...c: ThirdParam4<Parameters<F>>) => (...b: SecondParam4<Parameters<F>>) => (...a: FirstParam4<Parameters<F>>) => R {
   return withBase(d => c => b => a => func(a, b, c, d), func)
-}
-
-export function curryFirst3<
-  F extends (a: any, b: any, c: any) => any,
-  R = ReturnType<F>
->(func: F): (...params: PopParams<Parameters<F>>) => (...a: FirstParam3<Parameters<F>>) => R {
-  /* @ts-ignore */
-  return withBase((b, c) => a => func(a, b, c), func)
-}
-
-export function curryFirst4<
-  F extends (a: any, b: any, c: any, d: any) => any,
-  R = ReturnType<F>
->(func: F): (...params: PopParams<Parameters<F>>) => (...a: FirstParam3<Parameters<F>>) => R {
-  /* @ts-ignore */
-  return withBase((b, c, d) => a => func(a, b, c, d), func)
 }
 
 /**
