@@ -22,83 +22,20 @@ import {
   yNone
 } from '../src/lib/array/existential.curry';
 
-beforeAll(jest.restoreAllMocks)
+// @ts-ignore
+import {testCurried} from "./utils";
 
-it('#yAll', () => {
-  const spy = jest.spyOn(A, 'all').mockImplementation(()=>true)
-  const arr = [1]
-  const fn = jest.fn()
-  yAll(fn)(arr)
-  expect(spy).toHaveBeenLastCalledWith(arr, fn)
-})
+it('#yAll', () => testCurried(yAll, A.all))
+it('#yfAll', () => testCurried(yfAll, A.all))
 
-it('#yfAll', () => {
-  const spy = jest.spyOn(A, 'all').mockImplementation(()=>true)
-  const arr = [1]
-  const fn = jest.fn()
-  yfAll(arr)(fn)
-  expect(spy).toHaveBeenLastCalledWith(arr, fn)
-})
+it('#yAny', () => testCurried(yAny, A.any))
+it('#yfAny', () => testCurried(yfAny, A.any))
 
-it('#yAny', () => {
-  const spy = jest.spyOn(A, 'any').mockImplementation(()=>true)
-  const arr = [1]
-  const fn = jest.fn()
-  yAny(fn)(arr)
-  expect(spy).toHaveBeenLastCalledWith(arr, fn)
-})
+it('#yNone', () => testCurried(yNone, A.none))
+it('#yfNone', () => testCurried(yfNone, A.none))
 
-it('#yfAny', () => {
-  const spy = jest.spyOn(A, 'any').mockImplementation(()=>true)
-  const arr = [1]
-  const fn = jest.fn()
-  yfAny(arr)(fn)
-  expect(spy).toHaveBeenLastCalledWith(arr, fn)
-})
+it('#yContains', () => testCurried(yContains, A.contains))
+it('#yfContains', () => testCurried(yfContains, A.contains))
 
-it('#yNone', () => {
-  const spy = jest.spyOn(A, 'none').mockImplementation(()=>true)
-  const arr = [1]
-  const fn = jest.fn()
-  yNone(fn)(arr)
-  expect(spy).toHaveBeenLastCalledWith(arr, fn)
-})
-
-it('#yfNone', () => {
-  const spy = jest.spyOn(A, 'none').mockImplementation(()=>true)
-  const arr = [1]
-  const fn = jest.fn()
-  yfNone(arr)(fn)
-  expect(spy).toHaveBeenLastCalledWith(arr, fn)
-})
-
-it('#yContains', () => {
-  const spy = jest.spyOn(A, 'contains').mockImplementation(()=>true)
-  const arr = [1]
-  yContains(2)(arr)
-  expect(spy).toHaveBeenLastCalledWith(arr, 2)
-})
-
-it('#yfContains', () => {
-  const spy = jest.spyOn(A, 'contains').mockImplementation(()=>true)
-  const arr = [1]
-  yfContains(arr)(2)
-  expect(spy).toHaveBeenLastCalledWith(arr, 2)
-})
-
-it('#yContainsAll', () => {
-  const spy = jest.spyOn(A, 'containsAll').mockImplementation(()=>true)
-  const arr = [1]
-  yContainsAll([2])(arr)
-  expect(spy).toHaveBeenLastCalledWith(arr, [2])
-})
-
-it('#yfContainsAll', () => {
-  const spy = jest.spyOn(A, 'containsAll').mockImplementation(()=>true)
-  const arr = [1]
-  yfContainsAll(arr)([2])
-  expect(spy).toHaveBeenLastCalledWith(arr, [2])
-})
-
-
-
+it('#yContainsAll', () => testCurried(yContainsAll, A.containsAll))
+it('#yfContainsAll', () => testCurried(yfContainsAll, A.containsAll))

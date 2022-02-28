@@ -32,35 +32,20 @@ import {
   yFindLastOrNullBy
 } from '../src/lib/array/findElement.curry';
 
+// @ts-ignore
+import {testCurried} from "./utils";
+
 beforeEach(jest.clearAllMocks)
 
 const arr = [0]
 const find = 0
 const fn = jest.fn()
 
-test('yFindFirst', () => {
-  const spy = jest.spyOn(A, 'findFirst').mockImplementation(() => {})
-  yFindFirst(fn)(arr)
-  expect(spy).toHaveBeenLastCalledWith(arr, fn)
-})
+test('yFindFirst', () => testCurried(yFindFirst, A.findFirst))
+test('yfFindFirst', () => testCurried(yfFindFirst, A.findFirst))
 
-test('yfFindFirst', () => {
-  const spy = jest.spyOn(A, 'findFirst').mockImplementation(() => {})
-  yfFindFirst(arr)(fn)
-  expect(spy).toHaveBeenLastCalledWith(arr, fn)
-})
-
-test('yFindLast', () => {
-  const spy = jest.spyOn(A, 'findLast').mockImplementation(() => {})
-  yFindLast(fn)(arr)
-  expect(spy).toHaveBeenLastCalledWith(arr, fn)
-})
-
-test('yfFindLast', () => {
-  const spy = jest.spyOn(A, 'findLast').mockImplementation(() => {})
-  yfFindLast(arr)(fn)
-  expect(spy).toHaveBeenLastCalledWith(arr, fn)
-})
+test('yFindLast', () => testCurried(yFindLast, A.findLast))
+test('yfFindLast', () => testCurried(yfFindLast, A.findLast))
 
 test('yFindFirstBy', () => {
   const spy = jest.spyOn(A, 'findFirstBy').mockImplementation(() => {})
@@ -98,29 +83,11 @@ test('yffFindLastBy', () => {
   expect(spy).toHaveBeenLastCalledWith(arr, find, fn)
 })
 
-test('yFindFirstOrNull', () => {
-  const spy = jest.spyOn(A, 'findFirstOrNull').mockImplementation(() => {})
-  yFindFirstOrNull(fn)(arr)
-  expect(spy).toHaveBeenLastCalledWith(arr, fn)
-})
+test('yFindFirstOrNull', () => testCurried(yFindFirstOrNull, A.findFirstOrNull))
+test('yfFindFirstOrNull', () => testCurried(yfFindFirstOrNull, A.findFirstOrNull))
 
-test('yfFindFirstOrNull', () => {
-  const spy = jest.spyOn(A, 'findFirstOrNull').mockImplementation(() => {})
-  yfFindFirstOrNull(arr)(fn)
-  expect(spy).toHaveBeenLastCalledWith(arr, fn)
-})
-
-test('yFindLastOrNull', () => {
-  const spy = jest.spyOn(A, 'findLastOrNull').mockImplementation(() => {})
-  yFindLastOrNull(fn)(arr)
-  expect(spy).toHaveBeenLastCalledWith(arr, fn)
-})
-
-test('yfFindLastOrNull', () => {
-  const spy = jest.spyOn(A, 'findLastOrNull').mockImplementation(() => {})
-  yfFindLastOrNull(arr)(fn)
-  expect(spy).toHaveBeenLastCalledWith(arr, fn)
-})
+test('yFindLastOrNull', () => testCurried(yFindLastOrNull, A.findLastOrNull))
+test('yfFindLastOrNull', () => testCurried(yfFindLastOrNull, A.findLastOrNull))
 
 test('yFindFirstOrNullBy', () => {
   const spy = jest.spyOn(A, 'findFirstOrNullBy').mockImplementation(() => {})

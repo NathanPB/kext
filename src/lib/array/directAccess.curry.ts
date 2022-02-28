@@ -9,35 +9,28 @@
  */
 
 import {elementAt, elementAtOrNull} from "./directAccess";
+import {curry2, flipSecond2} from "../../curry";
 
 /**
  * Curried version of {@link elementAt}.
  * {@inheritDoc elementAt}
  */
-export function yElementAt(index: number) {
-  return <T> (array: T[]) => elementAt(array, index)
-}
+export const yElementAt = curry2(elementAt)
 
 /**
  * Curried version of {@link elementAt}.
  * {@inheritDoc elementAt}
  */
-export function yfElementAt<T>(array: T[]) {
-  return (index: number) => elementAt(array, index)
-}
+export const yfElementAt = curry2(flipSecond2(elementAt))
 
 /**
  * Curried version of {@link elementAtOrNull}.
  * {@inheritDoc elementAtOrNull}
  */
-export function yElementAtOrNull(index: number) {
-  return <T> (array: T[]) => elementAtOrNull(array, index)
-}
+export const yElementAtOrNull = curry2(elementAtOrNull)
 
 /**
  * Curried version of {@link elementAtOrNull}.
  * {@inheritDoc elementAtOrNull}
  */
-export function yfElementAtOrNull<T>(array: T[]) {
-  return (index: number) => elementAtOrNull(array, index)
-}
+export const yfElementAtOrNull = curry2(flipSecond2(elementAtOrNull))

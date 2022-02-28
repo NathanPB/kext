@@ -9,84 +9,65 @@
  */
 
 
-import {all, any, ArrayPredicate, contains, containsAll, none} from "../../array";
+import {all, any, contains, containsAll, none} from "./existential";
+import {curry2, flipSecond2} from "../../curry";
 
 /**
  * Curried version of {@link all}.
  * {@inheritDoc all}
  */
-export function yAll<T>(predicate: ArrayPredicate<T>) {
-  return (array: T[]) => all(array, predicate)
-}
+export const yAll = curry2(all)
 
 /**
  * Curried version of {@link all}.
  * {@inheritDoc all}
  */
-export function yfAll<T>(array: T[]) {
-  return (predicate: ArrayPredicate<T>) => all(array, predicate)
-}
+export const yfAll = curry2(flipSecond2(all))
 
 /**
  * Curried version of {@link any}.
  * {@inheritDoc any}
  */
-export function yAny<T>(predicate: ArrayPredicate<T>) {
-  return (array: T[]) => any(array, predicate)
-}
+export const yAny = curry2(any)
 
 /**
  * Curried version of {@link any}.
  * {@inheritDoc any}
  */
-export function yfAny<T>(array: T[]) {
-  return (predicate: ArrayPredicate<T>) => any(array, predicate)
-}
+export const yfAny = curry2(flipSecond2(any))
 
 /**
  * Curried version of {@link none}.
  * {@inheritDoc none}
  */
-export function yNone<T>(predicate: ArrayPredicate<T>) {
-  return (array: T[]) => none(array, predicate)
-}
+export const yNone = curry2(none)
 
 /**
  * Curried version of {@link none}.
  * {@inheritDoc none}
  */
-export function yfNone<T>(array: T[]) {
-  return (predicate: ArrayPredicate<T>) => none(array, predicate)
-}
+export const yfNone = curry2(flipSecond2(none))
 
 /**
  * Curried version of {@link contains}.
  * {@inheritDoc contains}
  */
-export function yContains<T>(element: T) {
-  return (array: T[]) => contains(array, element)
-}
+export const yContains = curry2(contains)
 
 /**
  * Curried version of {@link contains}.
  * {@inheritDoc contains}
  */
-export function yfContains<T>(array: T[]) {
-  return (element: T) => contains(array, element)
-}
+export const yfContains = curry2(flipSecond2(contains))
 
 /**
  * Curried version of {@link containsAll}.
  * {@inheritDoc containsAll}
  */
-export function yContainsAll<T>(elements: T[]) {
-  return (array: T[]) => containsAll(array, elements)
-}
+export const yContainsAll = curry2(containsAll)
 
 /**
  * Curried version of {@link containsAll}.
  * {@inheritDoc containsAll}
  */
-export function yfContainsAll<T>(array: T[]) {
-  return (elements: T[]) => containsAll(array, elements)
-}
+export const yfContainsAll = curry2(flipSecond2(containsAll))

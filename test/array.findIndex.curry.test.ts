@@ -20,56 +20,19 @@ import {
   yIndexOfLast
 } from '../src/lib/array/findIndex.curry'
 
+// @ts-ignore
+import {testCurried} from "./utils";
+
 beforeEach(jest.restoreAllMocks)
 
-const arr = [0]
-const find = 0
-const fn = jest.fn()
+test('#yIndexOfFirst', () => testCurried(yIndexOfFirst, A.indexOfFirst))
+test('#yfIndexOfFirst', () => testCurried(yfIndexOfFirst, A.indexOfFirst))
 
-test('#yIndexOfFirst', () => {
-  const spy = jest.spyOn(A, 'indexOfFirst').mockImplementation(() => 0)
-  yIndexOfFirst(find, fn)(arr)
-  expect(spy).toHaveBeenLastCalledWith(arr, find, fn)
-})
+test('#yIndexOfLast', () => testCurried(yIndexOfLast, A.indexOfLast))
+test('#yfIndexOfLast', () => testCurried(yfIndexOfLast, A.indexOfLast))
 
-test('#yfIndexOfFirst', () => {
-  const spy = jest.spyOn(A, 'indexOfFirst').mockImplementation(() => 0)
-  yfIndexOfFirst(arr, fn)(find)
-  expect(spy).toHaveBeenLastCalledWith(arr, find, fn)
-})
+test('#yFindIndexOfFirst', () => testCurried(yFindIndexOfFirst, A.findIndexOfFirst))
+test('#yfFindIndexOfFirst', () => testCurried(yfFindIndexOfFirst, A.findIndexOfFirst))
 
-test('#yIndexOfLast', () => {
-  const spy = jest.spyOn(A, 'indexOfLast').mockImplementation(() => 0)
-  yIndexOfLast(find, fn)(arr)
-  expect(spy).toHaveBeenLastCalledWith(arr, find, fn)
-})
-
-test('#yfIndexOfLast', () => {
-  const spy = jest.spyOn(A, 'indexOfLast').mockImplementation(() => 0)
-  yfIndexOfLast(arr, fn)(find)
-  expect(spy).toHaveBeenLastCalledWith(arr, find, fn)
-})
-
-test('#yFindIndexOfFirst', () => {
-  const spy = jest.spyOn(A, 'findIndexOfFirst').mockImplementation(() => 0)
-  yFindIndexOfFirst(fn)(arr)
-  expect(spy).toHaveBeenLastCalledWith(arr, fn)
-})
-
-test('#yfFindIndexOfFirst', () => {
-  const spy = jest.spyOn(A, 'findIndexOfFirst').mockImplementation(() => 0)
-  yfFindIndexOfFirst(arr)(fn)
-  expect(spy).toHaveBeenLastCalledWith(arr, fn)
-})
-
-test('#yFindIndexOfLast', () => {
-  const spy = jest.spyOn(A, 'findIndexOfLast').mockImplementation(() => 0)
-  yFindIndexOfLast(fn)(arr)
-  expect(spy).toHaveBeenLastCalledWith(arr, fn)
-})
-
-test('#yfFindIndexOfLast', () => {
-  const spy = jest.spyOn(A, 'findIndexOfLast').mockImplementation(() => 0)
-  yfFindIndexOfLast(arr)(fn)
-  expect(spy).toHaveBeenLastCalledWith(arr, fn)
-})
+test('#yFindIndexOfLast', () => testCurried(yFindIndexOfLast, A.findIndexOfLast))
+test('#yfFindIndexOfLast', () => testCurried(yfFindIndexOfLast, A.findIndexOfLast))

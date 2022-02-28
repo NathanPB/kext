@@ -10,7 +10,6 @@
 
 import {
   ArrayMapper,
-  ArrayPredicate,
   findFirst,
   findFirstBy,
   findFirstOrNull,
@@ -20,22 +19,15 @@ import {
   findLastOrNull,
   findLastOrNullBy
 } from "../../array";
+import {curry2, flipSecond2} from "../../curry";
 
-export function yFindFirst<T>(predicate: ArrayPredicate<T>) {
-  return (array: T[]) => findFirst(array, predicate)
-}
+export const yFindFirst = curry2(findFirst)
 
-export function yfFindFirst<T>(array: T[]) {
-  return (predicate: ArrayPredicate<T>) => findFirst(array, predicate)
-}
+export const yfFindFirst = curry2(flipSecond2(findFirst))
 
-export function yFindLast<T>(predicate: ArrayPredicate<T>) {
-  return (array: T[]) => findLast(array, predicate)
-}
+export const yFindLast = curry2(findLast)
 
-export function yfFindLast<T>(array: T[]) {
-  return (predicate: ArrayPredicate<T>) => findLast(array, predicate)
-}
+export const yfFindLast = curry2(flipSecond2(findLast))
 
 export function yFindFirstBy<T, V extends T>(find: V, select: ArrayMapper<T, V>) {
   return (array: T[]) => findFirstBy(array, find, select)
@@ -61,22 +53,13 @@ export function yffFindLastBy<T, V extends T>(array: T[], find: V) {
   return (select: ArrayMapper<T, V>) => findLastBy(array, find, select)
 }
 
-export function yFindFirstOrNull<T>(predicate: ArrayPredicate<T>) {
-  return (array: T[]) => findFirstOrNull(array, predicate)
-}
+export const yFindFirstOrNull = curry2(findFirstOrNull)
 
-export function yfFindFirstOrNull<T>(array: T[]) {
-  return (predicate: ArrayPredicate<T>) => findFirstOrNull(array, predicate)
-}
+export const yfFindFirstOrNull = curry2(flipSecond2(findFirstOrNull))
 
-export function yFindLastOrNull<T>(predicate: ArrayPredicate<T>) {
-  return (array: T[]) => findLastOrNull(array, predicate)
-}
+export const yFindLastOrNull = curry2(findLastOrNull)
 
-export function yfFindLastOrNull<T>(array: T[]) {
-  return (predicate: ArrayPredicate<T>) => findLastOrNull(array, predicate)
-}
-
+export const yfFindLastOrNull = curry2(flipSecond2(findLastOrNull))
 
 export function yFindFirstOrNullBy<T, V extends T>(find: V, select: ArrayMapper<T, V>) {
   return (array: T[]) => findFirstOrNullBy(array, find, select)

@@ -8,68 +8,53 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import {ArrayMapper, ArrayPredicate, findIndexOfFirst, findIndexOfLast, indexOfFirst, indexOfLast} from "../../array";
+import * as A from './findIndex'
+import {curry2, flipSecond2} from "../../curry";
 
 /**
  * Curried version of {@link indexOfFirst}.
  * @inheritDoc indexOfFirst
  */
-export function yIndexOfFirst<T, V>(find: V, select?: ArrayMapper<T, V>) {
-  return (array: T[]) => indexOfFirst(array, find, select)
-}
+export const yIndexOfFirst = curry2(A.indexOfFirst)
 
 /**
  * Curried version of {@link indexOfFirst}.
  * @inheritDoc indexOfFirst
  */
-export function yfIndexOfFirst<T, V>(array: T[], select?: ArrayMapper<T, V>) {
-  return (find: V) => indexOfFirst(array, find, select)
-}
+export const yfIndexOfFirst = curry2(flipSecond2(A.indexOfFirst))
 
 /**
  * Curried version of {@link indexOfLast}.
  * @inheritDoc indexOfLast
  */
-export function yIndexOfLast<T, V>(find: V, select?: ArrayMapper<T, V>) {
-  return (array: T[]) => indexOfLast(array, find, select)
-}
+export const yIndexOfLast = curry2(A.indexOfLast)
 
 /**
  * Curried version of {@link indexOfLast}.
  * @inheritDoc indexOfLast
  */
-export function yfIndexOfLast<T, V>(array: T[], select?: ArrayMapper<T, V>) {
-  return (find: V) => indexOfLast(array, find, select)
-}
+export const yfIndexOfLast = curry2(flipSecond2(A.indexOfLast))
 
 /**
  * Curried version of {@link findIndexOfFirst}.
  * @inheritDoc findIndexOfFirst
  */
-export function yFindIndexOfFirst<T>(predicate: ArrayPredicate<T>) {
-  return (array: T[]) => findIndexOfFirst(array, predicate)
-}
+export const yFindIndexOfFirst = curry2(A.findIndexOfFirst)
 
 /**
  * Curried version of {@link findIndexOfFirst}.
  * @inheritDoc findIndexOfFirst
  */
-export function yfFindIndexOfFirst<T>(array: T[]) {
-  return (predicate: ArrayPredicate<T>) => findIndexOfFirst(array, predicate)
-}
+export const yfFindIndexOfFirst = curry2(flipSecond2(A.findIndexOfFirst))
 
 /**
  * Curried version of {@link findIndexOfLast}.
  * @inheritDoc findIndexOfLast
  */
-export function yFindIndexOfLast<T>(predicate: ArrayPredicate<T>) {
-  return (array: T[]) => findIndexOfLast(array, predicate)
-}
+export const yFindIndexOfLast = curry2(A.findIndexOfLast)
 
 /**
  * Curried version of {@link findIndexOfLast}.
  * @inheritDoc findIndexOfLast
  */
-export function yfFindIndexOfLast<T>(array: T[]) {
-  return (predicate: ArrayPredicate<T>) => findIndexOfLast(array, predicate)
-}
+export const yfFindIndexOfLast = curry2(flipSecond2(A.findIndexOfLast))

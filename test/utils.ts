@@ -8,15 +8,11 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-import '../src/array' // I have no fucking idea why this import is needed
-import * as A from '../src/lib/array/directAccess';
-import {yElementAt, yElementAtOrNull, yfElementAt, yfElementAtOrNull} from '../src/lib/array/directAccess.curry';
+export function testCurried<T extends (...params: any[])=>any>(func: T, baseFunction: any) {
+  let f: any = func
+  while (baseFunction !== f && f && f['kext$baseFunction']) {
+    f = f['kext$baseFunction']
+  }
 
-// @ts-ignore
-import {testCurried} from "./utils";
-
-it('#yElementAt', () => testCurried(yElementAt, A.elementAt))
-it('#yfElementAt', () => testCurried(yfElementAt, A.elementAt))
-
-it('yElementAtOrNull', () => testCurried(yElementAtOrNull, A.elementAtOrNull))
-it('yfElementAtOrNull', () => testCurried(yfElementAtOrNull, A.elementAtOrNull))
+  expect(f).toStrictEqual(baseFunction)
+}
