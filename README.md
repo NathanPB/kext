@@ -26,6 +26,7 @@ If you want to try the unstable features, use the ``next`` tag: ``npm i @nathanp
 
 - [Docs](https://kext.nathanpb.dev)
 - [API Reference](https://kext.nathanpb.dev/api)
+- [Showcase](https://kext.nathanpb.dev/#/showcase)
 
 This library is all inspired by Kotlin, so [their documentation](https://kotlinlang.org/docs/home.html) may be useful.
 

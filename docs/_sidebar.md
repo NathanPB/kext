@@ -1,5 +1,6 @@
 - [API Reference](/api)
 - [Playground](https://runkit.com/npm/@nathanpb/kext)
+- [Showcase](/showcase.md)
 - [Concepts](/concepts.md)
   - [Curried Functions](/concepts.md#curried-functions)
   - [Scope Functions](/concepts.md#scope-functions)
