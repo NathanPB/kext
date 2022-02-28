@@ -8,6 +8,7 @@
 - [Modules](/modules.md)
   - [Array](/modules.md#array)
   - [Chainer](/modules.md#chainer)
+  - [Curry](/modules.md#curry)
   - [Enum](/modules.md#enum)
   - [Error](/modules.md#error)
   - [Math](/modules.md#math)

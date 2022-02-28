@@ -10,6 +10,7 @@
 
 export * as Array from './array'
 export * as Chainer from './chainer'
+export * as Curry from './curry'
 export * as Enum from './enum'
 export * as Error from './error'
 export * as Math from './math'

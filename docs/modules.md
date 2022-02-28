@@ -35,6 +35,15 @@ const value = await chainer([1, 2, 3, 4])
   .then(purchase => db.findUser(purchase.userId))
 ```
 
+## Curry
+[View all functions](/api/modules/Curry.html)
+
+Import from ``@nathanpb/kext/curry``
+
+Allows for easily currying functions.
+
+This module heavily depends on contributions by [u/burkybang](https://www.reddit.com/user/burkybang) and [u/sam-goodwin](https://www.reddit.com/user/sam-goodwin/) on [Reddit](https://www.reddit.com/r/typescript/comments/t25op5/is_there_any_way_that_i_could_maintain_the_name/).
+
 ## Enum
 [View all functions](/api/modules/Enum.html)
 
