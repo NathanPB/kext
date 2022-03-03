@@ -1,28 +1,5 @@
 import * as A from '../src/array'
 
-describe('findIndexOfFirst', () => {
-  const data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 90]
-  test('return', () => {
-    expect(A.findIndexOfFirst(data, it => it === 0)).toEqual(0)
-    expect(A.findIndexOfFirst(data, it => it === 90)).toEqual(10)
-    expect(A.findIndexOfFirst(data, it => it === 99)).toEqual(-1)
-  })
-
-  test('callback params', () => {
-    const fnWorst = jest.fn(() => false)
-    A.findIndexOfFirst(data, fnWorst)
-
-    expect(fnWorst).toHaveBeenCalledTimes(11)
-    expect(fnWorst).toHaveBeenNthCalledWith(1, 0, 0, data)
-    expect(fnWorst).toHaveBeenNthCalledWith(11, 90, 10, data)
-
-    const fnBest = jest.fn(() => true)
-    A.findIndexOfFirst(data, fnBest)
-    expect(fnBest).toHaveBeenCalledTimes(1)
-    expect(fnBest).toHaveBeenNthCalledWith(1, 0, 0, data)
-  })
-})
-
 test('subList', () => {
   const list = [0, 1, 2, 3]
   expect(A.subList(list, 0, 99)).toStrictEqual([0, 1, 2, 3])
