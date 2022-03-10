@@ -10,6 +10,9 @@
 
 import {_also, _apply, _let, _run, _with, run, takeIf, takeUnless} from "../src/scope";
 
+/* @ts-ignore */
+import {compile} from "./utils";
+
 test('_let', () => {
   const foo = _let(
     { firstName: 'Nathan' },
@@ -57,24 +60,38 @@ test('_also', () => {
   expect(_also({ firstName: 'Nathan' }, f)).toEqual({ firstName: 'Nathan' })
 })
 
-test('takeIf', () => {
-  expect(takeIf(1, () => true)).toStrictEqual(1)
-  expect(takeIf(1, () => false)).toStrictEqual(undefined)
-  expect(takeIf(1, it => it === 1)).toStrictEqual(1)
-  expect(takeIf(1, it => it === 0)).toStrictEqual(undefined)
+describe('#takeIf', () => {
+  test('runtime', () => {
+    expect(takeIf(1, () => true)).toStrictEqual(1)
+    expect(takeIf(1, () => false)).toStrictEqual(undefined)
+    expect(takeIf(1, it => it === 1)).toStrictEqual(1)
+    expect(takeIf(1, it => it === 0)).toStrictEqual(undefined)
 
-  expect(takeIf(1, true)).toStrictEqual(1)
-  expect(takeIf(1, false)).toStrictEqual(undefined)
+    expect(takeIf(1, true)).toStrictEqual(1)
+    expect(takeIf(1, false)).toStrictEqual(undefined)
+  })
+
+  test('compile time', () => {
+    expect(() => compile(`takeIf('A' as Union, isA) === 'A'`)).not.toThrow()
+    expect(() => compile(`takeIf('A' as Union, isA) === 'B'`)).toThrow()
+  })
 })
 
-test('takeUnless', () => {
-  expect(takeUnless(1, () => true)).toStrictEqual(undefined)
-  expect(takeUnless(1, () => false)).toStrictEqual(1)
-  expect(takeUnless(1, it => it === 1)).toStrictEqual(undefined)
-  expect(takeUnless(1, it => it === 0)).toStrictEqual(1)
+describe('#takeUnless', () => {
+  test('runtime', () => {
+    expect(takeUnless(1, () => true)).toStrictEqual(undefined)
+    expect(takeUnless(1, () => false)).toStrictEqual(1)
+    expect(takeUnless(1, it => it === 1)).toStrictEqual(undefined)
+    expect(takeUnless(1, it => it === 0)).toStrictEqual(1)
 
-  expect(takeUnless(1, true)).toStrictEqual(undefined)
-  expect(takeUnless(1, false)).toStrictEqual(1)
+    expect(takeUnless(1, true)).toStrictEqual(undefined)
+    expect(takeUnless(1, false)).toStrictEqual(1)
+  })
+
+  test('compile time', () => {
+    expect(() => compile(`takeUnless('A' as Union, isB) === 'A'`)).not.toThrow()
+    expect(() => compile(`takeUnless('A' as Union, isB) === 'B'`)).toThrow()
+  })
 })
 
 test('_run', () => {

@@ -77,9 +77,9 @@ export function _also<T>(receiver: T, block: (it: T)=>void): T {
  *
  * @returns `receiver` if `predicate` (or it's evaluation) is `true`. `undefined` otherwise.
  */
-export function takeIf<T>(receiver: T, predicate: ((it: T)=>boolean) | boolean) : T | undefined {
+export function takeIf<T, R extends T = T>(receiver: T, predicate: ((it: T)=>it is R) | ((it: T)=>boolean) | boolean) : R | undefined {
   return typeof predicate === 'boolean'
-    ? (predicate ? receiver : undefined)
+    ? (predicate ? receiver as R : undefined)
     : (predicate(receiver) ? receiver : undefined)
 }
 
@@ -92,10 +92,11 @@ export function takeIf<T>(receiver: T, predicate: ((it: T)=>boolean) | boolean) 
  *
  * @returns `receiver` if `predicate` (or it's evaluation) is `false`. `undefined` otherwise.
  */
-export function takeUnless<T>(receiver: T, predicate: ((it: T)=>boolean) | boolean) : T | undefined {
+
+export function takeUnless<T, R extends T>(receiver: T, predicate: ((it: T)=>it is R) | ((it: T)=>boolean) | boolean) : Exclude<T, R> | undefined {
   return typeof predicate === 'boolean'
-    ? (predicate ? undefined : receiver)
-    : (predicate(receiver) ? undefined : receiver)
+    ? (predicate ? undefined : receiver as Exclude<R, T>)
+    : (predicate(receiver) ? undefined : receiver as Exclude<R, T> )
 }
 
 /**
