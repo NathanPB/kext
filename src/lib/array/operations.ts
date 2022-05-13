@@ -53,7 +53,7 @@ export function chunkedByCount<T>(array: T[], count: number) : T[][] {
 }
 
 export function chunkedBySize<T>(array: T[], size: number) : T[][] {
-  const buckedSize = Math.min(array.length / size)
+  const buckedSize = Math.ceil(array.length / size)
   return array.reduce((buff, it, index) => {
     const chunkIndex = index % buckedSize
     const chunk = [ ...(buff[chunkIndex] ?? []), it ]
