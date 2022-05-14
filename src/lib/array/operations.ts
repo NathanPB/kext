@@ -43,7 +43,38 @@ export function averageBy<T>(array: T[], selector: ArrayMapper<T, number>): numb
   return sumOf(array, selector) / array.length
 }
 
-// TODO transform
+/**
+ * Splits the array content in `size` chunks of x elements each, keeps the original order of the elements.
+ * @param array array to perform the operation.
+ * @param size number of chunks.
+ */
+export function chunkedByCountKeepOrder<T>(array: T[], size: number): T[][] {
+  const buckedSize = Math.ceil(array.length / size)
+  return array.reduce((buff, it, index) => {
+    const chunkIndex = Math.floor(index / buckedSize)
+    const chunk = [ ...(buff[chunkIndex] ?? []), it ]
+    return Object.assign(buff, { [chunkIndex]: chunk })
+  }, [])
+}
+
+/**
+ * Splits the array content in x chunks of `size` elements each, keeps the original order of the elements.
+ * @param array array to perform the operation.
+ * @param count number of elements in each chunk.
+ */
+export function chunkedBySizeKeepOrder<T>(array: T[], count: number) : T[][] {
+  return array.reduce((buff, it, index) => {
+    const chunkIndex = Math.floor(index / count)
+    const chunk = [ ...(buff[chunkIndex] ?? []), it ]
+    return Object.assign(buff, { [chunkIndex]: chunk })
+  }, [])
+}
+
+/**
+ * Splits the array content in `size` chunks of x elements each, does not keep the original order of the elements.
+ * @param array array to perform the operation.
+ * @param count number of chunks.
+ */
 export function chunkedByCount<T>(array: T[], count: number) : T[][] {
   return array.reduce((buff, it, index) => {
     const chunkIndex = index % count
@@ -52,6 +83,11 @@ export function chunkedByCount<T>(array: T[], count: number) : T[][] {
   }, [])
 }
 
+/**
+ * Splits the array content in x chunks of `size` elements each, does not keep the original order of the elements.
+ * @param array array to perform the operation.
+ * @param size number of elements in each chunk.
+ */
 export function chunkedBySize<T>(array: T[], size: number) : T[][] {
   const buckedSize = Math.ceil(array.length / size)
   return array.reduce((buff, it, index) => {
