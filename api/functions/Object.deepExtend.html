@@ -25,15 +25,13 @@ The order of <code>extensors</code> define it&#39;s priority, the lower the inde
 <h3>Example</h3><pre><code class="language-ts"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-3">extended</span><span class="hl-1"> = </span><span class="hl-5">deepExtend</span><span class="hl-1">(</span><br/><span class="hl-1"> { </span><span class="hl-0">a:</span><span class="hl-1"> </span><span class="hl-2">1</span><span class="hl-1">, </span><span class="hl-0">b:</span><span class="hl-1"> </span><span class="hl-4">null</span><span class="hl-1">, </span><span class="hl-0">d:</span><span class="hl-1"> { </span><span class="hl-0">bar:</span><span class="hl-1"> </span><span class="hl-6">&#39;this bar should be here&#39;</span><span class="hl-1"> } },</span><br/><span class="hl-1"> { </span><span class="hl-0">a:</span><span class="hl-1"> </span><span class="hl-2">2</span><span class="hl-1">, </span><span class="hl-0">b:</span><span class="hl-1"> </span><span class="hl-2">2</span><span class="hl-1">, </span><span class="hl-0">c:</span><span class="hl-1"> </span><span class="hl-6">&#39;foo&#39;</span><span class="hl-1">, </span><span class="hl-0">d:</span><span class="hl-1"> { </span><span class="hl-0">bar:</span><span class="hl-1"> </span><span class="hl-6">&#39;foo&#39;</span><span class="hl-1">, </span><span class="hl-0">foobar:</span><span class="hl-1"> </span><span class="hl-6">&#39;ok too&#39;</span><span class="hl-1"> } },</span><br/><span class="hl-1"> { </span><span class="hl-0">d:</span><span class="hl-1"> { </span><span class="hl-0">foo:</span><span class="hl-1"> </span><span class="hl-6">&#39;bar&#39;</span><span class="hl-1"> }, </span><span class="hl-0">f:</span><span class="hl-1"> </span><span class="hl-6">&#39;f&#39;</span><span class="hl-1">, </span><span class="hl-0">g:</span><span class="hl-1"> [{ </span><span class="hl-0">bondia:</span><span class="hl-1"> </span><span class="hl-6">&#39;bondia&#39;</span><span class="hl-1"> }] }</span><br/><span class="hl-1">)</span><br/><br/><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-5">log</span><span class="hl-1">(</span><span class="hl-0">extended</span><span class="hl-1">)</span><br/><span class="hl-9">// &gt; { a: 1, b: null, d: { bar: &#39;this bar should be here&#39;, foobar: &#39;ok too&#39;, foo: &#39;bar&#39; }, c: &#39;foo&#39;, f: &#39;f&#39;, g: [ { bondia: &#39;bondia&#39; } ] }</span>
 </code></pre>
 </div>
-<div class="tsd-type-parameters">
-<h4 class="tsd-type-parameters-title">Type Parameters</h4>
 <section class="tsd-panel tsd-type-parameters">
 <h4>Type Parameters</h4>
 <ul class="tsd-type-parameters">
 <li>
 <h4>T<span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">object</span></h4></li>
 <li>
-<h4>E<span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">object</span></h4></li></ul></section></div>
+<h4>E<span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">object</span></h4></li></ul></section>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
@@ -47,7 +45,7 @@ The order of <code>extensors</code> define it&#39;s priority, the lower the inde
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type" data-tsd-kind="Type parameter">T</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/NathanPB/kext/blob/d4c5aa1/src/object.ts#L79">src/object.ts:79</a></li></ul></aside></li></ul></section></div>
+<li>Defined in <a href="https://github.com/NathanPB/kext/blob/a3e2753/src/object.ts#L79">src/object.ts:79</a></li></ul></aside></li></ul></section></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
 <details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
