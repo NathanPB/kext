@@ -22,7 +22,7 @@
   "devDependencies": {
     "@nathanpb/jest-bench": "^0.1.6-1",
     "@types/jest": "^27.0.1",
-    "@types/node": "^18.0.0",
+    "@types/node": "14.x",
     "docsify-cli": "^4.4.3",
     "jest": "^27.1.0",
     "ts-jest": "^27.0.5",
@@ -31,5 +31,8 @@
     "typedoc": "^0.23.1",
     "typescript": "^4.4.4",
     "yarn": "^1.22.17"
+  },
+  "engines": {
+    "node": ">= 14.0.0"
   }
 }
