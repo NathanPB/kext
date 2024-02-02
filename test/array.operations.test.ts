@@ -165,3 +165,41 @@ test('distinctBy', () => {
   expect(A.distinctBy(<{ age: number }[]>[], it => it.age)).toStrictEqual([])
 })
 
+test('groupBy', () => {
+  expect(
+    A.groupBy(
+      [ { id: 0, age: 0 }, { id: 1, age: 1 }, { id: 2, age: 0 }, { id: 3, age: 2 }, { id: 4, age: 3 }, { id: 5, age: 1 } ],
+        it => it.age
+    )
+  ).toStrictEqual([
+    [0, [ { id: 0, age: 0 }, { id: 2, age: 0 }]],
+    [1, [ { id: 1, age: 1 }, { id: 5, age: 1 }]],
+    [2, [ { id: 3, age: 2 }]],
+    [3, [ { id: 4, age: 3 }]]
+  ])
+
+  expect(
+    A.groupBy(
+      [ { id: 0, age: 0 }, { id: 1, age: 1 }, { id: 2, age: 0 }, { id: 3, age: 2 }, { id: 4, age: 3 }, { id: 5, age: 1 } ],
+        it => it.id % 2 === 0,
+        it => it.age * 10
+    )
+  ).toStrictEqual([
+    [true, [0, 0, 30]],
+    [false, [10, 20, 10]],
+  ])
+
+  expect(
+    A.groupBy(
+      [ { id: 0, age: 0 }, { id: 1, age: 1 }, { id: 2, age: 0 }, { id: 3, age: 2 }, { id: 4, age: 3 }, { id: 5, age: 1 } ],
+      it => it.age > 2
+    )
+  ).toStrictEqual([
+    [false, [{ id: 0, age: 0 }, { id: 1, age: 1 }, { id: 2, age: 0 }, { id: 3, age: 2 }, { id: 5, age: 1 }]],
+    [true, [{ id: 4, age: 3 }]],
+  ])
+
+  expect(
+    A.groupBy([], it => it)
+  ).toStrictEqual([])
+})

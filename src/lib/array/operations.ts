@@ -181,23 +181,28 @@ export function foldRight<T, R>(array: T[], initial: R, operation: (acc: R, it: 
   return array.reduceRight(operation, initial)
 }
 
-export function groupBy<T, V, K extends ComparableSafe>(array: T[], keySelector: ArrayMapper<T, K>, valueTransform?: ArrayMapper<T, V>): [K, V[]][] {
-  return array.reduce((acc, it, index, array) => {
-    const key: K = keySelector(it, index, array)
-    const value: V = valueTransform ? valueTransform(it, index, array) : <V> <unknown> it
+export function groupBy<T, K extends ComparableSafe, V = T>(array: T[], keySelector: ArrayMapper<T, K>, valueTransform?: ArrayMapper<T, V>): [K, V[]][] {
+  if (!array.length) return []
 
-    let groupIndex = acc.findIndex(it2 => it2.key === key)
-    if (groupIndex === -1) {
-      acc = [...acc, { key, values: [] }]
-      groupIndex = acc.length - 1
+  const keys: K[] = []
+  const values: V[][] = []
+
+  for (let index = 0; index < array.length; index++) {
+    const it = array[index]
+
+    const key = keySelector(it, index, array)
+    const value = valueTransform ? valueTransform(it, index, array) : it as unknown as V
+
+    const keyIndex = keys.indexOf(key)
+    if (keyIndex === -1) {
+      keys.push(key)
+      values.push([value])
+    } else {
+      values[keyIndex].push(value)
     }
+  }
 
-    return Object.assign(acc, {
-      [groupIndex]: { key, values: [ ...acc[groupIndex].values, value ] }
-    })
-
-  }, <Array<{ key: K, values: Array<V[]> }>> [])
-    .map(it => [it.key, flatten(it.values)])
+  return keys.map((key, index) => [key, values[index]])
 }
 
 export function intersect<T>(array: T[], other: T[]): T[] {
